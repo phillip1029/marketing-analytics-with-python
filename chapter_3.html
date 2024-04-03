@@ -1,0 +1,935 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Chapter 3 Feature Engineering for Marketing Data &#8212; Marketing Analytics with Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'chapter_3';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Chapter 4 Regression Analysis for Marketing" href="chapter_4.html" />
+    <link rel="prev" title="Chapter 2 Data Preprocessing and Exploratory Data Analysis" href="chapter_2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part I Introduction to Marketing Analytics</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chapter_1.html">Chapter 1 The Role of Data Science in Marketing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_2.html">Chapter 2 Data Preprocessing and Exploratory Data Analysis</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 3 Feature Engineering for Marketing Data</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part II Predictive Analytics for Marketing</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chapter_4.html">Chapter 4 Regression Analysis for Marketing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_5.html">Chapter 5 Classification Models for Customer Segmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_6.html">Chapter 6 Clustering Techniques for Market Segmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_7.html">Chapter 7 Time Series Analysis for Sales Forecasting</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part III Advanced Marketing Analytics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chapter_8.html">Chapter 8 Marketing Channel Attribution Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_9.html">Chapter 9 Marketing Media Mix Optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_10.html">Chapter 10 Next Best Action (NBA) Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_11.html">Chapter 11 Natural Language Processing for Sentiment Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_12.html">Chapter 12 Recommender Systems for Personalized Marketing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_13.html">Chapter 13 A/B Testing and Experimentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_14.html">Chapter 14 Customer Lifetime Value Prediction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part IV Case Studies and Applications</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chapter_15.html">Chapter 15 Churn Prediction and Retention Strategies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_16.html">Chapter 16 Optimizing Marketing Campaigns with Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_17.html">Chapter 17 Social Media Analytics for Marketing Insights</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Part V Conclusion</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="chapter_18.html">Chapter 18 Future Trends in Marketing Analytics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_19.html">Chapter 19 Best Practices and Pitfalls to Avoid</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fchapter_3.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/chapter_3.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Chapter 3 Feature Engineering for Marketing Data</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recency-frequency-and-monetary-rfm-analysis">3.1 Recency, Frequency, and Monetary (RFM) Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-based-features">3.2 Time-based Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#product-based-features">3.3 Product-based Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#engineering-interaction-features">3.4 Engineering Interaction Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">3.4 Conclusion</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-3-feature-engineering-for-marketing-data">
+<h1>Chapter 3 Feature Engineering for Marketing Data<a class="headerlink" href="#chapter-3-feature-engineering-for-marketing-data" title="Permalink to this heading">#</a></h1>
+<p>In the previous chapter, we learned how to preprocess and explore our marketing data using Python libraries like Pandas, Matplotlib, and Seaborn. Now, we’ll dive into feature engineering, a crucial step in the data science workflow that involves creating new and informative features from existing data to improve the predictive power of our models.</p>
+<p>Feature engineering is particularly important in marketing analytics, as it helps us capture more complex patterns and relationships in customer behavior and market trends. In this chapter, we’ll explore various techniques for creating new features using Python and apply them to our Online Retail dataset.</p>
+<section id="recency-frequency-and-monetary-rfm-analysis">
+<h2>3.1 Recency, Frequency, and Monetary (RFM) Analysis<a class="headerlink" href="#recency-frequency-and-monetary-rfm-analysis" title="Permalink to this heading">#</a></h2>
+<p>One of the most common feature engineering techniques in marketing is Recency, Frequency, and Monetary (RFM) analysis. RFM analysis segments customers based on three key metrics:</p>
+<ul class="simple">
+<li><p>Recency: How recently a customer made a purchase</p></li>
+<li><p>Frequency: How often a customer makes purchases</p></li>
+<li><p>Monetary: How much a customer spends</p></li>
+</ul>
+<p>Let’s calculate RFM metrics for our Online Retail dataset using Python:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># read the csv file into a pandas dataframe </span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data\online_retail.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Quantity&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Price&#39;</span><span class="p">]</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;InvoiceDate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;InvoiceDate&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Invoice</th>
+      <th>StockCode</th>
+      <th>Description</th>
+      <th>Quantity</th>
+      <th>InvoiceDate</th>
+      <th>Price</th>
+      <th>Customer ID</th>
+      <th>Country</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>489434</td>
+      <td>85048</td>
+      <td>15CM CHRISTMAS GLASS BALL 20 LIGHTS</td>
+      <td>12</td>
+      <td>2009-12-01 07:45:00</td>
+      <td>6.95</td>
+      <td>13085.0</td>
+      <td>United Kingdom</td>
+      <td>83.4</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>489434</td>
+      <td>79323P</td>
+      <td>PINK CHERRY LIGHTS</td>
+      <td>12</td>
+      <td>2009-12-01 07:45:00</td>
+      <td>6.75</td>
+      <td>13085.0</td>
+      <td>United Kingdom</td>
+      <td>81.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>489434</td>
+      <td>79323W</td>
+      <td>WHITE CHERRY LIGHTS</td>
+      <td>12</td>
+      <td>2009-12-01 07:45:00</td>
+      <td>6.75</td>
+      <td>13085.0</td>
+      <td>United Kingdom</td>
+      <td>81.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>489434</td>
+      <td>22041</td>
+      <td>RECORD FRAME 7" SINGLE SIZE</td>
+      <td>48</td>
+      <td>2009-12-01 07:45:00</td>
+      <td>2.10</td>
+      <td>13085.0</td>
+      <td>United Kingdom</td>
+      <td>100.8</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>489434</td>
+      <td>21232</td>
+      <td>STRAWBERRY CERAMIC TRINKET BOX</td>
+      <td>24</td>
+      <td>2009-12-01 07:45:00</td>
+      <td>1.25</td>
+      <td>13085.0</td>
+      <td>United Kingdom</td>
+      <td>30.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="c1"># Calculate the maximum InvoiceDate for each customer</span>
+<span class="n">max_date</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Customer ID&#39;</span><span class="p">)[</span><span class="s1">&#39;InvoiceDate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+<span class="c1"># Calculate Recency, Frequency, and Monetary metrics</span>
+<span class="n">rfm</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Customer ID&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span>
+    <span class="s1">&#39;InvoiceDate&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2011</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">max</span><span class="p">())</span><span class="o">.</span><span class="n">days</span><span class="p">,</span>
+    <span class="s1">&#39;Invoice&#39;</span><span class="p">:</span> <span class="s1">&#39;nunique&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Amount&#39;</span><span class="p">:</span> <span class="s1">&#39;sum&#39;</span>
+<span class="p">})</span>
+
+<span class="c1"># Rename columns</span>
+<span class="n">rfm</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Recency&#39;</span><span class="p">,</span> <span class="s1">&#39;Frequency&#39;</span><span class="p">,</span> <span class="s1">&#39;Monetary&#39;</span><span class="p">]</span>
+
+<span class="c1"># Assign quintile ranks to each metric</span>
+<span class="n">rfm</span><span class="p">[</span><span class="s1">&#39;R_rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">qcut</span><span class="p">(</span><span class="n">rfm</span><span class="p">[</span><span class="s1">&#39;Recency&#39;</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">duplicates</span><span class="o">=</span><span class="s1">&#39;drop&#39;</span><span class="p">)</span>
+<span class="n">rfm</span><span class="p">[</span><span class="s1">&#39;F_rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">qcut</span><span class="p">(</span><span class="n">rfm</span><span class="p">[</span><span class="s1">&#39;Frequency&#39;</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">duplicates</span><span class="o">=</span><span class="s1">&#39;drop&#39;</span><span class="p">)</span>
+<span class="n">rfm</span><span class="p">[</span><span class="s1">&#39;M_rank&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">qcut</span><span class="p">(</span><span class="n">rfm</span><span class="p">[</span><span class="s1">&#39;Monetary&#39;</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">duplicates</span><span class="o">=</span><span class="s1">&#39;drop&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add 1 to the ranks to start ranking from 1 instead of 0</span>
+<span class="n">rfm</span><span class="p">[</span><span class="s1">&#39;R_rank&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">rfm</span><span class="p">[</span><span class="s1">&#39;F_rank&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">rfm</span><span class="p">[</span><span class="s1">&#39;M_rank&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="c1"># Combine R, F, and M ranks into a single RFM score</span>
+<span class="n">rfm</span><span class="p">[</span><span class="s1">&#39;RFM_score&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rfm</span><span class="p">[</span><span class="s1">&#39;R_rank&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">+</span> <span class="n">rfm</span><span class="p">[</span><span class="s1">&#39;F_rank&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">+</span> <span class="n">rfm</span><span class="p">[</span><span class="s1">&#39;M_rank&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rfm</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Recency</th>
+      <th>Frequency</th>
+      <th>Monetary</th>
+      <th>R_rank</th>
+      <th>F_rank</th>
+      <th>M_rank</th>
+      <th>RFM_score</th>
+    </tr>
+    <tr>
+      <th>Customer ID</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>12346.0</th>
+      <td>325</td>
+      <td>17</td>
+      <td>-64.68</td>
+      <td>4</td>
+      <td>4</td>
+      <td>1</td>
+      <td>441</td>
+    </tr>
+    <tr>
+      <th>12347.0</th>
+      <td>2</td>
+      <td>8</td>
+      <td>5633.32</td>
+      <td>1</td>
+      <td>3</td>
+      <td>5</td>
+      <td>135</td>
+    </tr>
+    <tr>
+      <th>12348.0</th>
+      <td>75</td>
+      <td>5</td>
+      <td>2019.40</td>
+      <td>3</td>
+      <td>2</td>
+      <td>4</td>
+      <td>324</td>
+    </tr>
+    <tr>
+      <th>12349.0</th>
+      <td>18</td>
+      <td>5</td>
+      <td>4404.54</td>
+      <td>1</td>
+      <td>2</td>
+      <td>5</td>
+      <td>125</td>
+    </tr>
+    <tr>
+      <th>12350.0</th>
+      <td>310</td>
+      <td>1</td>
+      <td>334.40</td>
+      <td>4</td>
+      <td>1</td>
+      <td>2</td>
+      <td>412</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>In this code snippet, we first calculate the maximum InvoiceDate for each customer. Then, we calculate the Recency, Frequency, and Monetary metrics using the groupby() and agg() functions. We assign quintile ranks to each metric using pd.qcut() and combine the ranks into a single RFM score.</p>
+<p>The resulting RFM score can be used to segment customers and tailor marketing strategies accordingly. For example, customers with high RFM scores (e.g., 555) are likely to be high-value customers who have made recent, frequent, and high-value purchases.</p>
+<p>By calculating RFM metrics for the Online Retail dataset, we can segment our customers based on their purchasing behavior and create targeted marketing campaigns. For example, we might offer incentives to customers in the lowest recency quintiles (Q1 or Q2) to encourage them to make a purchase. Similarly, we might target customers in the highest monetary quintiles (Q4 or Q5) with high-value products or services.</p>
+<p>Now that we’ve calculated RFM metrics for our dataset, let’s move on to other feature engineering techniques for marketing data.</p>
+</section>
+<section id="time-based-features">
+<h2>3.2 Time-based Features<a class="headerlink" href="#time-based-features" title="Permalink to this heading">#</a></h2>
+<p>Time-based features can provide valuable insights into customer behavior over time. For example, we might want to understand how a customer’s purchasing behavior changes throughout the year or the impact of a marketing campaign on sales over time.</p>
+<p>To create time-based features for our Online Retail dataset, we might use techniques such as:</p>
+<ul class="simple">
+<li><p>Rolling averages and moving averages to capture trends in customer behavior over time</p></li>
+<li><p>Lagged features to capture the impact of previous purchases or events on current behavior</p></li>
+<li><p>Year, month, day, and hour-of-the-day features to capture seasonality or time-specific patterns</p></li>
+</ul>
+<p>Let’s create time-based features for our Online Retail dataset:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extract time-based features from InvoiceDate</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;InvoiceYear&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;InvoiceDate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;InvoiceMonth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;InvoiceDate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;InvoiceDay&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;InvoiceDate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">day</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;InvoiceDayOfWeek&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;InvoiceDate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">dayofweek</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;InvoiceHour&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;InvoiceDate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">hour</span>
+
+<span class="c1"># Calculate the time since last purchase for each customer</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;TimeSinceLastPurchase&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Customer ID&#39;</span><span class="p">)[</span><span class="s1">&#39;InvoiceDate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;TimeSinceLastPurchase&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;TimeSinceLastPurchase&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">days</span>
+
+<span class="c1"># Calculate the time between first and last purchase for each customer</span>
+<span class="n">first_purchase</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Customer ID&#39;</span><span class="p">)[</span><span class="s1">&#39;InvoiceDate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="n">last_purchase</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Customer ID&#39;</span><span class="p">)[</span><span class="s1">&#39;InvoiceDate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;CustomerLifetime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">last_purchase</span> <span class="o">-</span> <span class="n">first_purchase</span><span class="p">)</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">days</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert the InvoiceDate column to datetime type</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;InvoiceDate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;InvoiceDate&#39;</span><span class="p">])</span>
+
+<span class="c1"># Set the index of the dfFrame to InvoiceDate</span>
+<span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;InvoiceDate&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Create a rolling average of sales for each customer over the last 30 days</span>
+<span class="n">customer_sales</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;CustomerID&#39;</span><span class="p">)[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">customer_sales</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create lagged features for each customer&#39;s total sales and number of orders</span>
+<span class="n">customer_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;CustomerID&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;Amount&#39;</span><span class="p">:</span> <span class="s1">&#39;sum&#39;</span><span class="p">,</span> <span class="s1">&#39;Invoice&#39;</span><span class="p">:</span> <span class="s1">&#39;nunique&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">customer_df</span><span class="p">[</span><span class="s1">&#39;LaggedAmount&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">customer_df</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">customer_df</span><span class="p">[</span><span class="s1">&#39;LaggedInvoiceNo&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">customer_df</span><span class="p">[</span><span class="s1">&#39;Invoice&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Create year, month, day, and hour-of-the-day features</span>
+<span class="n">customer_df</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;InvoiceDate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span>
+<span class="n">customer_df</span><span class="p">[</span><span class="s1">&#39;Month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;InvoiceDate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
+<span class="n">customer_df</span><span class="p">[</span><span class="s1">&#39;Day&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;InvoiceDate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">day</span>
+<span class="n">customer_df</span><span class="p">[</span><span class="s1">&#39;DayOfWeek&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;InvoiceDate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">dayofweek</span>
+<span class="n">customer_df</span><span class="p">[</span><span class="s1">&#39;Hour&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;InvoiceDate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">hour</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Holiday Features</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">holidays</span>
+
+<span class="c1"># Assume &#39;data&#39; is our preprocessed Online Retail dataset</span>
+
+<span class="c1"># Create a holiday object for the United Kingdom</span>
+<span class="n">us_holidays</span> <span class="o">=</span> <span class="n">holidays</span><span class="o">.</span><span class="n">US</span><span class="p">()</span>  <span class="c1"># this is a dict</span>
+
+<span class="c1"># Create a feature indicating if a transaction occurred on a holiday</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Holiday&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;InvoiceDate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">date</span><span class="p">()</span> <span class="ow">in</span> <span class="n">us_holidays</span><span class="p">)</span>
+
+<span class="c1"># Create a feature indicating the name of the holiday (if applicable)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;HolidayName&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;InvoiceDate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">uk_holidays</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">date</span><span class="p">()))</span>
+
+<span class="c1"># Create a feature indicating if a transaction occurred on a weekend</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Weekend&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;InvoiceDate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">dayofweek</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+
+<span class="c1"># Calculate the total sales on holidays and weekends for each customer</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;HolidaySales&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;CustomerID&#39;</span><span class="p">,</span> <span class="s1">&#39;Holiday&#39;</span><span class="p">])[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s1">&#39;sum&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;WeekendSales&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;CustomerID&#39;</span><span class="p">,</span> <span class="s1">&#39;Weekend&#39;</span><span class="p">])[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s1">&#39;sum&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this example, we extract various time-based features from the InvoiceDate column, such as the year, month, day, day of the week, and hour of each transaction. We also calculate the time since the last purchase for each customer using the diff() function and the time between the first and last purchase (customer lifetime) using the min() and max() functions.</p>
+<p>These time-based features can provide valuable insights into customer purchasing patterns and help us create more targeted marketing campaigns.</p>
+</section>
+<section id="product-based-features">
+<h2>3.3 Product-based Features<a class="headerlink" href="#product-based-features" title="Permalink to this heading">#</a></h2>
+<p>Product-based features capture information about the products customers purchase and their characteristics. Let’s create some product-based features for our Online Retail dataset:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate the total number of unique products purchased by each customer</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;NumUniqueProduts&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Customer ID&#39;</span><span class="p">)[</span><span class="s1">&#39;StockCode&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
+ 
+<span class="c1"># Calculate the average unit price of products purchased by each customer</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;AvgUnitPrice&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Customer ID&#39;</span><span class="p">)[</span><span class="s1">&#39;Price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="c1"># Calculate the total quantity of products purchased by each customer</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;TotalQuantity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Customer ID&#39;</span><span class="p">)[</span><span class="s1">&#39;Quantity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="c1"># Calculate the average quantity per transaction for each customer</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;AvgQuantityPerTransaction&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Customer ID&#39;</span><span class="p">)[</span><span class="s1">&#39;Quantity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this code snippet, we calculate various product-based features such as the total number of unique products purchased by each customer, the average unit price of products purchased, the total quantity of products purchased, and the average quantity per transaction.</p>
+<p>These features can help us understand customer preferences and purchasing habits, which can inform product recommendations, cross-selling, and upselling strategies.</p>
+</section>
+<section id="engineering-interaction-features">
+<h2>3.4 Engineering Interaction Features<a class="headerlink" href="#engineering-interaction-features" title="Permalink to this heading">#</a></h2>
+<p>Interaction features capture the relationship between two or more variables in our dataset. For example, we might want to understand how the relationship between a customer’s total sales and the number of orders they place impacts their overall value to the business.</p>
+<p>To create interaction features for our Online Retail dataset, we can use techniques such as:</p>
+<ul class="simple">
+<li><p>Multiplying or dividing features to create new features that capture the relationship between them</p></li>
+<li><p>Polynomial features to capture more complex relationships between variables</p></li>
+</ul>
+<p>Let’s create interaction features for our Online Retail dataset:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an interaction feature between total sales and the number of orders</span>
+<span class="n">customer_df</span><span class="p">[</span><span class="s1">&#39;SalesPerOrder&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">customer_df</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">customer_df</span><span class="p">[</span><span class="s1">&#39;Invoice&#39;</span><span class="p">]</span>
+
+<span class="c1"># Use polynomial features to capture more complex relationships between variables</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">PolynomialFeatures</span>
+
+<span class="n">poly</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">()</span>
+<span class="n">poly_features</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">poly</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">customer_df</span><span class="p">[[</span><span class="s1">&#39;LaggedAmount&#39;</span><span class="p">,</span> <span class="s1">&#39;LaggedInvoiceNo&#39;</span><span class="p">]]))</span>
+<span class="n">poly_features</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;LaggedAmount^2&#39;</span><span class="p">,</span> <span class="s1">&#39;LaggedAmount * LaggedInvoiceNo&#39;</span><span class="p">,</span> <span class="s1">&#39;LaggedInvoiceNo^2&#39;</span><span class="p">]</span>
+<span class="n">customer_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">customer_df</span><span class="p">,</span> <span class="n">poly_features</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>By creating interaction features for our Online Retail dataset, we can capture more complex patterns and relationships in customer behavior and market trends.</p>
+</section>
+<section id="conclusion">
+<h2>3.4 Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<p>In this chapter, we explored feature engineering techniques for marketing data using Python. We created new features based on RFM analysis, time-based patterns, and product characteristics to capture more complex relationships in our data.</p>
+<p>Feature engineering is an iterative process that requires domain knowledge, creativity, and experimentation. By creating informative and relevant features, we can improve the performance of our marketing analytics models and gain deeper insights into customer behavior.</p>
+<p>In the next chapter, we’ll dive into predictive analytics and learn how to build machine learning models for marketing tasks such as customer segmentation, churn prediction, and sales forecasting.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="chapter_2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Chapter 2 Data Preprocessing and Exploratory Data Analysis</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="chapter_4.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Chapter 4 Regression Analysis for Marketing</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recency-frequency-and-monetary-rfm-analysis">3.1 Recency, Frequency, and Monetary (RFM) Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-based-features">3.2 Time-based Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#product-based-features">3.3 Product-based Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#engineering-interaction-features">3.4 Engineering Interaction Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">3.4 Conclusion</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Phillip Peng
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
