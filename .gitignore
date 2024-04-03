@@ -1,0 +1,5 @@
+# ignore the _build directory
+global-exclude _build
+global-exclude .git
+global-exclude .gitignore
+ 

@@ -1,0 +1,39 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+parts:
+  - caption: Part I Introduction to Marketing Analytics
+    chapters:
+      - file: chapter_1
+      - file: chapter_2
+      - file: chapter_3
+
+  - caption: Part II Predictive Analytics for Marketing
+    chapters:
+      - file: chapter_4
+      - file: chapter_5
+      - file: chapter_6
+      - file: chapter_7
+
+  - caption: Part III Advanced Marketing Analytics
+    chapters:
+      - file: chapter_8
+      - file: chapter_9
+      - file: chapter_10
+      - file: chapter_11
+      - file: chapter_12
+      - file: chapter_13
+      - file: chapter_14
+
+  - caption: Part IV Case Studies and Applications
+    chapters:
+      - file: chapter_15
+      - file: chapter_16
+      - file: chapter_17
+
+  - caption: Part V Conclusion
+    chapters:    
+      - file: chapter_18
+      - file: chapter_19     

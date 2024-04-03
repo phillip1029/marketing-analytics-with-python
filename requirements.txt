@@ -1,0 +1,6 @@
+jupyter-book
+matplotlib
+pandas
+numpy
+ucimlrepo
+holidays
