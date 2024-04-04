@@ -4,3 +4,4 @@ pandas
 numpy
 ucimlrepo
 holidays
+scikit-learn
