@@ -359,7 +359,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -375,6 +377,35 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentals-of-customer-segmentation">5.1 Fundamentals of Customer Segmentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#popular-models-for-customer-segmentation">5.2 Popular Models for Customer Segmentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means-clustering">5.2.1 K-Means Clustering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hierarchical-clustering">5.2.2 Hierarchical Clustering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-mixture-models-gmm">5.2.3 Gaussian Mixture Models (GMM)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#self-organizing-maps-som">5.2.4 Self-Organizing Maps (SOM)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dbscan-density-based-spatial-clustering-of-applications-with-noise">5.2.5 DBSCAN (Density-Based Spatial Clustering of Applications with Noise)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means-clustering-model-development-on-kaggle-s-banking-dataset">5.3 K-Means Clustering Model Development on Kaggle’s Banking Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-description">5.3.1 Dataset Description</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eda-and-data-preprocessing">5.3.2 EDA and Data Preprocessing:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-k-means-clustering">5.3.3 Implementing K-Means Clustering</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-the-optimal-number-of-clusters-elbow-method">5.3.3.1 Selecting the Optimal Number of Clusters (Elbow Method)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-k-means-clustering">5.3.3.2 Applying K-Means Clustering</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-the-performance-of-a-k-means-clustering-model">5.3.3.4 Evaluating the performance of a K-means clustering model</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interprete-the-results">5.3.4 Interprete the results</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#llm-k-means-clustering-for-customer-segmentation">5.4 LLM+K-Means Clustering for Customer Segmentation</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -386,6 +417,1939 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="chapter-5-classification-models-for-customer-segmentation">
 <h1>Chapter 5 Classification Models for Customer Segmentation<a class="headerlink" href="#chapter-5-classification-models-for-customer-segmentation" title="Permalink to this heading">#</a></h1>
+<section id="fundamentals-of-customer-segmentation">
+<h2>5.1 Fundamentals of Customer Segmentation<a class="headerlink" href="#fundamentals-of-customer-segmentation" title="Permalink to this heading">#</a></h2>
+<p>Customer segmentation is an essential marketing strategy that categorizes a company’s customers into distinct groups with common characteristics, behaviors, or preferences. This approach allows businesses to tailor their marketing strategies, product offerings, and customer interactions to meet the specific needs and expectations of each segment. When executed effectively, customer segmentation enhances resource allocation, boosts customer satisfaction and loyalty, and drives growth and profitability.</p>
+<p>Traditionally, segmentation has relied on demographic, geographic, and psychographic criteria. Demographics analyze age, gender, income, education, and occupation; geography sorts customers by their physical locations, such as countries, regions, or cities; and psychographics assess personality traits, values, and lifestyles. While these traditional methods have proven effective, they may not capture the complete picture in today’s data-rich environment.</p>
+<p>The rise of big data and analytics has positioned machine learning as a transformative tool for customer segmentation. Machine learning algorithms can sift through vast datasets, identifying intricate patterns and insights beyond the reach of traditional segmentation methods. The advantages of machine learning in this context include:</p>
+<ol class="arabic simple">
+<li><p><strong>Enhanced Precision</strong>: Machine learning reveals complex relationships within customer data, offering more accurate and nuanced segmentation.</p></li>
+<li><p><strong>Scalability</strong>: Automated processes efficiently manage significant data volumes, evolving with the customer base and ensuring segmentation models remain current.</p></li>
+<li><p><strong>Dynamic Updates</strong>: Machine learning adapts to ongoing data flow, allowing for real-time refinement of customer segments.</p></li>
+<li><p><strong>Predictive Insights</strong>: Beyond current trends, machine learning anticipates future customer behaviors and preferences, facilitating forward-looking marketing strategies.</p></li>
+<li><p><strong>Comprehensive Data Integration</strong>: By analyzing diverse data sources, including transaction records, digital footprints, and customer feedback, machine learning provides a holistic customer view.</p></li>
+<li><p><strong>Personalization</strong>: Tailored experiences are developed through deep insights into customer segments and individual preferences, fostering enhanced engagement and loyalty.</p></li>
+</ol>
+<p>Subsequent sections will explore popular machine learning techniques for customer segmentation, including K-Means clustering, hierarchical clustering, Gaussian Mixture Models (GMM), Self-Organizing Maps (SOM), and DBSCAN. We will also guide you through constructing K-Means and LLM+K-Means models with practical datasets for advanced marketing analytics.</p>
+</section>
+<section id="popular-models-for-customer-segmentation">
+<h2>5.2 Popular Models for Customer Segmentation<a class="headerlink" href="#popular-models-for-customer-segmentation" title="Permalink to this heading">#</a></h2>
+<section id="k-means-clustering">
+<h3>5.2.1 K-Means Clustering<a class="headerlink" href="#k-means-clustering" title="Permalink to this heading">#</a></h3>
+<p>K-Means clustering, a dominant unsupervised machine learning technique, efficiently segments customers by partitioning observations into k clusters, based on the nearest mean (centroid). The objective is to minimize the within-cluster sum of squares (WCSS), essentially the squared distances between data points and their respective centroids.</p>
+<p><strong>Advantages</strong>:</p>
+<ul class="simple">
+<li><p><strong>Simplicity</strong>: Its straightforward nature makes K-Means accessible for a broad audience.</p></li>
+<li><p><strong>Efficiency</strong>: Capable of managing large datasets, it’s well-suited for extensive customer segmentation tasks.</p></li>
+<li><p><strong>Scalability</strong>: Adapts well to high-dimensional data, enhanced by appropriate initialization and distance measures.</p></li>
+</ul>
+<p><strong>Limitations</strong>:</p>
+<ul class="simple">
+<li><p><strong>Initialization Sensitivity</strong>: Initial centroid placement can significantly affect outcomes, potentially leading to less optimal clusterings.</p></li>
+<li><p><strong>Spherical Cluster Assumption</strong>: Assumes clusters are spherical and equally sized, which may not align with real customer data distributions.</p></li>
+<li><p><strong>Cluster Number Specification</strong>: Requires pre-determined cluster numbers (k), which can be challenging without prior data insights.</p></li>
+<li><p><strong>Outlier Sensitivity</strong>: Outliers can skew centroids, impacting clustering accuracy.</p></li>
+</ul>
+</section>
+<section id="hierarchical-clustering">
+<h3>5.2.2 Hierarchical Clustering<a class="headerlink" href="#hierarchical-clustering" title="Permalink to this heading">#</a></h3>
+<p>Hierarchical clustering offers a nuanced approach to customer segmentation by building a dendrogram, a tree-like structure that displays observation groupings at various granularity levels. It diverges from K-Means by not necessitating a predefined cluster count and can be executed in two main forms:</p>
+<ol class="arabic simple">
+<li><p><strong>Agglomerative (bottom-up)</strong>: Begins with each observation as an individual cluster, progressively merging the nearest pairs until a singular cluster remains. Common linkage criteria include:</p>
+<ul class="simple">
+<li><p><strong>Single linkage</strong>: Minimum distance between cluster observations.</p></li>
+<li><p><strong>Complete linkage</strong>: Maximum distance between cluster observations.</p></li>
+<li><p><strong>Average linkage</strong>: Average distance across all observation pairs within two clusters.</p></li>
+<li><p><strong>Ward’s linkage</strong>: Merge based on the smallest increase in total within-cluster variance.</p></li>
+</ul>
+</li>
+<li><p><strong>Divisive (top-down)</strong>: Starts with all observations in one cluster, systematically dividing into smaller clusters. Due to its higher computational demand, it’s less commonly applied.</p></li>
+</ol>
+<p><strong>Dendrogram Insights</strong>:
+The dendrogram visualizes the hierarchical clustering outcome, showing the sequential merging or splitting of clusters. It allows for determining the optimal cluster count by cutting the dendrogram at a desired distance or height.</p>
+<p><strong>Advantages</strong>:</p>
+<ul class="simple">
+<li><p><strong>No Cluster Count Pre-specification</strong>: It doesn’t require an upfront cluster number.</p></li>
+<li><p><strong>Granularity Flexibility</strong>: Users can select segmentation granularity by adjusting the dendrogram cut height.</p></li>
+<li><p><strong>Non-spherical Cluster Handling</strong>: Effectively identifies clusters of varied shapes and sizes, offering a realistic segmentation.</p></li>
+</ul>
+<p><strong>Limitations</strong>:</p>
+<ul class="simple">
+<li><p><strong>Computational Intensity</strong>: Higher computational complexity than K-Means, particularly for larger datasets.</p></li>
+<li><p><strong>Noise and Outlier Sensitivity</strong>: Especially with single linkage, noise and outliers can merge unrelated clusters.</p></li>
+<li><p><strong>Irreversible Merging/Splitting</strong>: Decisions are final, potentially leading to suboptimal outcomes.</p></li>
+</ul>
+<p>Applying hierarchical clustering necessitates careful data preprocessing, selecting a suitable linkage criterion, and thorough dendrogram analysis to align segmentation with business goals.</p>
+</section>
+<section id="gaussian-mixture-models-gmm">
+<h3>5.2.3 Gaussian Mixture Models (GMM)<a class="headerlink" href="#gaussian-mixture-models-gmm" title="Permalink to this heading">#</a></h3>
+<p>Gaussian Mixture Models (GMM) employ a probabilistic technique for clustering, positing that data originates from several Gaussian distributions. Each cluster is characterized by its mean, covariance matrix, and mixing coefficient, with the objective of GMM being to estimate these parameters and assign data points to the most probable cluster based on posterior probabilities.</p>
+<p><strong>Expectation-Maximization (EM) Algorithm for GMM</strong>:
+The EM algorithm iteratively refines the GMM parameters through two phases:</p>
+<ol class="arabic simple">
+<li><p><strong>Expectation (E-step)</strong>: Calculate the posterior probabilities for each data point’s cluster membership using current parameter estimates.</p></li>
+<li><p><strong>Maximization (M-step)</strong>: Update the model parameters (means, covariances, and mixing coefficients) to maximize the expected log-likelihood of the observed data, leveraging the posterior probabilities from the E-step.</p></li>
+</ol>
+<p>This cycle continues until the parameters converge or a predefined number of iterations is achieved.</p>
+<p><strong>Advantages</strong>:</p>
+<ul class="simple">
+<li><p><strong>Soft Clustering</strong>: Offers probabilistic cluster assignments, enabling nuanced and potentially overlapping segments.</p></li>
+<li><p><strong>Flexible Cluster Shapes</strong>: Capable of modeling clusters of different sizes and shapes due to the varied covariance structures.</p></li>
+<li><p><strong>Probabilistic Interpretation</strong>: Provides a measure of cluster membership uncertainty, useful for evaluating segmentation reliability.</p></li>
+</ul>
+<p><strong>Limitations</strong>:</p>
+<ul class="simple">
+<li><p><strong>Gaussian Assumption</strong>: Assumes data within each cluster follows a Gaussian distribution, which may not align with all real-world scenarios.</p></li>
+<li><p><strong>Initialization Sensitivity</strong>: Outcomes can vary based on the initial parameter values, potentially leading to different local optima.</p></li>
+<li><p><strong>Computational Demand</strong>: High, especially with large datasets and numerous clusters, due to the complexity of the EM algorithm.</p></li>
+</ul>
+</section>
+<section id="self-organizing-maps-som">
+<h3>5.2.4 Self-Organizing Maps (SOM)<a class="headerlink" href="#self-organizing-maps-som" title="Permalink to this heading">#</a></h3>
+<p>Self-Organizing Maps (SOM), or Kohonen maps, are a type of unsupervised neural network for clustering and visualizing high-dimensional data in a lower-dimensional (typically 2D) space, preserving the topological properties of the original data. This mapping aims to place similar data points close on the 2D grid, facilitating cluster analysis.</p>
+<p><strong>SOM Algorithm</strong>:</p>
+<ol class="arabic simple">
+<li><p>Initialize neuron weights in the 2D grid randomly.</p></li>
+<li><p>For each input, identify the best matching unit (BMU) — the neuron whose weight vector is closest to the input.</p></li>
+<li><p>Adjust the weights of the BMU and its neighbors to better match the input, influenced by a learning rate and a neighborhood function.</p></li>
+<li><p>Iterate through steps 2 and 3 until the system stabilizes or completes a fixed number of iterations.</p></li>
+</ol>
+<p><strong>Visualization and Interpretation</strong>:</p>
+<ul class="simple">
+<li><p><strong>U-matrix</strong>: Highlights distances between neurons to delineate clusters and outliers.</p></li>
+<li><p><strong>Component Planes</strong>: Depicts how individual features distribute across the grid, revealing patterns and correlations.</p></li>
+<li><p><strong>SOM Grid Clustering</strong>: Further clustering (e.g., with K-Means) on the SOM output can refine segmentation.</p></li>
+</ul>
+<p><strong>Advantages</strong>:</p>
+<ul class="simple">
+<li><p><strong>Dimensionality Reduction</strong>: Offers a manageable, visual representation of complex datasets.</p></li>
+<li><p><strong>Topology Preservation</strong>: Ensures that similar segments are mapped closely, aiding interpretability.</p></li>
+<li><p><strong>Missing Value Tolerance</strong>: Can train with incomplete data sets by disregarding missing values.</p></li>
+</ul>
+<p><strong>Limitations</strong>:</p>
+<ul class="simple">
+<li><p><strong>Indirect Clustering</strong>: Does not explicitly define clusters, necessitating further analysis.</p></li>
+<li><p><strong>Grid Size Sensitivity</strong>: The choice of grid dimensions can significantly impact performance and outcomes.</p></li>
+<li><p><strong>Interpretation Challenges</strong>: Complex data traits or a high feature count can complicate results analysis.</p></li>
+</ul>
+</section>
+<section id="dbscan-density-based-spatial-clustering-of-applications-with-noise">
+<h3>5.2.5 DBSCAN (Density-Based Spatial Clustering of Applications with Noise)<a class="headerlink" href="#dbscan-density-based-spatial-clustering-of-applications-with-noise" title="Permalink to this heading">#</a></h3>
+<p>DBSCAN excels in identifying clusters of any shape while managing noise and outliers, without pre-specifying a cluster count. It distinguishes clusters as dense regions, separated by less dense areas.</p>
+<p><strong>DBSCAN Overview</strong>:
+Data points are classified as:</p>
+<ol class="arabic simple">
+<li><p><strong>Core Points</strong>: Have a minimum number of neighbors within a specified radius (epsilon).</p></li>
+<li><p><strong>Border Points</strong>: Near a core point but don’t meet the core point criteria themselves.</p></li>
+<li><p><strong>Noise Points</strong>: Neither core nor border points.</p></li>
+</ol>
+<p>Starting from a core point, DBSCAN expands clusters by incorporating neighboring core and border points, proceeding to the next unvisited core point until all are processed.</p>
+<p><strong>Advantages</strong>:</p>
+<ul class="simple">
+<li><p><strong>Arbitrary Shape Clustering</strong>: Identifies non-spherical clusters, fitting various data distributions.</p></li>
+<li><p><strong>Outlier Resistance</strong>: Effectively segregates noise and outliers from main clusters.</p></li>
+<li><p><strong>No Preset Clusters</strong>: Eliminates the need to define the number of clusters upfront.</p></li>
+</ul>
+<p><strong>Parameter Selection (epsilon and min_samples)</strong>:</p>
+<ul class="simple">
+<li><p><strong>Epsilon (ε)</strong>: Dictates the maximum distance for points to be considered as in the same cluster. Varying epsilon affects cluster size and count.</p></li>
+<li><p><strong>Min_samples</strong>: Determines the density threshold for core points, influencing cluster robustness and noise sensitivity.</p></li>
+</ul>
+<p>Selecting these parameters is critical and can be aided by techniques like the k-distance plot to identify an appropriate epsilon.</p>
+<p><strong>Implementing DBSCAN with Scikit-learn</strong> involves data preprocessing, instantiating a DBSCAN object with chosen parameters, fitting it to data, and analyzing the results.</p>
+<p><strong>Interpreting DBSCAN</strong>:
+The output categorizes points into clusters or as noise (-1). Visualizing these assignments helps understand the segmentation, which can be further analyzed through feature examination and cluster quality metrics.</p>
+<p>DBSCAN’s effectiveness in customer segmentation hinges on careful parameter choice, informed by data properties and segmentation objectives. Its ability to manage complex cluster shapes and noise makes it a versatile tool for exploratory segmentation tasks.</p>
+</section>
+</section>
+<section id="k-means-clustering-model-development-on-kaggle-s-banking-dataset">
+<h2>5.3 K-Means Clustering Model Development on Kaggle’s Banking Dataset<a class="headerlink" href="#k-means-clustering-model-development-on-kaggle-s-banking-dataset" title="Permalink to this heading">#</a></h2>
+<p>This section outlines the process of developing a K-Means clustering classification model for customer segmentation using the public Banking Dataset - Marketing Targets available on Kaggle. This dataset includes bank customers’ demographic details, financial attributes, and responses to marketing campaigns. We will conduct exploratory data analysis (EDA), preprocess the data, and utilize the Scikit-learn library in Python to implement K-Means clustering.</p>
+<section id="dataset-description">
+<h3>5.3.1 Dataset Description<a class="headerlink" href="#dataset-description" title="Permalink to this heading">#</a></h3>
+<p>Banking Dataset - Marketing Targets Overview:
+The Banking Dataset - Marketing Targets, accessible on Kaggle, offers insights into bank customers’ profiles and behaviors. It comprises 45,211 records with 17 features, including:</p>
+<ul class="simple">
+<li><p><strong>age</strong>: Customer’s age</p></li>
+<li><p><strong>job</strong>: Customer’s job type (e.g., management, technician, entrepreneur)</p></li>
+<li><p><strong>marital</strong>: Marital status (married, single, divorced)</p></li>
+<li><p><strong>education</strong>: Education level (e.g., primary, secondary, tertiary)</p></li>
+<li><p><strong>default</strong>: Credit default status (yes, no)</p></li>
+<li><p><strong>balance</strong>: Average yearly balance</p></li>
+<li><p><strong>housing</strong>: Housing loan status (yes, no)</p></li>
+<li><p><strong>loan</strong>: Personal loan status (yes, no)</p></li>
+<li><p><strong>contact</strong>: Contact method (e.g., cellular, telephone)</p></li>
+<li><p><strong>day &amp; month</strong>: Last contact day and month</p></li>
+<li><p><strong>duration</strong>: Last contact duration (seconds)</p></li>
+<li><p><strong>campaign</strong>: Contacts during the current campaign</p></li>
+<li><p><strong>pday &amp; previous</strong>: Days since last contact and previous contact count</p></li>
+<li><p><strong>poutcome</strong>: Previous campaign outcome (e.g., success, failure)</p></li>
+<li><p><strong>y</strong>: response of subscription to bank’s term deposit (yes, no)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+
+<span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data\Chapter5_train.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">df_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data\Chapter5_test.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(45211, 17)
+(4521, 17)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_train</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>job</th>
+      <th>marital</th>
+      <th>education</th>
+      <th>default</th>
+      <th>balance</th>
+      <th>housing</th>
+      <th>loan</th>
+      <th>contact</th>
+      <th>day</th>
+      <th>month</th>
+      <th>duration</th>
+      <th>campaign</th>
+      <th>pdays</th>
+      <th>previous</th>
+      <th>poutcome</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>58</td>
+      <td>management</td>
+      <td>married</td>
+      <td>tertiary</td>
+      <td>no</td>
+      <td>2143</td>
+      <td>yes</td>
+      <td>no</td>
+      <td>unknown</td>
+      <td>5</td>
+      <td>may</td>
+      <td>261</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>unknown</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>44</td>
+      <td>technician</td>
+      <td>single</td>
+      <td>secondary</td>
+      <td>no</td>
+      <td>29</td>
+      <td>yes</td>
+      <td>no</td>
+      <td>unknown</td>
+      <td>5</td>
+      <td>may</td>
+      <td>151</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>unknown</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>33</td>
+      <td>entrepreneur</td>
+      <td>married</td>
+      <td>secondary</td>
+      <td>no</td>
+      <td>2</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>unknown</td>
+      <td>5</td>
+      <td>may</td>
+      <td>76</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>unknown</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>47</td>
+      <td>blue-collar</td>
+      <td>married</td>
+      <td>unknown</td>
+      <td>no</td>
+      <td>1506</td>
+      <td>yes</td>
+      <td>no</td>
+      <td>unknown</td>
+      <td>5</td>
+      <td>may</td>
+      <td>92</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>unknown</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>33</td>
+      <td>unknown</td>
+      <td>single</td>
+      <td>unknown</td>
+      <td>no</td>
+      <td>1</td>
+      <td>no</td>
+      <td>no</td>
+      <td>unknown</td>
+      <td>5</td>
+      <td>may</td>
+      <td>198</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>unknown</td>
+      <td>no</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="eda-and-data-preprocessing">
+<h3>5.3.2 EDA and Data Preprocessing:<a class="headerlink" href="#eda-and-data-preprocessing" title="Permalink to this heading">#</a></h3>
+<p>Key preprocessing steps include:</p>
+<ol class="arabic simple">
+<li><p><strong>Missing Values</strong>: Identify and address missing values through removal or imputation.</p></li>
+<li><p><strong>Categorical Variables</strong>: Convert categories into numerical forms via one-hot or label encoding.</p></li>
+<li><p><strong>Feature Scaling</strong>: Normalize numerical features to ensure equal impact on clustering.</p></li>
+<li><p><strong>Feature Analysis</strong>: Assess distributions and correlations among features using visual tools.</p></li>
+<li><p><strong>Outliers</strong>: Detect and address outliers with methods like Z-score or IQR.</p></li>
+</ol>
+<p>We will use Python package ‘Sweetviz’ to generate an EDA report automatically. By setting the target feature as “y”, we can understand better the response (subscription) rate pattern by feature segments.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># convert y to 0 and 1: 0 for &quot;no&quot; and 1 for &quot;yes&quot;</span>
+<span class="n">df_train</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s2">&quot;no&quot;</span> <span class="k">else</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">df_test</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_test</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s2">&quot;no&quot;</span> <span class="k">else</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># use sweetviz to generate a report</span>
+<span class="kn">import</span> <span class="nn">sweetviz</span> <span class="k">as</span> <span class="nn">sv</span>
+<span class="n">report</span> <span class="o">=</span> <span class="n">sv</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">target_feat</span> <span class="o">=</span> <span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">report</span><span class="o">.</span><span class="n">show_html</span><span class="p">(</span><span class="s2">&quot;results\chapter5_eda_report.html&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For simplicity, we will use one-hot encoding method to convert categorical variables to numerical features.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># use one-hot encoding to convert categorical variables to numerical</span>
+<span class="n">df_train_encoded</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df_train</span><span class="p">,</span> <span class="n">drop_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df_test_encoded</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df_test</span><span class="p">,</span> <span class="n">drop_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df_train_encoded</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>balance</th>
+      <th>day</th>
+      <th>duration</th>
+      <th>campaign</th>
+      <th>pdays</th>
+      <th>previous</th>
+      <th>y</th>
+      <th>job_blue-collar</th>
+      <th>job_entrepreneur</th>
+      <th>...</th>
+      <th>month_jul</th>
+      <th>month_jun</th>
+      <th>month_mar</th>
+      <th>month_may</th>
+      <th>month_nov</th>
+      <th>month_oct</th>
+      <th>month_sep</th>
+      <th>poutcome_other</th>
+      <th>poutcome_success</th>
+      <th>poutcome_unknown</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>58</td>
+      <td>2143</td>
+      <td>5</td>
+      <td>261</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>44</td>
+      <td>29</td>
+      <td>5</td>
+      <td>151</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>33</td>
+      <td>2</td>
+      <td>5</td>
+      <td>76</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>47</td>
+      <td>1506</td>
+      <td>5</td>
+      <td>92</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>33</td>
+      <td>1</td>
+      <td>5</td>
+      <td>198</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 43 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># feature scaling min-max   </span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">df_train_encoded</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">df_train_encoded</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span>
+
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">df_test_encoded</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">X_test_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">df_test_encoded</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># convert the scaled data to a dataframe</span>
+<span class="n">df_X_train_scaled</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">X_train</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">df_X_test_scaled</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">X_test</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">df_train_encoded_scaled</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df_test_encoded_scaled</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_X_test_scaled</span><span class="p">,</span> <span class="n">y_test</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="implementing-k-means-clustering">
+<h3>5.3.3 Implementing K-Means Clustering<a class="headerlink" href="#implementing-k-means-clustering" title="Permalink to this heading">#</a></h3>
+<section id="selecting-the-optimal-number-of-clusters-elbow-method">
+<h4>5.3.3.1 Selecting the Optimal Number of Clusters (Elbow Method)<a class="headerlink" href="#selecting-the-optimal-number-of-clusters-elbow-method" title="Permalink to this heading">#</a></h4>
+<p>We will use the Elbow method to determine the ideal cluster count (k) by plotting the within-cluster sum of squares (WCSS) against the number of clusters and identifying the “elbow” point.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+<span class="kn">from</span> <span class="nn">yellowbrick.cluster</span> <span class="kn">import</span> <span class="n">KElbowVisualizer</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="s1">&#39;k-means++&#39;</span><span class="p">)</span>
+<span class="n">visualizer</span> <span class="o">=</span> <span class="n">KElbowVisualizer</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">12</span><span class="p">),</span><span class="n">metric</span><span class="o">=</span><span class="s2">&quot;distortion&quot;</span><span class="p">)</span> 
+<span class="n">visualizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">)</span>
+<span class="n">visualizer</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6dfda97f577425f11fe5a58c5463808d95c417e2e4eb31c1916ffb18ba290e61.png" src="_images/6dfda97f577425f11fe5a58c5463808d95c417e2e4eb31c1916ffb18ba290e61.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:title={&#39;center&#39;:&#39;Distortion Score Elbow for KMeans Clustering&#39;}, xlabel=&#39;k&#39;, ylabel=&#39;distortion score&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="applying-k-means-clustering">
+<h4>5.3.3.2 Applying K-Means Clustering<a class="headerlink" href="#applying-k-means-clustering" title="Permalink to this heading">#</a></h4>
+<p>The generated figure indicates that the optimal cluster number is seven. By specifying n_clusters=7, we fit the KMeans clustering model with the optimal number of clusters and assign the cluster number to each individual customer.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+
+<span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="s1">&#39;k-means++&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">kmeans</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">)</span>
+<span class="n">df_train_encoded_scaled</span><span class="p">[</span><span class="s2">&quot;Cluster&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="evaluating-the-performance-of-a-k-means-clustering-model">
+<h4>5.3.3.4 Evaluating the performance of a K-means clustering model<a class="headerlink" href="#evaluating-the-performance-of-a-k-means-clustering-model" title="Permalink to this heading">#</a></h4>
+<p>K-Means clustering model involves determining the effectiveness of the data partitioning into distinct clusters. Unlike supervised learning models, which utilize accuracy, precision, and recall for evaluation, unsupervised clustering models require alternative approaches due to the absence of predefined labels. Here are several methods used to evaluate K-means clustering models:</p>
+<p><strong>Inertia or Within-Cluster Sum of Squares (WCSS)</strong>:
+Inertia quantifies the compactness of the clusters, calculating the sum of squared distances of each data point to its nearest centroid. The objective is to minimize inertia, indicating dense and well-separated clusters. However, reducing the cluster count to 1 results in zero inertia, presenting a trade-off. An inertia plot against the number of clusters (elbow method) helps identify the optimal cluster count by locating the “elbow point,” where the rate of decrease in inertia markedly shifts.</p>
+<p><strong>Silhouette Score</strong>:
+The Silhouette Score assesses how similar an object is to its cluster (cohesion) versus other clusters (separation). Scores range from -1 to 1, where higher values indicate strong matching within the cluster and poor matching to neighboring clusters. Predominantly high values suggest a suitable clustering configuration.</p>
+<p><strong>Davies-Bouldin Index</strong>:
+The Davies-Bouldin Index (DBI) evaluates clustering quality based on the ratio of within-cluster to between-cluster distances. Lower DBI values indicate better clustering by favoring compact and well-separated clusters.</p>
+<p><strong>Calinski-Harabasz Index</strong>:
+Also known as the Variance Ratio Criterion, this index evaluates clustering by comparing the ratio of between-cluster dispersion to within-cluster dispersion across all clusters. Higher values signify better clustering performance, reflecting dense and distinct clusters.</p>
+<p>All these metrics can be obtained through sklearn Python package which makes the metrics calculation much easier.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">silhouette_score</span><span class="p">,</span> <span class="n">davies_bouldin_score</span><span class="p">,</span> <span class="n">calinski_harabasz_score</span>
+
+<span class="k">def</span> <span class="nf">evaluate_clustering</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Evaluate clustering performance using various metrics.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    - X: The dataset used for clustering (features).</span>
+<span class="sd">    - labels: The labels predicted by the clustering model.</span>
+<span class="sd">    - model: The fitted clustering model (e.g., KMeans instance).</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    A dictionary containing the Inertia, Silhouette Score, Davies-Bouldin Index, and Calinski-Harabasz Index.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">metrics</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="c1"># Inertia</span>
+    <span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;Inertia&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">inertia_</span>
+    
+    <span class="c1"># Silhouette Score</span>
+    <span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;Silhouette Score&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">silhouette_score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">sample_size</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
+    
+    <span class="c1"># Davies-Bouldin Index</span>
+    <span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;Davies-Bouldin Index&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">davies_bouldin_score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+    
+    <span class="c1"># Calinski-Harabasz Index</span>
+    <span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;Calinski-Harabasz Index&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">calinski_harabasz_score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">metrics</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">metrics</span> <span class="o">=</span> <span class="n">evaluate_clustering</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span><span class="p">,</span> <span class="n">kmeans</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Inertia&#39;: 103927.74320527555, &#39;Silhouette Score&#39;: 0.12321804390553139, &#39;Davies-Bouldin Index&#39;: 2.371944407695371, &#39;Calinski-Harabasz Index&#39;: 3822.0899747713497}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="interprete-the-results">
+<h3>5.3.4 Interprete the results<a class="headerlink" href="#interprete-the-results" title="Permalink to this heading">#</a></h3>
+<p>By calculating the mean values of each feature by Cluster, we can create the profile for each cluster.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cluster profiling: mean values of each feature for each cluster</span>
+<span class="n">cluster_profile</span> <span class="o">=</span> <span class="n">df_train_encoded_scaled</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Cluster&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="c1"># write the cluster_profile to a csv file</span>
+<span class="n">cluster_profile</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;results\chapter5_cluster_profile.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>After encoding and scaling the data frame, traditional methods of deriving explainable insights become challenging. However, leveraging Language Model prompts (LLM) simplifies the extraction of insights from cluster profiles. Through the LLM prompt, we can not only catalog the features of each cluster but also provide tailored marketing strategy recommendations for each segment.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Cluster</p></th>
+<th class="head"><p>Age Group</p></th>
+<th class="head"><p>Average Balance</p></th>
+<th class="head"><p>Campaign Interaction Timing</p></th>
+<th class="head"><p>Dominant Job Roles</p></th>
+<th class="head"><p>Contact Months</p></th>
+<th class="head"><p>Campaign Outcome (Success Rate)</p></th>
+<th class="head"><p>Marketing Strategy Recommendations</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Mixed, younger to middle-age</p></td>
+<td><p>Moderate</p></td>
+<td><p>Middle of the month, moderate duration</p></td>
+<td><p>Diverse, entrepreneurs</p></td>
+<td><p>Throughout the year, peak in May and November</p></td>
+<td><p>Moderate</p></td>
+<td><p>Diversify messaging to appeal to a wide age range; emphasize entrepreneurial spirit.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Younger to middle-age</p></td>
+<td><p>Slightly lower</p></td>
+<td><p>Predominantly in May, fewer follow-ups</p></td>
+<td><p>Strongly blue-collar</p></td>
+<td><p>May</p></td>
+<td><p>Lower</p></td>
+<td><p>Focus on value and practical benefits; leverage direct, clear communication.</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>Similar to 0 and 1, slightly older</p></td>
+<td><p>Similar to 0 and 1</p></td>
+<td><p>Almost exclusive in June</p></td>
+<td><p>Blue-collar, entrepreneurs</p></td>
+<td><p>June</p></td>
+<td><p>Lower, minimal previous engagement</p></td>
+<td><p>Intensify efforts in June with targeted offers; highlight opportunities for growth and investment.</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>Younger demographic</p></td>
+<td><p>Comparable to others</p></td>
+<td><p>End of the month, slightly longer interactions</p></td>
+<td><p>Diverse, fewer blue-collar</p></td>
+<td><p>Evenly distributed, preference for May and November</p></td>
+<td><p>Higher</p></td>
+<td><p>Utilize digital channels and social media; focus on innovation and tech-savviness.</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>Oldest</p></td>
+<td><p>Similar to others</p></td>
+<td><p>Later in the month, moderate interaction</p></td>
+<td><p>Mix, less blue-collar</p></td>
+<td><p>Varied, no specific peak month</p></td>
+<td><p>Moderately high</p></td>
+<td><p>Personalize communication; emphasize security, stability, and long-term benefits.</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>Youngest</p></td>
+<td><p>Slightly lower</p></td>
+<td><p>Middle of the month, slightly longer than average</p></td>
+<td><p>Varied, significant blue-collar presence</p></td>
+<td><p>High activity in May, but less exclusively</p></td>
+<td><p>Moderately high</p></td>
+<td><p>Craft youthful, energetic campaigns; focus on affordability and starting early on financial planning.</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>Younger to middle-age, slightly older than Cluster 5</p></td>
+<td><p>Comparable to others</p></td>
+<td><p>Later in the month, similar to Cluster 4</p></td>
+<td><p>Strongly blue-collar</p></td>
+<td><p>Less concentrated, notable absence in May</p></td>
+<td><p>Lower</p></td>
+<td><p>Adopt a hands-on approach with real-life examples; emphasize trustworthiness and reliability of services or products offered.</p></td>
+</tr>
+</tbody>
+</table>
+<p>These marketing strategy recommendations are tailored to each cluster’s unique characteristics and campaign interaction patterns, aiming to enhance engagement and improve the success rate of future campaigns.</p>
+</section>
+</section>
+<section id="llm-k-means-clustering-for-customer-segmentation">
+<h2>5.4 LLM+K-Means Clustering for Customer Segmentation<a class="headerlink" href="#llm-k-means-clustering-for-customer-segmentation" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sentence_transformers</span> <span class="kn">import</span> <span class="n">SentenceTransformer</span>
+
+<span class="n">df_train</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>job</th>
+      <th>marital</th>
+      <th>education</th>
+      <th>default</th>
+      <th>balance</th>
+      <th>housing</th>
+      <th>loan</th>
+      <th>contact</th>
+      <th>day</th>
+      <th>month</th>
+      <th>duration</th>
+      <th>campaign</th>
+      <th>pdays</th>
+      <th>previous</th>
+      <th>poutcome</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>58</td>
+      <td>management</td>
+      <td>married</td>
+      <td>tertiary</td>
+      <td>no</td>
+      <td>2143</td>
+      <td>yes</td>
+      <td>no</td>
+      <td>unknown</td>
+      <td>5</td>
+      <td>may</td>
+      <td>261</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>unknown</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>44</td>
+      <td>technician</td>
+      <td>single</td>
+      <td>secondary</td>
+      <td>no</td>
+      <td>29</td>
+      <td>yes</td>
+      <td>no</td>
+      <td>unknown</td>
+      <td>5</td>
+      <td>may</td>
+      <td>151</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>unknown</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>33</td>
+      <td>entrepreneur</td>
+      <td>married</td>
+      <td>secondary</td>
+      <td>no</td>
+      <td>2</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>unknown</td>
+      <td>5</td>
+      <td>may</td>
+      <td>76</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>unknown</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>47</td>
+      <td>blue-collar</td>
+      <td>married</td>
+      <td>unknown</td>
+      <td>no</td>
+      <td>1506</td>
+      <td>yes</td>
+      <td>no</td>
+      <td>unknown</td>
+      <td>5</td>
+      <td>may</td>
+      <td>92</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>unknown</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>33</td>
+      <td>unknown</td>
+      <td>single</td>
+      <td>unknown</td>
+      <td>no</td>
+      <td>1</td>
+      <td>no</td>
+      <td>no</td>
+      <td>unknown</td>
+      <td>5</td>
+      <td>may</td>
+      <td>198</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>unknown</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compile_text</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">text_list</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">col</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">x</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">]</span>
+    <span class="n">text_string</span> <span class="o">=</span> <span class="s2">&quot;,</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text_list</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&quot;&quot;&quot;</span><span class="si">{</span><span class="n">text_string</span><span class="si">}</span><span class="s1">&quot;&quot;&quot;&#39;</span>
+    <span class="k">return</span> <span class="n">text</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">df</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>job</th>
+      <th>marital</th>
+      <th>education</th>
+      <th>default</th>
+      <th>balance</th>
+      <th>housing</th>
+      <th>loan</th>
+      <th>contact</th>
+      <th>day</th>
+      <th>month</th>
+      <th>duration</th>
+      <th>campaign</th>
+      <th>pdays</th>
+      <th>previous</th>
+      <th>poutcome</th>
+      <th>y</th>
+      <th>Cluster</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>58</td>
+      <td>management</td>
+      <td>married</td>
+      <td>tertiary</td>
+      <td>no</td>
+      <td>2143</td>
+      <td>yes</td>
+      <td>no</td>
+      <td>unknown</td>
+      <td>5</td>
+      <td>may</td>
+      <td>261</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>unknown</td>
+      <td>0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>44</td>
+      <td>technician</td>
+      <td>single</td>
+      <td>secondary</td>
+      <td>no</td>
+      <td>29</td>
+      <td>yes</td>
+      <td>no</td>
+      <td>unknown</td>
+      <td>5</td>
+      <td>may</td>
+      <td>151</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>unknown</td>
+      <td>0</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>33</td>
+      <td>entrepreneur</td>
+      <td>married</td>
+      <td>secondary</td>
+      <td>no</td>
+      <td>2</td>
+      <td>yes</td>
+      <td>yes</td>
+      <td>unknown</td>
+      <td>5</td>
+      <td>may</td>
+      <td>76</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>unknown</td>
+      <td>0</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>47</td>
+      <td>blue-collar</td>
+      <td>married</td>
+      <td>unknown</td>
+      <td>no</td>
+      <td>1506</td>
+      <td>yes</td>
+      <td>no</td>
+      <td>unknown</td>
+      <td>5</td>
+      <td>may</td>
+      <td>92</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>unknown</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>33</td>
+      <td>unknown</td>
+      <td>single</td>
+      <td>unknown</td>
+      <td>no</td>
+      <td>1</td>
+      <td>no</td>
+      <td>no</td>
+      <td>unknown</td>
+      <td>5</td>
+      <td>may</td>
+      <td>198</td>
+      <td>1</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>unknown</td>
+      <td>0</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">columns</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">sentences</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">compile_text</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sentences</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;&quot;&quot;Age: 58,
+Job: management,
+Marital: married,
+Education: tertiary,
+Default: no,
+Balance: 2143,
+Housing: yes,
+Loan: no,
+Contact: unknown,
+Day: 5,
+Month: may,
+Duration: 261,
+Campaign: 1,
+Pdays: -1,
+Previous: 0,
+Poutcome: unknown,
+Cluster: 2&quot;&quot;&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">SentenceTransformer</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;sentence-transformers/paraphrase-MiniLM-L6-v2&quot;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+
+<span class="c1"># Define a batch size</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">64</span>
+
+<span class="c1"># Create a DataLoader</span>
+<span class="n">dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">sentences</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span>
+
+<span class="c1"># Encode sentences in batches</span>
+<span class="n">output</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">dataloader</span><span class="p">:</span>
+    <span class="n">batch_output</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">batch</span><span class="p">,</span> <span class="n">show_progress_bar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">normalize_embeddings</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">output</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">batch_output</span><span class="p">)</span>
+
+<span class="n">df_embedding</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.06it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.65it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.64it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.68it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.62it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.70it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.37it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.65it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.64it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.69it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.62it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.68it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.60it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.65it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.57it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.67it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.64it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.68it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.70it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.65it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.65it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.66it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.64it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.61it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.68it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.58it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.63it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.61it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.68it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.58it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.65it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.66it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.67it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.67it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.64it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.54it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.59it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.49it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.48it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.45it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.49it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.55it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.57it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.57it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.57it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.51it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.53it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.58it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.29it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.51it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.32it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.31it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.53it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.57it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.55it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.55it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.53it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.53it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.53it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.51it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.54it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.53it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.54it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.57it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.57it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.54it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.25it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.41it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.37it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.23it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.48it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.46it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.09it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.29it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.48it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.53it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.29it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.23it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.49it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.43it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.15it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.30it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.22it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.51it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.41it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.47it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.25it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.33it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.51it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.47it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.54it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.32it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.44it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.42it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.23it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.12it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.42it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.49it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.55it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.58it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.44it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.40it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.36it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.48it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.34it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.49it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.45it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.23it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.46it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.40it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.19it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.40it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.42it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.28it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.46it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.27it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.51it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.46it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.29it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.55it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.51it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.49it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.55it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.54it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.55it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.48it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.55it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.54it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.54it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.44it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.35it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.31it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.41it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.47it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.49it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.51it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.53it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.53it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.24it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.32it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.30it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.46it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.45it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.39it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.55it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.48it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.39it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.30it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.39it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.41it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.38it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.33it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.34it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.08it/s]
+Batches: 100%|██████████| 2/2 [00:02&lt;00:00,  1.07s/it]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.11it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.30it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.39it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.36it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.37it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.25it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.31it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.38it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.22it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.30it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.32it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.45it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.36it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.53it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.19it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.33it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.27it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.51it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.42it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.39it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.46it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.47it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.43it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.58it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.58it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.44it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.18it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.40it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.55it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.35it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.47it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.59it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.53it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.48it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.59it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.30it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.43it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.53it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.66it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.51it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.22it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.54it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.41it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.31it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.53it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.47it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.54it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.41it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.49it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.51it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.48it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.62it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.24it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.48it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.66it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.49it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.48it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.53it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.25it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.44it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.36it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.35it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.51it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.61it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.59it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.38it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.59it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.58it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.40it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.61it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.58it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.55it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.54it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.34it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.57it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.59it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.59it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.57it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.59it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.54it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.26it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.39it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.54it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.51it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.42it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.59it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.53it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.59it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.58it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.46it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.23it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.48it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.47it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.38it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.27it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.29it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.35it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.49it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.41it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.44it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.32it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.63it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.31it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.27it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.53it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.51it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.46it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.28it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.39it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.41it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.45it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.39it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.45it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.48it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.31it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.15it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.29it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.34it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.38it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.33it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.15it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.23it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.27it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.37it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.39it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.40it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.43it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.34it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.54it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.55it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.59it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.55it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.48it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.54it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.27it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.47it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.46it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.59it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.31it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.47it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.45it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.43it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.36it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.40it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.45it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.46it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.27it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.19it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.33it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.22it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.25it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.37it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.38it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.37it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.43it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.36it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.39it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.27it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.37it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.40it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.44it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.39it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.46it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.34it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.10it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.32it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.47it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.62it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.55it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.61it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.54it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.58it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.48it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.53it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.53it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.54it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.35it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.60it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.59it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.58it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.57it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.59it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.60it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.63it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.51it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.24it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.49it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.55it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.36it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.33it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.36it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.48it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.28it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.48it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.44it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.15it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.45it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.55it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.48it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.47it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.33it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.38it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.37it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.53it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.30it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.59it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.45it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.46it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.44it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.24it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.55it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.54it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.60it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.59it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.58it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.55it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.26it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.53it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.59it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.53it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.62it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.48it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.34it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.39it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.51it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.31it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.54it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.27it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.35it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.47it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.41it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.65it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.54it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.43it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.53it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.51it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.44it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.36it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.49it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.41it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.37it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.37it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.17it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.33it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.41it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.48it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.27it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.25it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.37it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.54it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.46it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.32it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.05it/s]
+Batches: 100%|██████████| 2/2 [00:03&lt;00:00,  1.80s/it]
+Batches: 100%|██████████| 2/2 [00:02&lt;00:00,  1.08s/it]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.03it/s]
+Batches: 100%|██████████| 2/2 [00:02&lt;00:00,  1.15s/it]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.13it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.17it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.13it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.06it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.20it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.24it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.09it/s]
+Batches: 100%|██████████| 2/2 [00:02&lt;00:00,  1.14s/it]
+Batches: 100%|██████████| 2/2 [00:02&lt;00:00,  1.04s/it]
+Batches: 100%|██████████| 2/2 [00:02&lt;00:00,  1.18s/it]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.04it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.11it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.17it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.26it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.30it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.07it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.09it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.08it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.16it/s]
+Batches: 100%|██████████| 2/2 [00:02&lt;00:00,  1.00s/it]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.33it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.27it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.35it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.23it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.19it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.21it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.20it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.09it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.27it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.33it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.18it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.27it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.26it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.17it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.32it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.24it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.08it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.20it/s]
+Batches: 100%|██████████| 2/2 [00:02&lt;00:00,  1.10s/it]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.08it/s]
+Batches: 100%|██████████| 2/2 [00:02&lt;00:00,  1.01s/it]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.40it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.39it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.33it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.46it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.51it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.59it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.64it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.44it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.54it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.26it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.47it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.62it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.57it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.33it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.30it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.28it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.51it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.49it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.47it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.33it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.61it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.35it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.26it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.55it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.38it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.29it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.29it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.29it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.37it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.44it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.35it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.61it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.46it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.42it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.57it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.57it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.42it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.36it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.53it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.32it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.36it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.23it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.39it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.30it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.57it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.55it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.34it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.39it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.28it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.46it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.31it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.46it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.51it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.45it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.38it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.49it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.26it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.37it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.39it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.30it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.16it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.35it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.38it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.19it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.22it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.41it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.29it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.09it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.17it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.36it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.34it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.32it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.49it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.17it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.38it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.25it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.33it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.43it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.31it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.39it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.53it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.46it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.51it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.45it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.46it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.53it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.64it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.58it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.54it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.61it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.58it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.37it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.57it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.57it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.47it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.59it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.58it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.43it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.55it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.42it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.32it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.55it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.55it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.28it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.43it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.55it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.36it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.51it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.59it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.55it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.60it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.58it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.55it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.54it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.60it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.48it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.54it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.48it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.53it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.62it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.59it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.43it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.58it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.58it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.61it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.51it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.55it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.57it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.61it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.63it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.57it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.61it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.59it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.62it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.57it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.41it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.58it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.58it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.39it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.53it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.60it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.57it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.59it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.55it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.59it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.59it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.61it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.52it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.59it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.58it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.61it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.50it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.41it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.60it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.55it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.61it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.56it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.58it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.60it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.60it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.60it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.61it/s]
+Batches: 100%|██████████| 2/2 [00:01&lt;00:00,  1.54it/s]
+Batches: 100%|██████████| 1/1 [00:00&lt;00:00,  1.88it/s]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_embedding</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;results\chapter5_embedding_train.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>When working with large dataframes, the embedding process may fail without optimization. The SentenceTransformer model, a transformer-based solution for text data, is inherently efficient. However, several strategies can further enhance your code’s efficiency:</p>
+<p><strong>Batch Processing:</strong> If your sentences list is very large, you might want to consider processing the sentences in batches. This can be done by splitting the sentences list into smaller lists and then encoding each smaller list separately. This can help to reduce memory usage.</p>
+<p><strong>GPU Acceleration:</strong> If you have a compatible GPU, you can use it to accelerate the encoding process. The SentenceTransformer model automatically uses the GPU if it is available. You can check if a GPU is available and set the device to GPU using PyTorch’s torch.cuda module.</p>
+<p><strong>Preprocessing:</strong> Depending on your specific use case, you might be able to make the encoding process more efficient by preprocessing your sentences. This could involve removing unnecessary words or characters, or converting all text to lowercase.</p>
+<p><strong>Parallel Processing:</strong> If you have a multi-core CPU, you can use parallel processing to encode multiple sentences at the same time. This can be done using Python’s multiprocessing module.</p>
+<p>We have now generated embeddings for all features. Subsequently, we employ the Elbow method to determine the optimal number of clusters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_llm</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="s1">&#39;k-means++&#39;</span><span class="p">)</span>
+<span class="n">visualizer_llm</span> <span class="o">=</span> <span class="n">KElbowVisualizer</span><span class="p">(</span><span class="n">model_llm</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">12</span><span class="p">),</span><span class="n">metric</span><span class="o">=</span><span class="s2">&quot;distortion&quot;</span><span class="p">)</span> 
+<span class="n">visualizer_llm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_embedding</span><span class="p">)</span>
+<span class="n">visualizer_llm</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/493012e3113753c7ad18a96b3f4451b49f7ad12243a8f942321bfc83f60e78e3.png" src="_images/493012e3113753c7ad18a96b3f4451b49f7ad12243a8f942321bfc83f60e78e3.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:title={&#39;center&#39;:&#39;Distortion Score Elbow for KMeans Clustering&#39;}, xlabel=&#39;k&#39;, ylabel=&#39;distortion score&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>After identifying the optimal number of clusters, we continue to train a K-Means classifier on the embedding dataframe.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">llm_kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="s1">&#39;k-means++&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">llm_kmeans</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_embedding</span><span class="p">)</span>
+<span class="n">df_train</span><span class="p">[</span><span class="s2">&quot;Cluster&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">llm_kmeans</span><span class="o">.</span><span class="n">labels_</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">metrics_llm</span> <span class="o">=</span> <span class="n">evaluate_clustering</span><span class="p">(</span><span class="n">df_embedding</span><span class="p">,</span> <span class="n">llm_kmeans</span><span class="o">.</span><span class="n">labels_</span><span class="p">,</span> <span class="n">llm_kmeans</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">metrics_llm</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Inertia&#39;: 2151.683837890625, &#39;Silhouette Score&#39;: 0.2150295, &#39;Davies-Bouldin Index&#39;: 1.6160626787772425, &#39;Calinski-Harabasz Index&#39;: 6742.381848334127}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Comparing four key performance metrics reveals a significant improvement in the LLM+K-Means classification model’s performance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">metrics_llm</span><span class="p">[</span><span class="s1">&#39;Inertia&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;Inertia&#39;</span><span class="p">],</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">metrics_llm</span><span class="p">[</span><span class="s1">&#39;Silhouette Score&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;Silhouette Score&#39;</span><span class="p">],</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">metrics_llm</span><span class="p">[</span><span class="s1">&#39;Davies-Bouldin Index&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;Davies-Bouldin Index&#39;</span><span class="p">],</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">metrics_llm</span><span class="p">[</span><span class="s1">&#39;Calinski-Harabasz Index&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;Calinski-Harabasz Index&#39;</span><span class="p">],</span> <span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.021
+1.745
+0.681
+1.764
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -446,6 +2410,41 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamentals-of-customer-segmentation">5.1 Fundamentals of Customer Segmentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#popular-models-for-customer-segmentation">5.2 Popular Models for Customer Segmentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means-clustering">5.2.1 K-Means Clustering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hierarchical-clustering">5.2.2 Hierarchical Clustering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-mixture-models-gmm">5.2.3 Gaussian Mixture Models (GMM)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#self-organizing-maps-som">5.2.4 Self-Organizing Maps (SOM)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dbscan-density-based-spatial-clustering-of-applications-with-noise">5.2.5 DBSCAN (Density-Based Spatial Clustering of Applications with Noise)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means-clustering-model-development-on-kaggle-s-banking-dataset">5.3 K-Means Clustering Model Development on Kaggle’s Banking Dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-description">5.3.1 Dataset Description</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eda-and-data-preprocessing">5.3.2 EDA and Data Preprocessing:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-k-means-clustering">5.3.3 Implementing K-Means Clustering</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-the-optimal-number-of-clusters-elbow-method">5.3.3.1 Selecting the Optimal Number of Clusters (Elbow Method)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-k-means-clustering">5.3.3.2 Applying K-Means Clustering</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-the-performance-of-a-k-means-clustering-model">5.3.3.4 Evaluating the performance of a K-means clustering model</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interprete-the-results">5.3.4 Interprete the results</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#llm-k-means-clustering-for-customer-segmentation">5.4 LLM+K-Means Clustering for Customer Segmentation</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

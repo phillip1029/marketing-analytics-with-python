@@ -61,6 +61,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'chapter_4';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -359,7 +361,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -375,6 +379,36 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-regression-analysis">4.1 Introduction to Regression Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-in-marketing">Applications in Marketing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-regression-analysis">4.2 Types of Regression Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">4.2.1 Linear Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">4.2.2 Logistic Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poisson-regression">4.2.3 Poisson Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polynomial-regression">4.2.4 Polynomial Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stepwise-regression">4.2.5 Stepwise Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-and-lasso-regression">4.2.6 Ridge and Lasso Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generalized-linear-regression-glm">4.2.7 Generalized Linear Regression (GLM)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-right-model">Choosing the Right Model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">4.3 Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-linear-regression-model">4.3.1 The Linear Regression Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-coefficients">4.3.2 Interpreting Coefficients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-linear-regression-with-scikit-learn">4.3.3 Implementing Linear Regression with Scikit-learn</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">4.4 Generalized Linear Regression (GLM)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">4.5 Conclusion</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -386,6 +420,616 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="chapter-4-regression-analysis-for-marketing">
 <h1>Chapter 4 Regression Analysis for Marketing<a class="headerlink" href="#chapter-4-regression-analysis-for-marketing" title="Permalink to this heading">#</a></h1>
+<section id="introduction-to-regression-analysis">
+<h2>4.1 Introduction to Regression Analysis<a class="headerlink" href="#introduction-to-regression-analysis" title="Permalink to this heading">#</a></h2>
+<p>Regression analysis stands as a cornerstone of marketing analytics, offering a powerful toolkit for deciphering the intricate dynamics between various factors influencing market outcomes. This statistical approach enables marketers to navigate through the complexity of consumer behavior, advertising effectiveness, pricing strategies, and more, by establishing quantifiable relationships between dependent variables and one or more independent variables.</p>
+<section id="applications-in-marketing">
+<h3>Applications in Marketing<a class="headerlink" href="#applications-in-marketing" title="Permalink to this heading">#</a></h3>
+<p>The versatility of regression analysis makes it indispensable in the realm of marketing. Here are some ways it can be applied:</p>
+<ul class="simple">
+<li><p><strong>Forecasting Sales:</strong> By incorporating variables such as marketing expenditure, seasonal trends, and economic indicators, businesses can predict future sales, enabling better inventory and budget planning.</p></li>
+<li><p><strong>Advertising Effectiveness:</strong> Evaluating the ROI on advertising campaigns by analyzing how different channels and messaging impact customer acquisition and retention.</p></li>
+<li><p><strong>Customer Insights:</strong> Understanding what drives customer satisfaction and loyalty by examining factors such as service quality, product features, and user experience.</p></li>
+<li><p><strong>Pricing Optimization:</strong> Assessing how price changes influence demand and sales, aiding in the development of dynamic pricing strategies to maximize profitability.</p></li>
+</ul>
+</section>
+</section>
+<section id="types-of-regression-analysis">
+<h2>4.2 Types of Regression Analysis<a class="headerlink" href="#types-of-regression-analysis" title="Permalink to this heading">#</a></h2>
+<p>Regression analysis is a versatile statistical tool used to examine the relationship between a dependent (target) variable and one or more independent (predictor) variables. The choice of regression analysis depends on the nature of the target variable and the relationship you wish to investigate. Below, we discuss several commonly used types of regression analysis, each serving distinct analytical needs in marketing analytics.</p>
+<section id="linear-regression">
+<h3>4.2.1 Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this heading">#</a></h3>
+<p><strong>Linear regression</strong> is the most straightforward form of regression analysis. It assumes a linear relationship between the dependent variable and one or more independent variables. This model is highly interpretable and is often used as a starting point for understanding relationships between variables.</p>
+<ul class="simple">
+<li><p><strong>Usage:</strong> Ideal for continuous data and forecasting outcomes like sales volume based on advertising spend.</p></li>
+<li><p><strong>Python Implementation:</strong> Widely supported by libraries such as Scikit-learn (<code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code>) and Statsmodels.</p></li>
+</ul>
+</section>
+<section id="logistic-regression">
+<h3>4.2.2 Logistic Regression<a class="headerlink" href="#logistic-regression" title="Permalink to this heading">#</a></h3>
+<p>Unlike linear regression, <strong>logistic regression</strong> is used when the dependent variable is categorical, typically binary. This model estimates probabilities by predicting the log odds of the outcome, making it suitable for classification tasks.</p>
+<ul class="simple">
+<li><p><strong>Usage:</strong> Commonly applied to predict binary outcomes such as customer churn (yes/no) or conversion success (purchase/no purchase).</p></li>
+<li><p><strong>Python Implementation:</strong> Can be implemented using Scikit-learn’s <code class="docutils literal notranslate"><span class="pre">LogisticRegression</span></code> class.</p></li>
+</ul>
+</section>
+<section id="poisson-regression">
+<h3>4.2.3 Poisson Regression<a class="headerlink" href="#poisson-regression" title="Permalink to this heading">#</a></h3>
+<p><strong>Poisson regression</strong> is a specialized form of regression analysis used when the dependent variable is count data. This type of regression is particularly useful for modeling the number of times an event occurs within a fixed interval of time or space. Given its nature, Poisson regression is a powerful tool for analyzing and predicting behaviors or trends where outcomes are discrete counts.</p>
+<ul class="simple">
+<li><p><strong>Usage:</strong> Poisson regression is ideal for count-based data scenarios such as predicting the number of website visits, daily sales transactions, or call center calls received in a day. It helps in understanding how various factors or exposures influence the rate at which events occur.</p></li>
+<li><p><strong>Assumptions:</strong> The model assumes that the mean and variance of the distribution of the dependent variable are equal, a condition known as equidispersion. However, real-world data often violate this assumption, leading to overdispersion or underdispersion. In such cases, alternative models like Negative Binomial regression may be more appropriate.</p></li>
+<li><p><strong>Python Implementation:</strong> The <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> library in Python provides functionality to fit Poisson regression models.</p></li>
+</ul>
+</section>
+<section id="polynomial-regression">
+<h3>4.2.4 Polynomial Regression<a class="headerlink" href="#polynomial-regression" title="Permalink to this heading">#</a></h3>
+<p><strong>Polynomial regression</strong> extends linear regression by introducing polynomial terms (squared, cubic, etc.) of the independent variables. This allows the model to capture nonlinear relationships between the dependent and independent variables.</p>
+<ul class="simple">
+<li><p><strong>Usage:</strong> Useful when the relationship between variables is not linear but still requires the simplicity and interpretability of regression models.</p></li>
+<li><p><strong>Python Implementation:</strong> Achieved by transforming features into polynomial features (e.g., using Scikit-learn’s <code class="docutils literal notranslate"><span class="pre">PolynomialFeatures</span></code>) before applying linear regression.</p></li>
+</ul>
+</section>
+<section id="stepwise-regression">
+<h3>4.2.5 Stepwise Regression<a class="headerlink" href="#stepwise-regression" title="Permalink to this heading">#</a></h3>
+<p><strong>Stepwise regression</strong> is a systematic method for adding and removing predictors based on their statistical significance in explaining the variance of the dependent variable. It aims to identify the most parsimonious model that explains the data.</p>
+<ul class="simple">
+<li><p><strong>Usage:</strong> Effective in scenarios with large numbers of predictors, identifying a subset that offers the best prediction.</p></li>
+<li><p><strong>Python Implementation:</strong> Can be complex to implement directly but is supported through procedures in statistical packages like Statsmodels.</p></li>
+</ul>
+</section>
+<section id="ridge-and-lasso-regression">
+<h3>4.2.6 Ridge and Lasso Regression<a class="headerlink" href="#ridge-and-lasso-regression" title="Permalink to this heading">#</a></h3>
+<p>Both <strong>Ridge</strong> and <strong>Lasso regression</strong> are techniques used to analyze data with multicollinearity or when the number of predictors exceeds the number of observations. They introduce a penalty term to the loss function to shrink coefficient estimates.</p>
+<ul class="simple">
+<li><p><strong>Ridge Regression</strong> (L2 regularization) minimizes the sum of the square of coefficients, effectively reducing model complexity.</p></li>
+<li><p><strong>Lasso Regression</strong> (L1 regularization) can shrink some coefficients to zero, performing variable selection.</p></li>
+<li><p><strong>Usage:</strong> Both are used for feature selection, regularization, and improving model predictions in high-dimensional datasets.</p></li>
+<li><p><strong>Python Implementation:</strong> Scikit-learn offers <code class="docutils literal notranslate"><span class="pre">Ridge</span></code> and <code class="docutils literal notranslate"><span class="pre">Lasso</span></code> classes under its linear models module.</p></li>
+</ul>
+</section>
+<section id="generalized-linear-regression-glm">
+<h3>4.2.7 Generalized Linear Regression (GLM)<a class="headerlink" href="#generalized-linear-regression-glm" title="Permalink to this heading">#</a></h3>
+<p><strong>Generalized Linear Regression (GLM)</strong> extend traditional linear regression models to accommodate response variables that are not normally distributed. GLMs are versatile, allowing for the specification of different distributions for the response variable and the use of a link function to model the relationship between the response variable and the predictors. This flexibility makes GLMs a powerful tool for a wide range of data types and analytical tasks.</p>
+<ul class="simple">
+<li><p><strong>Usage:</strong> GLMs are broadly applicable in marketing analytics, from modeling binary outcomes like conversion or churn with logistic regression, to modeling count data, such as the number of purchases made by a customer, using Poisson or Negative Binomial regression.</p></li>
+<li><p><strong>Components:</strong> A GLM is characterized by three components: the probability distribution of the response variable (from the exponential family), the linear predictor (a linear combination of the input variables), and the link function (which connects the expected value of the response to the linear predictor).</p></li>
+<li><p><strong>Python Implementation:</strong> Implementing GLMs in Python can be readily done with the <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> library, which supports a variety of families for the response distribution (e.g., Binomial for binary data, Poisson for count data).</p></li>
+</ul>
+</section>
+<section id="choosing-the-right-model">
+<h3>Choosing the Right Model<a class="headerlink" href="#choosing-the-right-model" title="Permalink to this heading">#</a></h3>
+<p>Selecting the appropriate regression model depends on several factors, including the nature of the dependent variable, the relationship between the independent and dependent variables, and the specific analytical objectives. Experimentation and validation are key to determining the most effective model for your data.</p>
+</section>
+</section>
+<section id="id1">
+<h2>4.3 Linear Regression<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p>At the heart of regression analysis is linear regression, a model that assumes a linear relationship between the dependent and independent variables. This simplicity makes it not only a starting point for analysis but also a tool for making predictions and decisions in marketing strategies.</p>
+<section id="the-linear-regression-model">
+<h3>4.3.1 The Linear Regression Model<a class="headerlink" href="#the-linear-regression-model" title="Permalink to this heading">#</a></h3>
+<p>The linear regression model can be expressed in the formula:</p>
+<div class="math notranslate nohighlight">
+\[
+y = \beta_0 + \beta_1x_1 + \beta_2x_2 + \ldots + \beta_ix_i + \epsilon
+\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(y\)</span> represents the dependent variable we aim to predict, such as sales volume or customer satisfaction scores. The <span class="math notranslate nohighlight">\(x\)</span> variables are the independent variables or predictors, such as advertising spend, product price, or customer demographics. <span class="math notranslate nohighlight">\(\beta\)</span> coefficients quantify the impact of each predictor on the dependent variable, and <span class="math notranslate nohighlight">\(\epsilon\)</span> is the error term, accounting for the variability not explained by the model.</p>
+</section>
+<section id="interpreting-coefficients">
+<h3>4.3.2 Interpreting Coefficients<a class="headerlink" href="#interpreting-coefficients" title="Permalink to this heading">#</a></h3>
+<p>Understanding the coefficients in a linear regression model is crucial for making informed marketing decisions. A positive coefficient for a variable, such as marketing spend, indicates a direct relationship with the dependent variable, suggesting that increasing the marketing budget could lead to higher sales. Conversely, a negative coefficient suggests an inverse relationship, providing insights into factors that might hinder performance.</p>
+</section>
+<section id="implementing-linear-regression-with-scikit-learn">
+<h3>4.3.3 Implementing Linear Regression with Scikit-learn<a class="headerlink" href="#implementing-linear-regression-with-scikit-learn" title="Permalink to this heading">#</a></h3>
+<p>Scikit-learn, a comprehensive Python library for machine learning, simplifies the process of implementing linear regression models. It offers an intuitive interface and efficient tools for model fitting, prediction, and evaluation, making it an excellent choice for marketing analytics projects.</p>
+<p>Below are the general steps to build a regression model:</p>
+<ol class="arabic simple">
+<li><p><strong>Data Preparation:</strong> Begin by loading your dataset and selecting the dependent and independent variables. It’s important to clean and preprocess your data, handling missing values, and encoding categorical variables as needed.</p></li>
+<li><p><strong>Model Setup:</strong> Import the <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> class from Scikit-learn’s <code class="docutils literal notranslate"><span class="pre">linear_model</span></code> module. Instantiate the model with appropriate parameters.</p></li>
+<li><p><strong>Model Fitting:</strong> Use the <code class="docutils literal notranslate"><span class="pre">fit</span></code> method to train your model on the data. This involves finding the coefficients that minimize the error term.</p></li>
+<li><p><strong>Prediction and Evaluation:</strong> With the model trained, use it to make predictions on new or test data. Evaluate the model’s performance using metrics such as R-squared and mean squared error to understand its accuracy and reliability.</p></li>
+<li><p><strong>Interpretation:</strong> Analyze the model’s coefficients to draw insights into the relationships between your variables. This step is critical for applying your findings to make informed marketing decisions.</p></li>
+</ol>
+<p>By following these steps, you can leverage linear regression in Scikit-learn to uncover valuable marketing insights, predict outcomes, and optimize strategies for better performance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">r2_score</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Import the data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data\marketing_sales_data.csv&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>TV</th>
+      <th>Radio</th>
+      <th>Social Media</th>
+      <th>Influencer</th>
+      <th>Sales</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Low</td>
+      <td>3.518070</td>
+      <td>2.293790</td>
+      <td>Micro</td>
+      <td>55.261284</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Low</td>
+      <td>7.756876</td>
+      <td>2.572287</td>
+      <td>Mega</td>
+      <td>67.574904</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>High</td>
+      <td>20.348988</td>
+      <td>1.227180</td>
+      <td>Micro</td>
+      <td>272.250108</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Medium</td>
+      <td>20.108487</td>
+      <td>2.728374</td>
+      <td>Mega</td>
+      <td>195.102176</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>High</td>
+      <td>31.653200</td>
+      <td>7.776978</td>
+      <td>Nano</td>
+      <td>273.960377</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># processed marketing dataset</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="s1">&#39;TV&#39;</span><span class="p">,</span> <span class="s1">&#39;Radio&#39;</span><span class="p">,</span> <span class="s1">&#39;Social Media&#39;</span><span class="p">,</span> <span class="s1">&#39;Influencer&#39;</span><span class="p">]]</span>  <span class="c1"># Independent variables</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Sales&#39;</span><span class="p">]</span>  <span class="c1"># Dependent variable</span>
+
+<span class="c1"># separate the features into categorical and numerical features</span>
+<span class="n">categorical_features</span> <span class="o">=</span> <span class="p">[</span> <span class="s1">&#39;TV&#39;</span><span class="p">,</span> <span class="s1">&#39;Influencer&#39;</span><span class="p">]</span>
+<span class="n">numerical_features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Social Media&#39;</span><span class="p">,</span><span class="s1">&#39;Radio&#39;</span><span class="p">]</span>
+
+<span class="c1"># target encoding for categorical features</span>
+<span class="k">def</span> <span class="nf">target_encoding</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    
+    <span class="n">grouped</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="n">column</span><span class="p">,</span><span class="n">target</span><span class="p">]]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">column</span><span class="p">,</span><span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">empty_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">grouped</span><span class="p">)):</span>
+        <span class="n">empty_dict</span><span class="p">[</span><span class="n">grouped</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span><span class="o">=</span><span class="n">grouped</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">empty_dict</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+    
+    <span class="k">return</span> <span class="n">data</span>
+
+<span class="c1"># combine X and y to apply target encoding</span>
+<span class="n">X</span><span class="p">[</span><span class="s1">&#39;Sales&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
+
+<span class="n">X_te</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">categorical_features</span><span class="p">:</span>
+    <span class="n">target_encoding</span><span class="p">(</span><span class="n">X_te</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="s1">&#39;Sales&#39;</span><span class="p">)</span>
+
+<span class="c1"># separate the features into X and y</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">X_te</span><span class="p">[</span><span class="s1">&#39;Sales&#39;</span><span class="p">]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">X_te</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Sales&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">X</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>TV</th>
+      <th>Radio</th>
+      <th>Social Media</th>
+      <th>Influencer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>90.984101</td>
+      <td>3.518070</td>
+      <td>2.293790</td>
+      <td>188.321846</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>90.984101</td>
+      <td>7.756876</td>
+      <td>2.572287</td>
+      <td>194.487941</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>300.853195</td>
+      <td>20.348988</td>
+      <td>1.227180</td>
+      <td>188.321846</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>195.358032</td>
+      <td>20.108487</td>
+      <td>2.728374</td>
+      <td>194.487941</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>300.853195</td>
+      <td>31.653200</td>
+      <td>7.776978</td>
+      <td>191.874432</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>we define a function for target encoding of categorical features. This function replaces each unique value in the specified column with the mean of the target column for that value.</p>
+<p>From the data examples above, we can see that features are at different scales. We usually standardize the features before we can estimate the model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># standardize the numerical features</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+
+<span class="n">all_features</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span>
+<span class="c1"># all the features in X are numerical</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">all_features</span><span class="p">)</span>
+<span class="n">X</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>TV</th>
+      <th>Radio</th>
+      <th>Social Media</th>
+      <th>Influencer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-1.173289</td>
+      <td>-1.508439</td>
+      <td>-0.465035</td>
+      <td>-0.210564</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-1.173289</td>
+      <td>-1.051809</td>
+      <td>-0.340507</td>
+      <td>1.120998</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.331340</td>
+      <td>0.304689</td>
+      <td>-0.941962</td>
+      <td>-0.210564</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.072335</td>
+      <td>0.278781</td>
+      <td>-0.270713</td>
+      <td>1.120998</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.331340</td>
+      <td>1.522447</td>
+      <td>1.986735</td>
+      <td>0.556614</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+
+<span class="c1"># Split the data into training and test sets</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Create a linear regression model using Scikit-learn</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+
+<span class="c1"># Fit the model to the training data</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Create a new dataset with the same features as the training data</span>
+<span class="n">X_train_sm</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+
+<span class="c1"># Create an OLS (Ordinary Least Squares) model using Statsmodels</span>
+<span class="n">model_sm</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">X_train_sm</span><span class="p">)</span>
+
+<span class="c1"># Fit the OLS model</span>
+<span class="n">results_sm</span> <span class="o">=</span> <span class="n">model_sm</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># Print the detailed model summary from Statsmodels</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">results_sm</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  Sales   R-squared:                       0.905
+Model:                            OLS   Adj. R-squared:                  0.904
+Method:                 Least Squares   F-statistic:                     1074.
+Date:                Thu, 04 Apr 2024   Prob (F-statistic):          3.23e-229
+Time:                        02:02:08   Log-Likelihood:                -2168.0
+No. Observations:                 457   AIC:                             4346.
+Df Residuals:                     452   BIC:                             4367.
+Df Model:                           4                                         
+Covariance Type:            nonrobust                                         
+================================================================================
+                   coef    std err          t      P&gt;|t|      [0.025      0.975]
+--------------------------------------------------------------------------------
+const          190.1769      1.309    145.249      0.000     187.604     192.750
+TV              59.9624      2.250     26.649      0.000      55.540      64.384
+Radio           27.2419      2.391     11.393      0.000      22.543      31.941
+Social Media     0.6669      1.678      0.398      0.691      -2.630       3.964
+Influencer       0.1651      1.329      0.124      0.901      -2.447       2.778
+==============================================================================
+Omnibus:                       50.570   Durbin-Watson:                   1.852
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               15.172
+Skew:                           0.086   Prob(JB):                     0.000507
+Kurtosis:                       2.124   Cond. No.                         3.68
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+<p>The results above show the output of an Ordinary Least Squares (OLS) regression model. The model attempts to explain the relationship between the dependent variable “Sales” and four independent variables: “TV,” “Radio,” “Social Media,” and “Influencer.” Let’s go through the main parts of the results:</p>
+<ol class="arabic simple">
+<li><p>R-squared and Adjusted R-squared:</p>
+<ul class="simple">
+<li><p>R-squared (0.905) indicates that approximately 90.5% of the variance in “Sales” can be explained by the independent variables included in the model.</p></li>
+<li><p>Adjusted R-squared (0.904) is a modified version of R-squared that takes into account the number of predictors in the model. It is slightly lower than R-squared, suggesting that the model’s explanatory power is still high even after accounting for the number of variables.</p></li>
+</ul>
+</li>
+<li><p>F-statistic and Prob (F-statistic):</p>
+<ul class="simple">
+<li><p>The F-statistic (1074.0) tests the overall significance of the regression model. A high F-statistic suggests that the model is statistically significant.</p></li>
+<li><p>Prob (F-statistic) (3.23e-229) is the p-value associated with the F-statistic. It is extremely low (close to zero), indicating that the model is highly statistically significant.</p></li>
+</ul>
+</li>
+<li><p>Coefficients and their significance:</p>
+<ul class="simple">
+<li><p>The “coef” column shows the estimated coefficients for each independent variable.</p></li>
+<li><p>“const” (190.1769) represents the intercept or the expected value of “Sales” when all independent variables are zero.</p></li>
+<li><p>“TV” (59.9624), “Radio” (27.2419), “Social Media” (0.6669), and “Influencer” (0.1651) are the coefficients for the respective independent variables.</p></li>
+<li><p>The “std err” column shows the standard errors associated with each coefficient estimate.</p></li>
+<li><p>The “t” column represents the t-statistic, which measures the statistical significance of each coefficient. Higher absolute values of t-statistic indicate greater significance.</p></li>
+<li><p>The “P&gt;|t|” column shows the p-value associated with each t-statistic. Lower p-values (typically &lt; 0.05) suggest that the coefficient is statistically significant.</p></li>
+<li><p>The “[0.025, 0.975]” columns represent the 95% confidence interval for each coefficient estimate.</p></li>
+</ul>
+</li>
+<li><p>Model diagnostics:</p>
+<ul class="simple">
+<li><p>Omnibus, Prob(Omnibus), Skew, and Kurtosis provide information about the normality of the residuals. In this case, the low p-value for the Omnibus test (0.000) suggests that the residuals may not be normally distributed.</p></li>
+<li><p>Durbin-Watson (1.852) is a test statistic for autocorrelation in the residuals. A value close to 2 indicates no autocorrelation.</p></li>
+<li><p>Jarque-Bera (JB) and Prob(JB) are additional tests for normality of the residuals. The low p-value (0.000507) suggests that the residuals may not be normally distributed.</p></li>
+<li><p>Cond. No. (3.68) is the condition number, which measures the sensitivity of the regression estimates to small changes in the input data. A higher value may indicate multicollinearity among the independent variables.</p></li>
+</ul>
+</li>
+</ol>
+<p><strong>Business Insights Interpretation:</strong>
+Based on the results, the coefficients for “TV” and “Radio” are statistically significant (p-values &lt; 0.05), indicating that they have a significant impact on “Sales.” The coefficients for “Social Media” and “Influencer” are not statistically significant (p-values &gt; 0.05), suggesting that they may not have a significant effect on “Sales.”</p>
+<p>However, the diagnostics raise some concerns about the normality of the residuals, which may affect the validity of the model assumptions. Further investigation and potential model refinements may be necessary.</p>
+</section>
+</section>
+<section id="id2">
+<h2>4.4 Generalized Linear Regression (GLM)<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>To create a Generalized Linear Model (GLM) instead of an Ordinary Least Squares (OLS) model, you can use the <code class="docutils literal notranslate"><span class="pre">statsmodels.genmod.generalized_linear_model</span></code> module in Python. Here’s an example of how to create a GLM model using the same data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">from</span> <span class="nn">statsmodels.genmod.generalized_linear_model</span> <span class="kn">import</span> <span class="n">GLM</span>
+<span class="kn">from</span> <span class="nn">statsmodels.genmod.families</span> <span class="kn">import</span> <span class="n">Gaussian</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="c1"># Add a constant term to the training and test sets</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># Create the GLM model with Gaussian family and identity link function</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">GLM</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="n">Gaussian</span><span class="p">(</span><span class="n">link</span><span class="o">=</span><span class="n">sm</span><span class="o">.</span><span class="n">genmod</span><span class="o">.</span><span class="n">families</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">identity</span><span class="p">()))</span>
+
+<span class="c1"># Fit the GLM model on the training data</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># Print the model summary</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GLM Model Summary:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GLM Model Summary:
+                 Generalized Linear Model Regression Results                  
+==============================================================================
+Dep. Variable:                  Sales   No. Observations:                  457
+Model:                            GLM   Df Residuals:                      452
+Model Family:                Gaussian   Df Model:                            4
+Link Function:               identity   Scale:                          781.34
+Method:                          IRLS   Log-Likelihood:                -2168.0
+Date:                Thu, 04 Apr 2024   Deviance:                   3.5317e+05
+Time:                        02:18:05   Pearson chi2:                 3.53e+05
+No. Iterations:                     3   Pseudo R-squ. (CS):             0.9999
+Covariance Type:            nonrobust                                         
+================================================================================
+                   coef    std err          z      P&gt;|z|      [0.025      0.975]
+--------------------------------------------------------------------------------
+const          190.1769      1.309    145.249      0.000     187.611     192.743
+TV              59.9624      2.250     26.649      0.000      55.552      64.372
+Radio           27.2419      2.391     11.393      0.000      22.555      31.928
+Social Media     0.6669      1.678      0.398      0.691      -2.621       3.955
+Influencer       0.1651      1.329      0.124      0.901      -2.440       2.771
+================================================================================
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">r2_score</span>
+
+<span class="c1"># Make predictions on the test set</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># Calculate the mean squared error (MSE) and R-squared on the test set</span>
+<span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
+<span class="c1"># Print the evaluation metrics</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test Set Evaluation:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean Squared Error (MSE):&quot;</span><span class="p">,</span> <span class="n">mse</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R-squared:&quot;</span><span class="p">,</span> <span class="n">r2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test Set Evaluation:
+Mean Squared Error (MSE): 802.7904830299971
+R-squared: 0.8974988747706325
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this example:</p>
+<ol class="arabic simple">
+<li><p>We import the necessary modules from <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code>, including <code class="docutils literal notranslate"><span class="pre">GLM</span></code> from <code class="docutils literal notranslate"><span class="pre">statsmodels.genmod.generalized_linear_model</span></code> and <code class="docutils literal notranslate"><span class="pre">Gaussian</span></code> from <code class="docutils literal notranslate"><span class="pre">statsmodels.genmod.families</span></code>.</p></li>
+<li><p>We assume that you have a dataset called <code class="docutils literal notranslate"><span class="pre">data</span></code> with ‘Sales’ as the dependent variable and ‘TV’, ‘Radio’, ‘Social Media’, and ‘Influencer’ as independent variables.</p></li>
+<li><p>We create the design matrix <code class="docutils literal notranslate"><span class="pre">X</span></code> by adding a constant term to the independent variables using <code class="docutils literal notranslate"><span class="pre">sm.add_constant()</span></code>. This is necessary for including the intercept in the model.</p></li>
+<li><p>We create the GLM model using <code class="docutils literal notranslate"><span class="pre">GLM()</span></code> and specify the dependent variable (<code class="docutils literal notranslate"><span class="pre">data['Sales']</span></code>), the design matrix (<code class="docutils literal notranslate"><span class="pre">X</span></code>), and the family and link function. In this case, we use the Gaussian family with the identity link function, which is equivalent to a linear regression model.</p></li>
+<li><p>We fit the GLM model using the <code class="docutils literal notranslate"><span class="pre">fit()</span></code> method and store the results in the <code class="docutils literal notranslate"><span class="pre">results</span></code> variable.</p></li>
+<li><p>Finally, we print the model summary using <code class="docutils literal notranslate"><span class="pre">results.summary()</span></code>, which will display the coefficients, standard errors, t-values, p-values, and other model diagnostics.</p></li>
+</ol>
+<p>The output will be similar to the previous OLS model summary, but with some additional information specific to the GLM framework.</p>
+<p>Note that in this example, we used the Gaussian family with the identity link function, which makes the GLM model equivalent to a linear regression model. However, GLMs allow for more flexibility in modeling different types of dependent variables and relationships by specifying different families and link functions. For example, you can use the Poisson family for count data or the Binomial family for binary outcomes.</p>
+<p>Feel free to modify the code and experiment with different families and link functions based on the nature of your data and the specific problem you’re trying to solve.</p>
+<p>The results above show the output of a Generalized Linear Model (GLM) regression. The model aims to explain the relationship between the dependent variable “Sales” and four independent variables: “TV,” “Radio,” “Social Media,” and “Influencer.” Let’s go through the main parts of the results:</p>
+<ol class="arabic simple">
+<li><p>Model Family and Link Function:</p>
+<ul class="simple">
+<li><p>The GLM model assumes a Gaussian (normal) distribution for the dependent variable “Sales.”</p></li>
+<li><p>The link function used is the identity function, which means that the linear predictor is directly related to the expected value of the response variable.</p></li>
+</ul>
+</li>
+<li><p>Goodness of Fit Measures:</p>
+<ul class="simple">
+<li><p>Deviance (3.5317e+05) measures the difference between the fitted model and the saturated model. Lower values indicate a better fit.</p></li>
+<li><p>Pearson chi2 (3.53e+05) is another measure of goodness of fit, comparing the observed and expected values. Lower values indicate a better fit.</p></li>
+<li><p>Pseudo R-squared (CS) (0.9999) is a measure of the proportion of variance explained by the model. A value close to 1 suggests a good fit.</p></li>
+</ul>
+</li>
+<li><p>Coefficients and their significance:</p>
+<ul class="simple">
+<li><p>The “coef” column shows the estimated coefficients for each independent variable.</p></li>
+<li><p>“const” (190.1769) represents the intercept or the expected value of “Sales” when all independent variables are zero.</p></li>
+<li><p>“TV” (59.9624), “Radio” (27.2419), “Social Media” (0.6669), and “Influencer” (0.1651) are the coefficients for the respective independent variables.</p></li>
+<li><p>The “std err” column shows the standard errors associated with each coefficient estimate.</p></li>
+<li><p>The “z” column represents the z-statistic, which measures the statistical significance of each coefficient. Higher absolute values of z-statistic indicate greater significance.</p></li>
+<li><p>The “P&gt;|z|” column shows the p-value associated with each z-statistic. Lower p-values (typically &lt; 0.05) suggest that the coefficient is statistically significant.</p></li>
+<li><p>The “[0.025, 0.975]” columns represent the 95% confidence interval for each coefficient estimate.</p></li>
+</ul>
+</li>
+<li><p>Model Summary:</p>
+<ul class="simple">
+<li><p>No. Observations (457) indicates the total number of data points used in the model.</p></li>
+<li><p>Df Residuals (452) represents the degrees of freedom for the residuals.</p></li>
+<li><p>Df Model (4) represents the degrees of freedom for the model (number of independent variables).</p></li>
+<li><p>Scale (781.34) is an estimate of the scale parameter (dispersion) of the model.</p></li>
+<li><p>Log-Likelihood (-2168.0) measures the goodness of fit of the model. Higher values indicate a better fit.</p></li>
+<li><p>No. Iterations (3) indicates the number of iterations required for the model to converge.</p></li>
+</ul>
+</li>
+</ol>
+<p><strong>Business Insights Interpretation:</strong></p>
+<p>Based on the results, the coefficients for “TV” and “Radio” are statistically significant (p-values &lt; 0.05), indicating that they have a significant impact on “Sales.” The coefficients for “Social Media” and “Influencer” are not statistically significant (p-values &gt; 0.05), suggesting that they may not have a significant effect on “Sales.”</p>
+<p>The model assumes a Gaussian distribution for the dependent variable, and the identity link function suggests a linear relationship between the predictors and the response variable. The goodness of fit measures (Deviance, Pearson chi2, and Pseudo R-squared) indicate a relatively good fit of the model to the data.</p>
+</section>
+<section id="conclusion">
+<h2>4.5 Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -446,6 +1090,42 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-regression-analysis">4.1 Introduction to Regression Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-in-marketing">Applications in Marketing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-regression-analysis">4.2 Types of Regression Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">4.2.1 Linear Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">4.2.2 Logistic Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poisson-regression">4.2.3 Poisson Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#polynomial-regression">4.2.4 Polynomial Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stepwise-regression">4.2.5 Stepwise Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-and-lasso-regression">4.2.6 Ridge and Lasso Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generalized-linear-regression-glm">4.2.7 Generalized Linear Regression (GLM)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-right-model">Choosing the Right Model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">4.3 Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-linear-regression-model">4.3.1 The Linear Regression Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-coefficients">4.3.2 Interpreting Coefficients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-linear-regression-with-scikit-learn">4.3.3 Implementing Linear Regression with Scikit-learn</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">4.4 Generalized Linear Regression (GLM)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">4.5 Conclusion</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
