@@ -5,3 +5,5 @@ numpy
 ucimlrepo
 holidays
 scikit-learn
+statsmodels
+sweetviz
