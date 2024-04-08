@@ -166,8 +166,8 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="chapter_4.html">Chapter 4 Regression Analysis for Marketing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="chapter_5.html">Chapter 5 Classification Models for Customer Segmentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chapter_6.html">Chapter 6 Clustering Techniques for Market Segmentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chapter_7.html">Chapter 7 Time Series Analysis for Sales Forecasting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_6.html">Chapter 6 Time Series Forecasting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chapter_7.html">Chapter 7 Price Elasticity and Optimizaton</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Part III Advanced Marketing Analytics</span></p>
 <ul class="current nav bd-sidenav">
@@ -359,7 +359,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -375,6 +377,32 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">9.1 <strong>Introduction</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-importance-of-mmm-in-the-modern-marketing-landscape">9.1.1 The Importance of MMM in the Modern Marketing Landscape</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-objective-of-mmm">9.1.2 The Objective of MMM</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-basics-of-media-mix-modeling">9.2 <strong>The Basics of Media Mix Modeling</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-media-mix-modeling">9.2.1 What is Media Mix Modeling?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-role-of-mmm-in-data-driven-marketing-decisions">9.2.2 The Role of MMM in Data-Driven Marketing Decisions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-components-of-mmm">9.2.3 Key Components of MMM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#brief-history-and-evolution-of-mmm">9.2.4 Brief History and Evolution of MMM</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-framework-of-mmm">9.3 <strong>Understanding the Framework of MMM</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#theoretical-foundation-of-mmm">9.3.1 Theoretical Foundation of MMM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-methods-used-in-mmm">9.3.2 Statistical Methods Used in MMM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accounting-for-diminishing-returns-and-synergy">9.3.3 Accounting for Diminishing Returns and Synergy</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-a-media-mix-model-in-python-a-step-by-step-guide">9.4 Building a Media Mix Model in Python: A Step-by-Step Guide</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -386,6 +414,2386 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="chapter-9-marketing-media-mix-optimization">
 <h1>Chapter 9 Marketing Media Mix Optimization<a class="headerlink" href="#chapter-9-marketing-media-mix-optimization" title="Permalink to this heading">#</a></h1>
+<section id="introduction">
+<h2>9.1 <strong>Introduction</strong><a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>In today’s rapidly evolving marketing landscape, the ability to quantify the impact of each dollar spent across various channels is more crucial than ever. Media Mix Modeling (MMM) stands at the forefront of data-driven marketing strategies, offering a sophisticated analytical approach that dissects the performance of each marketing channel in isolation and in synergy. By employing statistical models that incorporate sales data, marketing expenditures, and external factors, MMM provides a comprehensive overview of marketing performance, allowing marketers to understand the effectiveness of their advertising expenditures.</p>
+<p>The essence of MMM lies in its ability to not only retrospectively analyze past performance but also to predict how adjustments in the marketing mix can influence future outcomes. This dual capability makes it an invaluable tool for marketers aiming to optimize their strategies in alignment with business objectives, whether it’s increasing overall sales, enhancing brand awareness, or achieving a higher return on investment (ROI).</p>
+<section id="the-importance-of-mmm-in-the-modern-marketing-landscape">
+<h3>9.1.1 The Importance of MMM in the Modern Marketing Landscape<a class="headerlink" href="#the-importance-of-mmm-in-the-modern-marketing-landscape" title="Permalink to this heading">#</a></h3>
+<p>In an era marked by the proliferation of digital channels and increasingly discerning consumers, MMM offers several advantages. It helps organizations navigate the complexity of the modern marketing ecosystem, where traditional media channels coexist with digital platforms, each offering varying levels of engagement and effectiveness. Moreover, MMM addresses the challenge of attribution, determining which channels are truly driving conversions and to what extent. This enables more effective reallocation of marketing budgets, away from underperforming channels and towards those with a proven impact on sales.</p>
+</section>
+<section id="the-objective-of-mmm">
+<h3>9.1.2 The Objective of MMM<a class="headerlink" href="#the-objective-of-mmm" title="Permalink to this heading">#</a></h3>
+<p>The primary objective of MMM is to decode the contribution of different marketing channels to sales and understand how these channels interact with one another. This involves dissecting the marketing budget to identify the most and least efficient areas of spending. By modeling the relationship between marketing spend and business outcomes, MMM allows for the simulation of different scenarios to forecast future performance. This forward-looking approach aids in budget optimization and strategic planning, enabling marketers to adjust their strategies in anticipation of changing market dynamics and consumer behaviors.</p>
+<p>Ultimately, MMM serves as a guiding light for marketers, navigating them through the intricacies of planning and optimization in a multi-channel landscape. It stands as a testament to the power of data-driven decision-making, underscoring the shift from intuition-based to evidence-based marketing strategies. As we dive deeper into the nuances of MMM, we will explore its framework, provide a step-by-step guide on building a model using Python, and demonstrate how these insights can be leveraged to achieve marketing excellence.</p>
+</section>
+</section>
+<section id="the-basics-of-media-mix-modeling">
+<h2>9.2 <strong>The Basics of Media Mix Modeling</strong><a class="headerlink" href="#the-basics-of-media-mix-modeling" title="Permalink to this heading">#</a></h2>
+<p>In the dynamic world of marketing, understanding and optimizing the impact of various advertising efforts on sales and brand recognition is an ongoing challenge. Media Mix Modeling (MMM) emerges as a powerful tool for marketers aiming to decode the efficacy of each dollar spent across marketing channels. MMM is a statistical approach that quantifies the relationship between marketing inputs and their outcomes, usually sales or brand awareness, allowing marketers to forecast the impact of future marketing strategies.</p>
+<section id="what-is-media-mix-modeling">
+<h3>9.2.1 What is Media Mix Modeling?<a class="headerlink" href="#what-is-media-mix-modeling" title="Permalink to this heading">#</a></h3>
+<p>Fundamentally, MMM utilizes regression analysis to gauge the additional effects of diverse marketing initiatives on sales or other critical performance metrics. Through the examination of past data, MMM offers perspectives on the contribution of various components of the marketing mix, such as TV and digital advertising, promotions, and pricing strategies, to the overall effectiveness. This analysis helps marketers understand the effectiveness of each channel and optimize their budgets accordingly.</p>
+</section>
+<section id="the-role-of-mmm-in-data-driven-marketing-decisions">
+<h3>9.2.2 The Role of MMM in Data-Driven Marketing Decisions<a class="headerlink" href="#the-role-of-mmm-in-data-driven-marketing-decisions" title="Permalink to this heading">#</a></h3>
+<p>In an era where data plays a crucial role, MMM stands out as a critical tool in the marketer’s arsenal. It provides a comprehensive view of marketing effectiveness, capturing the synergies and dynamics between different media channels. By incorporating external factors such as economic conditions, competitor actions, and seasonal trends, MMM offers a nuanced understanding of marketing performance. This holistic approach enables marketers to make informed decisions, allocate resources efficiently, and maximize return on investment (ROI).</p>
+</section>
+<section id="key-components-of-mmm">
+<h3>9.2.3 Key Components of MMM<a class="headerlink" href="#key-components-of-mmm" title="Permalink to this heading">#</a></h3>
+<p>Understanding the components that MMM analyzes is essential to grasp its functionality and utility:</p>
+<ul class="simple">
+<li><p><strong>Media Channels</strong>: MMM evaluates both traditional (e.g., TV, radio, print) and digital (e.g., social media, search engine marketing, email) advertising channels.</p></li>
+<li><p><strong>External Factors</strong>: These include any variables that might impact sales or marketing effectiveness outside of the company’s control, such as economic indicators, weather conditions, and competitive marketing activities.</p></li>
+<li><p><strong>Baseline Sales</strong>: This refers to the sales level that would be expected without any marketing activities. Understanding the baseline allows for the measurement of the incremental impact of marketing efforts.</p></li>
+</ul>
+</section>
+<section id="brief-history-and-evolution-of-mmm">
+<h3>9.2.4 Brief History and Evolution of MMM<a class="headerlink" href="#brief-history-and-evolution-of-mmm" title="Permalink to this heading">#</a></h3>
+<p>The roots of MMM trace back to the early days of econometric modeling in the 1960s, but it was the advent of more sophisticated computing power and data collection methods in the late 20th century that truly unlocked its potential. Originally focused on traditional media channels, the rise of digital marketing has significantly expanded MMM’s scope. Today, MMM must navigate a far more complex media landscape, integrating a multitude of digital data sources while addressing challenges like consumer privacy concerns and the diminishing effectiveness of cookies.</p>
+<p>In conclusion, Media Mix Modeling is an indispensable tool for marketers seeking to navigate the complexities of the modern advertising landscape. By offering a detailed analysis of how various marketing channels and external factors impact sales, MMM empowers businesses to optimize their marketing spend, enhance their strategic planning, and ultimately drive greater ROI. As we delve deeper into this topic, we’ll explore the theoretical underpinnings of MMM and how it integrates with broader marketing and econometric theories to provide actionable insights.</p>
+</section>
+</section>
+<section id="understanding-the-framework-of-mmm">
+<h2>9.3 <strong>Understanding the Framework of MMM</strong><a class="headerlink" href="#understanding-the-framework-of-mmm" title="Permalink to this heading">#</a></h2>
+<p>Media Mix Modeling (MMM) operates at the intersection of marketing science and statistical analysis, offering a framework that quantifies the impact of marketing strategies on business outcomes. This section explores the theoretical foundations of MMM, its statistical underpinnings, and how it accounts for the complex interplay between various media channels and external factors.</p>
+<section id="theoretical-foundation-of-mmm">
+<h3>9.3.1 Theoretical Foundation of MMM<a class="headerlink" href="#theoretical-foundation-of-mmm" title="Permalink to this heading">#</a></h3>
+<p>The theoretical underpinning of MMM is rooted in econometrics, a branch of economics that applies statistical methods to economic data to provide empirical content to economic relationships. MMM applies these principles to marketing, aiming to understand and quantify the relationships between marketing inputs (expenditures across various channels) and outputs (sales, brand awareness).</p>
+<p>MMM is grounded in the theory of diminishing returns, a fundamental concept in economics that suggests that as investment in a particular area increases, the marginal gains from that investment will eventually decrease. In marketing, this implies that while initially, investments in a marketing channel might yield significant returns, over time, the effectiveness of additional spending will start to diminish.</p>
+</section>
+<section id="statistical-methods-used-in-mmm">
+<h3>9.3.2 Statistical Methods Used in MMM<a class="headerlink" href="#statistical-methods-used-in-mmm" title="Permalink to this heading">#</a></h3>
+<p>MMM primarily relies on regression analysis, a statistical technique for estimating the relationships among variables. The general idea is to use historical data to estimate how changes in the marketing mix and external factors affect sales or other dependent variables. The model might take a simple linear form or a more complex one, incorporating interactions between variables to reflect the synergistic effects between different marketing channels.</p>
+<ul class="simple">
+<li><p><strong>Linear Regression</strong>: The most basic form of MMM, where sales are predicted as a function of marketing spend in different channels. It assumes a direct, linear relationship between marketing spend and sales.</p></li>
+<li><p><strong>Multiple Regression</strong>: To capture the influence of multiple factors, MMM often uses multiple regression, which can account for various marketing channels and external factors simultaneously.</p></li>
+<li><p><strong>Bayesian Methods and Time Series Analysis</strong>: For more sophisticated MMMs, Bayesian methods can incorporate prior knowledge into the analysis, and time series analysis can account for the temporal dynamics and lag effects of marketing efforts.</p></li>
+</ul>
+</section>
+<section id="accounting-for-diminishing-returns-and-synergy">
+<h3>9.3.3 Accounting for Diminishing Returns and Synergy<a class="headerlink" href="#accounting-for-diminishing-returns-and-synergy" title="Permalink to this heading">#</a></h3>
+<p>A critical aspect of MMM is its ability to account for diminishing returns and the synergistic effects between different marketing channels. Diminishing returns are modeled through nonlinear functions or interaction terms that show how the impact of additional spending decreases over time. For synergy, MMM includes interaction terms between different media investments to capture how the combination of two or more channels can have a greater impact than the sum of their individual effects.</p>
+<ul class="simple">
+<li><p><strong>Diminishing Returns</strong>: Represented by a logarithmic function or a polynomial where, after a certain point, increases in advertising spend yield progressively smaller increases in sales.</p></li>
+<li><p><strong>Synergy</strong>: Interaction terms in the regression model represent synergy. For example, an interaction term between online and TV advertising might show that the combined effect of these channels is greater than the sum of their separate impacts.</p></li>
+</ul>
+<p>By integrating these complex relationships, MMM provides a nuanced understanding of marketing effectiveness. This analytical framework helps marketers navigate the multifaceted media landscape, making informed decisions about where to allocate their budgets for maximum impact. In the next section, we’ll explore how to translate these theoretical and statistical considerations into practice by building a Media Mix Model in Python, step by step.</p>
+</section>
+</section>
+<section id="building-a-media-mix-model-in-python-a-step-by-step-guide">
+<h2>9.4 Building a Media Mix Model in Python: A Step-by-Step Guide<a class="headerlink" href="#building-a-media-mix-model-in-python-a-step-by-step-guide" title="Permalink to this heading">#</a></h2>
+<p>In this section, we will walk through the process of building a basic Media Mix Model (MMM) using Python, leveraging a public dataset. For this exercise, we’ll use the “Advertising” dataset available from the ISLR package, which is commonly used in statistical learning. This dataset provides a simple yet illustrative example of how advertising expenditures across three different media channels (TV, Radio, and Newspaper) impact sales.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># compress the warning messages</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+
+<span class="c1"># Load the dataset</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/Chapter9_mmm.csv&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(208, 10)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>DATE</th>
+      <th>revenue</th>
+      <th>tv_S</th>
+      <th>ooh_S</th>
+      <th>print_S</th>
+      <th>facebook_I</th>
+      <th>search_clicks_P</th>
+      <th>search_S</th>
+      <th>competitor_sales_B</th>
+      <th>facebook_S</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2015-11-23</td>
+      <td>2.754372e+06</td>
+      <td>167687.6</td>
+      <td>0</td>
+      <td>95463.666667</td>
+      <td>7.290385e+07</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>8125009</td>
+      <td>228213.987444</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2015-11-30</td>
+      <td>2.584277e+06</td>
+      <td>214600.9</td>
+      <td>0</td>
+      <td>0.000000</td>
+      <td>1.658110e+07</td>
+      <td>29511.715457</td>
+      <td>31000</td>
+      <td>7901549</td>
+      <td>34258.573511</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2015-12-07</td>
+      <td>2.547387e+06</td>
+      <td>0.0</td>
+      <td>248022</td>
+      <td>3404.000000</td>
+      <td>4.995477e+07</td>
+      <td>36132.358958</td>
+      <td>28400</td>
+      <td>8300197</td>
+      <td>127691.261335</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2015-12-14</td>
+      <td>2.875220e+06</td>
+      <td>625877.3</td>
+      <td>0</td>
+      <td>132600.000000</td>
+      <td>3.164930e+07</td>
+      <td>36804.210958</td>
+      <td>31900</td>
+      <td>8122883</td>
+      <td>84014.720306</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2015-12-21</td>
+      <td>2.215953e+06</td>
+      <td>0.0</td>
+      <td>520005</td>
+      <td>0.000000</td>
+      <td>8.802269e+06</td>
+      <td>28401.744069</td>
+      <td>27100</td>
+      <td>7105985</td>
+      <td>20687.478156</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># trim the column names </span>
+<span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;(&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;)&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 208 entries, 0 to 207
+Data columns (total 10 columns):
+ #   Column              Non-Null Count  Dtype  
+---  ------              --------------  -----  
+ 0   date                208 non-null    object 
+ 1   revenue             208 non-null    float64
+ 2   tv_s                208 non-null    float64
+ 3   ooh_s               208 non-null    int64  
+ 4   print_s             208 non-null    float64
+ 5   facebook_i          208 non-null    float64
+ 6   search_clicks_p     208 non-null    float64
+ 7   search_s            208 non-null    int64  
+ 8   competitor_sales_b  208 non-null    int64  
+ 9   facebook_s          208 non-null    float64
+dtypes: float64(6), int64(3), object(1)
+memory usage: 16.4+ KB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>date                  0
+revenue               0
+tv_s                  0
+ooh_s                 0
+print_s               0
+facebook_i            0
+search_clicks_p       0
+search_s              0
+competitor_sales_b    0
+facebook_s            0
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Feature engineering</p></li>
+</ul>
+<ul class="simple">
+<li><p>adstock effects</p></li>
+<li><p>interaction terms</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># adstocking the media spend</span>
+<span class="n">media_spend_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;tv_s&#39;</span><span class="p">,</span> <span class="s1">&#39;ooh_s&#39;</span><span class="p">,</span> <span class="s1">&#39;print_s&#39;</span><span class="p">,</span> <span class="s1">&#39;search_s&#39;</span><span class="p">,</span> <span class="s1">&#39;facebook_s&#39;</span><span class="p">]</span>
+
+<span class="n">df_adstock</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;facebook_i&#39;</span><span class="p">,</span> <span class="s1">&#39;search_clicks_p&#39;</span><span class="p">,</span> <span class="s1">&#39;competitor_sales_b&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">media</span> <span class="ow">in</span> <span class="n">media_spend_list</span><span class="p">:</span>
+    <span class="n">df_adstock</span><span class="p">[</span><span class="n">media</span><span class="p">]</span> <span class="o">=</span> <span class="n">apply_adstock</span><span class="p">(</span><span class="n">df_adstock</span><span class="p">[</span><span class="n">media</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_adstock</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>   
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(208, 7)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="n">decay_rate</span> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1"># Example decay rate</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.05</span>  <span class="c1"># 5% threshold</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">threshold</span><span class="p">)</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">decay_rate</span><span class="p">))</span>
+<span class="n">t</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># exclude the first t rows</span>
+<span class="n">df_adstock</span> <span class="o">=</span> <span class="n">df_adstock</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">t</span><span class="p">:]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_adstock</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(204, 7)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>create the interaction terms.</p></li>
+<li><p>Do not need to scale the columns as all the columns are media spending in dollars.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># add interaction terms of medias in media_spend_list</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">media1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">media_spend_list</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">media2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">media_spend_list</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span><span class="p">:</span>
+            <span class="n">df_adstock</span><span class="p">[</span><span class="n">media1</span> <span class="o">+</span> <span class="s1">&#39;_x_&#39;</span> <span class="o">+</span> <span class="n">media2</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_adstock</span><span class="p">[</span><span class="n">media1</span><span class="p">]</span> <span class="o">*</span> <span class="n">df_adstock</span><span class="p">[</span><span class="n">media2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_adstock</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>date</th>
+      <th>revenue</th>
+      <th>tv_s</th>
+      <th>ooh_s</th>
+      <th>print_s</th>
+      <th>search_s</th>
+      <th>facebook_s</th>
+      <th>tv_s_x_ooh_s</th>
+      <th>tv_s_x_print_s</th>
+      <th>tv_s_x_search_s</th>
+      <th>tv_s_x_facebook_s</th>
+      <th>ooh_s_x_print_s</th>
+      <th>ooh_s_x_search_s</th>
+      <th>ooh_s_x_facebook_s</th>
+      <th>print_s_x_search_s</th>
+      <th>print_s_x_facebook_s</th>
+      <th>search_s_x_facebook_s</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4</th>
+      <td>2015-12-21</td>
+      <td>2.215953e+06</td>
+      <td>350244.237500</td>
+      <td>582010.50000</td>
+      <td>73117.479167</td>
+      <td>54025.0000</td>
+      <td>113163.349546</td>
+      <td>2.038458e+11</td>
+      <td>2.560898e+10</td>
+      <td>1.892194e+10</td>
+      <td>3.963481e+10</td>
+      <td>4.255514e+10</td>
+      <td>3.144312e+10</td>
+      <td>6.586226e+10</td>
+      <td>3.950172e+09</td>
+      <td>8.274219e+09</td>
+      <td>6.113650e+09</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2015-12-28</td>
+      <td>2.569922e+06</td>
+      <td>424311.918750</td>
+      <td>291005.25000</td>
+      <td>275976.072917</td>
+      <td>55312.5000</td>
+      <td>216691.829975</td>
+      <td>1.234770e+11</td>
+      <td>1.170999e+11</td>
+      <td>2.346975e+10</td>
+      <td>9.194493e+10</td>
+      <td>8.031049e+10</td>
+      <td>1.609623e+10</td>
+      <td>6.305846e+10</td>
+      <td>1.526493e+10</td>
+      <td>5.980176e+10</td>
+      <td>1.198577e+10</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2016-01-04</td>
+      <td>2.171507e+06</td>
+      <td>217308.859375</td>
+      <td>570665.62500</td>
+      <td>137988.036458</td>
+      <td>55456.2500</td>
+      <td>217036.281974</td>
+      <td>1.240107e+11</td>
+      <td>2.998602e+10</td>
+      <td>1.205113e+10</td>
+      <td>4.716391e+10</td>
+      <td>7.874503e+10</td>
+      <td>3.164698e+10</td>
+      <td>1.238551e+11</td>
+      <td>7.652299e+09</td>
+      <td>2.994841e+10</td>
+      <td>1.203602e+10</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2016-01-11</td>
+      <td>2.464132e+06</td>
+      <td>130796.129687</td>
+      <td>285332.81250</td>
+      <td>245853.684896</td>
+      <td>59728.1250</td>
+      <td>232412.625582</td>
+      <td>3.732043e+10</td>
+      <td>3.215671e+10</td>
+      <td>7.812208e+09</td>
+      <td>3.039867e+10</td>
+      <td>7.015012e+10</td>
+      <td>1.704239e+10</td>
+      <td>6.631495e+10</td>
+      <td>1.468438e+10</td>
+      <td>5.713950e+10</td>
+      <td>1.388157e+10</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2016-01-18</td>
+      <td>2.012520e+06</td>
+      <td>65398.064844</td>
+      <td>142666.40625</td>
+      <td>122926.842448</td>
+      <td>52764.0625</td>
+      <td>224896.679777</td>
+      <td>9.330107e+09</td>
+      <td>8.039178e+09</td>
+      <td>3.450668e+09</td>
+      <td>1.470781e+10</td>
+      <td>1.753753e+10</td>
+      <td>7.527659e+09</td>
+      <td>3.208520e+10</td>
+      <td>6.486120e+09</td>
+      <td>2.764584e+10</td>
+      <td>1.186646e+10</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># list of features ending with &#39;_s&#39;</span>
+<span class="n">features_spend_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">col</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;_s&#39;</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">features_spend_list</span><span class="p">)</span>
+<span class="c1"># list of interaction terms</span>
+<span class="n">features_interaction_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df_adstock</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="s1">&#39;_x_&#39;</span> <span class="ow">in</span> <span class="n">col</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">features_interaction_list</span><span class="p">)</span>
+<span class="c1"># features_notspend_list</span>
+<span class="n">features_notspend_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df_adstock</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">features_spend_list</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">features_notspend_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;tv_s&#39;, &#39;ooh_s&#39;, &#39;print_s&#39;, &#39;search_s&#39;, &#39;facebook_s&#39;]
+[&#39;tv_s_x_ooh_s&#39;, &#39;tv_s_x_print_s&#39;, &#39;tv_s_x_search_s&#39;, &#39;tv_s_x_facebook_s&#39;, &#39;ooh_s_x_print_s&#39;, &#39;ooh_s_x_search_s&#39;, &#39;ooh_s_x_facebook_s&#39;, &#39;print_s_x_search_s&#39;, &#39;print_s_x_facebook_s&#39;, &#39;search_s_x_facebook_s&#39;]
+[&#39;date&#39;, &#39;revenue&#39;, &#39;tv_s_x_ooh_s&#39;, &#39;tv_s_x_print_s&#39;, &#39;tv_s_x_search_s&#39;, &#39;tv_s_x_facebook_s&#39;, &#39;ooh_s_x_print_s&#39;, &#39;ooh_s_x_search_s&#39;, &#39;ooh_s_x_facebook_s&#39;, &#39;print_s_x_search_s&#39;, &#39;print_s_x_facebook_s&#39;, &#39;search_s_x_facebook_s&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create month feature from &#39;date&#39;</span>
+<span class="n">df_adstock</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_adstock</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
+<span class="c1"># create dummy variables for &#39;month&#39;</span>
+<span class="n">df_adstock</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df_adstock</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">],</span> <span class="n">drop_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df_adstock</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>date</th>
+      <th>revenue</th>
+      <th>tv_s</th>
+      <th>ooh_s</th>
+      <th>print_s</th>
+      <th>search_s</th>
+      <th>facebook_s</th>
+      <th>tv_s_x_ooh_s</th>
+      <th>tv_s_x_print_s</th>
+      <th>tv_s_x_search_s</th>
+      <th>...</th>
+      <th>month_3</th>
+      <th>month_4</th>
+      <th>month_5</th>
+      <th>month_6</th>
+      <th>month_7</th>
+      <th>month_8</th>
+      <th>month_9</th>
+      <th>month_10</th>
+      <th>month_11</th>
+      <th>month_12</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4</th>
+      <td>2015-12-21</td>
+      <td>2.215953e+06</td>
+      <td>350244.237500</td>
+      <td>582010.50000</td>
+      <td>73117.479167</td>
+      <td>54025.0000</td>
+      <td>113163.349546</td>
+      <td>2.038458e+11</td>
+      <td>2.560898e+10</td>
+      <td>1.892194e+10</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2015-12-28</td>
+      <td>2.569922e+06</td>
+      <td>424311.918750</td>
+      <td>291005.25000</td>
+      <td>275976.072917</td>
+      <td>55312.5000</td>
+      <td>216691.829975</td>
+      <td>1.234770e+11</td>
+      <td>1.170999e+11</td>
+      <td>2.346975e+10</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2016-01-04</td>
+      <td>2.171507e+06</td>
+      <td>217308.859375</td>
+      <td>570665.62500</td>
+      <td>137988.036458</td>
+      <td>55456.2500</td>
+      <td>217036.281974</td>
+      <td>1.240107e+11</td>
+      <td>2.998602e+10</td>
+      <td>1.205113e+10</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2016-01-11</td>
+      <td>2.464132e+06</td>
+      <td>130796.129687</td>
+      <td>285332.81250</td>
+      <td>245853.684896</td>
+      <td>59728.1250</td>
+      <td>232412.625582</td>
+      <td>3.732043e+10</td>
+      <td>3.215671e+10</td>
+      <td>7.812208e+09</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2016-01-18</td>
+      <td>2.012520e+06</td>
+      <td>65398.064844</td>
+      <td>142666.40625</td>
+      <td>122926.842448</td>
+      <td>52764.0625</td>
+      <td>224896.679777</td>
+      <td>9.330107e+09</td>
+      <td>8.039178e+09</td>
+      <td>3.450668e+09</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 28 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Predictor variables with adstock and interaction terms</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df_adstock</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;revenue&#39;</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df_adstock</span><span class="p">[</span><span class="s1">&#39;revenue&#39;</span><span class="p">]</span>  <span class="c1"># Response variable</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>  <span class="c1"># Adds a constant term to the predictor</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(204, 27)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;const&#39;, &#39;tv_s&#39;, &#39;ooh_s&#39;, &#39;print_s&#39;, &#39;search_s&#39;, &#39;facebook_s&#39;,
+       &#39;tv_s_x_ooh_s&#39;, &#39;tv_s_x_print_s&#39;, &#39;tv_s_x_search_s&#39;,
+       &#39;tv_s_x_facebook_s&#39;, &#39;ooh_s_x_print_s&#39;, &#39;ooh_s_x_search_s&#39;,
+       &#39;ooh_s_x_facebook_s&#39;, &#39;print_s_x_search_s&#39;, &#39;print_s_x_facebook_s&#39;,
+       &#39;search_s_x_facebook_s&#39;, &#39;month_2&#39;, &#39;month_3&#39;, &#39;month_4&#39;, &#39;month_5&#39;,
+       &#39;month_6&#39;, &#39;month_7&#39;, &#39;month_8&#39;, &#39;month_9&#39;, &#39;month_10&#39;, &#39;month_11&#39;,
+       &#39;month_12&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Model Training</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">r2_score</span><span class="p">,</span> <span class="n">mean_absolute_error</span><span class="p">,</span> <span class="n">mean_squared_error</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+
+<span class="n">X_test</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(41, 27)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># build more complex models</span>
+<span class="kn">import</span> <span class="nn">xgboost</span>
+ 
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">AdaBoostRegressor</span>
+<span class="kn">from</span> <span class="nn">xgboost.sklearn</span> <span class="kn">import</span> <span class="n">XGBRegressor</span> 
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span><span class="p">,</span> <span class="n">GradientBoostingRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">neighbors</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+
+<span class="n">ada</span> <span class="o">=</span> <span class="n">AdaBoostRegressor</span><span class="p">()</span>
+<span class="n">xgb</span> <span class="o">=</span> <span class="n">XGBRegressor</span><span class="p">()</span>
+<span class="n">rfr</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">()</span>
+<span class="n">dtr</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">()</span>
+<span class="n">gbr</span> <span class="o">=</span> <span class="n">GradientBoostingRegressor</span><span class="p">()</span>
+<span class="n">knn</span> <span class="o">=</span> <span class="n">neighbors</span><span class="o">.</span><span class="n">KNeighborsRegressor</span><span class="p">()</span> 
+<span class="n">lr</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;LinearRegression&quot;</span><span class="p">,</span> <span class="s2">&quot;AdaBoostRegressor&quot;</span><span class="p">,</span><span class="s2">&quot;XGBRegressor&quot;</span><span class="p">,</span><span class="s2">&quot;RandomForestRegressor&quot;</span><span class="p">,</span><span class="s2">&quot;DecisionTreeRegressor&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;GradientBoostingRegressor&quot;</span><span class="p">,</span><span class="s2">&quot;KNeighborsRegressor&quot;</span><span class="p">]</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="n">lr</span><span class="p">,</span> <span class="n">ada</span><span class="p">,</span> <span class="n">xgb</span><span class="p">,</span> <span class="n">rfr</span><span class="p">,</span> <span class="n">dtr</span><span class="p">,</span> <span class="n">gbr</span><span class="p">,</span> <span class="n">knn</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_models</span><span class="p">(</span><span class="n">models</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">):</span>
+    <span class="n">metrics</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">models</span><span class="p">):</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+        
+        <span class="c1"># Predict the test data</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+        <span class="c1"># Calculate the R-squared, MAE, and RMSE</span>
+        <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+        <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+        <span class="n">rmse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+        
+        <span class="n">metrics</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">name</span><span class="p">,</span> <span class="n">r2</span><span class="p">,</span> <span class="n">mae</span><span class="p">,</span> <span class="n">rmse</span><span class="p">))</span>
+        
+    <span class="k">return</span> <span class="n">models</span><span class="p">,</span> <span class="n">metrics</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trained_models</span><span class="p">,</span> <span class="n">model_metrics</span> <span class="o">=</span> <span class="n">train_models</span><span class="p">(</span><span class="n">models</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">model_metrics</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">adstock_synergy</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">media_spend_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;tv_s&#39;</span><span class="p">,</span> <span class="s1">&#39;ooh_s&#39;</span><span class="p">,</span> <span class="s1">&#39;print_s&#39;</span><span class="p">,</span> <span class="s1">&#39;search_s&#39;</span><span class="p">,</span> <span class="s1">&#39;facebook_s&#39;</span><span class="p">],</span> <span class="n">decay_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">media</span> <span class="ow">in</span> <span class="n">media_spend_list</span><span class="p">:</span>
+        <span class="n">df</span><span class="p">[</span><span class="n">media</span><span class="p">]</span> <span class="o">=</span> <span class="n">apply_adstock</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">media</span><span class="p">],</span> <span class="n">decay_rate</span><span class="o">=</span><span class="n">decay_rate</span><span class="p">)</span>
+
+    <span class="c1"># add interaction terms of medias in media_spend_list</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">media1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">media_spend_list</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">media2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">media_spend_list</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span><span class="p">:</span>
+                <span class="n">df</span><span class="p">[</span><span class="n">media1</span> <span class="o">+</span> <span class="s1">&#39;_x_&#39;</span> <span class="o">+</span> <span class="n">media2</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">media1</span><span class="p">]</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="n">media2</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="n">decay_rate</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># data_ms = data[media_spend_list + [&#39;date&#39;, &#39;revenue&#39;]].copy()</span>
+<span class="n">data_ms</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tv_s</th>
+      <th>ooh_s</th>
+      <th>print_s</th>
+      <th>search_s</th>
+      <th>facebook_s</th>
+      <th>date</th>
+      <th>revenue</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>167687.6</td>
+      <td>0</td>
+      <td>95463.666667</td>
+      <td>0</td>
+      <td>228213.987444</td>
+      <td>2015-11-23</td>
+      <td>2.754372e+06</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>214600.9</td>
+      <td>0</td>
+      <td>0.000000</td>
+      <td>31000</td>
+      <td>34258.573511</td>
+      <td>2015-11-30</td>
+      <td>2.584277e+06</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.0</td>
+      <td>248022</td>
+      <td>3404.000000</td>
+      <td>28400</td>
+      <td>127691.261335</td>
+      <td>2015-12-07</td>
+      <td>2.547387e+06</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>625877.3</td>
+      <td>0</td>
+      <td>132600.000000</td>
+      <td>31900</td>
+      <td>84014.720306</td>
+      <td>2015-12-14</td>
+      <td>2.875220e+06</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.0</td>
+      <td>520005</td>
+      <td>0.000000</td>
+      <td>27100</td>
+      <td>20687.478156</td>
+      <td>2015-12-21</td>
+      <td>2.215953e+06</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="k">def</span> <span class="nf">apply_adstock</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">decay_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+    <span class="n">adstocked_x</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">previous</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
+        <span class="n">adstocked_value</span> <span class="o">=</span> <span class="n">value</span> <span class="o">+</span> <span class="p">(</span><span class="n">previous</span> <span class="o">*</span> <span class="n">decay_rate</span><span class="p">)</span>
+        <span class="n">adstocked_x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">adstocked_value</span><span class="p">)</span>
+        <span class="n">previous</span> <span class="o">=</span> <span class="n">adstocked_value</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">adstocked_x</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">adstock_synergy</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">media_spend_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;tv_s&#39;</span><span class="p">,</span> <span class="s1">&#39;ooh_s&#39;</span><span class="p">,</span> <span class="s1">&#39;print_s&#39;</span><span class="p">,</span> <span class="s1">&#39;search_s&#39;</span><span class="p">,</span> <span class="s1">&#39;facebook_s&#39;</span><span class="p">],</span> <span class="n">decay_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">media</span> <span class="ow">in</span> <span class="n">media_spend_list</span><span class="p">:</span>
+        <span class="n">df</span><span class="p">[</span><span class="n">media</span><span class="p">]</span> <span class="o">=</span> <span class="n">apply_adstock</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">media</span><span class="p">],</span> <span class="n">decay_rate</span><span class="o">=</span><span class="n">decay_rate</span><span class="p">)</span>
+
+    <span class="c1"># add interaction terms of medias in media_spend_list</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">media1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">media_spend_list</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">media2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">media_spend_list</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span><span class="p">:</span>
+                <span class="n">df</span><span class="p">[</span><span class="n">media1</span> <span class="o">+</span> <span class="s1">&#39;_x_&#39;</span> <span class="o">+</span> <span class="n">media2</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">media1</span><span class="p">]</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="n">media2</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="n">decay_rate</span>
+
+<span class="k">def</span> <span class="nf">trim_threshold</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">decay_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">threshold</span><span class="p">)</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">decay_rate</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">t</span><span class="p">:]</span>
+
+<span class="k">def</span> <span class="nf">add_ts_features</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">],</span> <span class="n">drop_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># drop date column</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span>
+
+<span class="k">def</span> <span class="nf">train_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;revenue&#39;</span><span class="p">,</span><span class="n">train_size</span><span class="o">=</span><span class="mf">0.8</span><span class="p">):</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">target</span><span class="p">])</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">target</span><span class="p">]</span>  <span class="c1"># Response variable</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>  <span class="c1"># Adds a constant term to the predictor             </span>
+                
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="n">train_size</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">data_pipe</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">media_spend_list</span><span class="o">=</span> <span class="p">[</span><span class="s1">&#39;tv_s&#39;</span><span class="p">,</span> <span class="s1">&#39;ooh_s&#39;</span><span class="p">,</span> <span class="s1">&#39;print_s&#39;</span><span class="p">,</span> <span class="s1">&#39;search_s&#39;</span><span class="p">,</span> <span class="s1">&#39;facebook_s&#39;</span><span class="p">],</span> <span class="n">decay_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;revenue&#39;</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="mf">0.8</span><span class="p">):</span> 
+    <span class="n">df</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df</span><span class="p">,</span> <span class="n">decay_rate</span> <span class="o">=</span> <span class="n">adstock_synergy</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">media_spend_list</span><span class="p">,</span> <span class="n">decay_rate</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">add_ts_features</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">trim_threshold</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">decay_rate</span><span class="o">=</span><span class="n">decay_rate</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">)</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_data</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">target</span><span class="p">,</span><span class="n">train_size</span><span class="o">=</span><span class="n">train_size</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">data_pipe</span><span class="p">(</span><span class="n">data_ms</span><span class="p">,</span> <span class="n">media_spend_list</span><span class="o">=</span> <span class="p">[</span><span class="s1">&#39;tv_s&#39;</span><span class="p">,</span> <span class="s1">&#39;ooh_s&#39;</span><span class="p">,</span> <span class="s1">&#39;print_s&#39;</span><span class="p">,</span> <span class="s1">&#39;search_s&#39;</span><span class="p">,</span> <span class="s1">&#39;facebook_s&#39;</span><span class="p">],</span> <span class="n">decay_rate</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;revenue&#39;</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>152
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trained_models</span><span class="p">,</span> <span class="n">model_metrics</span> <span class="o">=</span> <span class="n">train_models</span><span class="p">(</span><span class="n">models</span><span class="p">,</span> <span class="n">names</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="n">model_metrics</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;LinearRegression&#39;, 0.827, 222442.098, 297371.416),
+ (&#39;AdaBoostRegressor&#39;, 0.707, 315384.307, 387219.308),
+ (&#39;XGBRegressor&#39;, 0.728, 277247.385, 373506.686),
+ (&#39;RandomForestRegressor&#39;, 0.782, 248515.178, 333873.041),
+ (&#39;DecisionTreeRegressor&#39;, 0.582, 332240.219, 462857.011),
+ (&#39;GradientBoostingRegressor&#39;, 0.757, 248215.646, 352926.186),
+ (&#39;KNeighborsRegressor&#39;, 0.737, 273069.658, 366640.716)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_adstock</span><span class="p">,</span> <span class="n">decay_rate</span> <span class="o">=</span> <span class="n">adstock_synergy</span><span class="p">(</span><span class="n">data_ms</span><span class="p">,</span> <span class="n">decay_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">data_adstock</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tv_s</th>
+      <th>ooh_s</th>
+      <th>print_s</th>
+      <th>search_s</th>
+      <th>facebook_s</th>
+      <th>date</th>
+      <th>revenue</th>
+      <th>tv_s_x_ooh_s</th>
+      <th>tv_s_x_print_s</th>
+      <th>tv_s_x_search_s</th>
+      <th>tv_s_x_facebook_s</th>
+      <th>ooh_s_x_print_s</th>
+      <th>ooh_s_x_search_s</th>
+      <th>ooh_s_x_facebook_s</th>
+      <th>print_s_x_search_s</th>
+      <th>print_s_x_facebook_s</th>
+      <th>search_s_x_facebook_s</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>167687.6000</td>
+      <td>0.0</td>
+      <td>95463.666667</td>
+      <td>0.0</td>
+      <td>228213.987444</td>
+      <td>2015-11-23</td>
+      <td>2.754372e+06</td>
+      <td>0.000000e+00</td>
+      <td>1.600807e+10</td>
+      <td>0.000000e+00</td>
+      <td>3.826866e+10</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>2.178614e+10</td>
+      <td>0.000000e+00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>298444.7000</td>
+      <td>0.0</td>
+      <td>47731.833333</td>
+      <td>31000.0</td>
+      <td>148365.567233</td>
+      <td>2015-11-30</td>
+      <td>2.584277e+06</td>
+      <td>0.000000e+00</td>
+      <td>1.424531e+10</td>
+      <td>9.251786e+09</td>
+      <td>4.427892e+10</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>0.000000e+00</td>
+      <td>1.479687e+09</td>
+      <td>7.081761e+09</td>
+      <td>4.599333e+09</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>149222.3500</td>
+      <td>248022.0</td>
+      <td>27269.916667</td>
+      <td>43900.0</td>
+      <td>201874.044951</td>
+      <td>2015-12-07</td>
+      <td>2.547387e+06</td>
+      <td>3.701043e+10</td>
+      <td>4.069281e+09</td>
+      <td>6.550861e+09</td>
+      <td>3.012412e+10</td>
+      <td>6.763539e+09</td>
+      <td>1.088817e+10</td>
+      <td>5.006920e+10</td>
+      <td>1.197149e+09</td>
+      <td>5.505088e+09</td>
+      <td>8.862271e+09</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>700488.4750</td>
+      <td>124011.0</td>
+      <td>146234.958333</td>
+      <td>53850.0</td>
+      <td>184951.742781</td>
+      <td>2015-12-14</td>
+      <td>2.875220e+06</td>
+      <td>8.686828e+10</td>
+      <td>1.024359e+11</td>
+      <td>3.772130e+10</td>
+      <td>1.295566e+11</td>
+      <td>1.813474e+10</td>
+      <td>6.677992e+09</td>
+      <td>2.293605e+10</td>
+      <td>7.874753e+09</td>
+      <td>2.704641e+10</td>
+      <td>9.959651e+09</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>350244.2375</td>
+      <td>582010.5</td>
+      <td>73117.479167</td>
+      <td>54025.0</td>
+      <td>113163.349546</td>
+      <td>2015-12-21</td>
+      <td>2.215953e+06</td>
+      <td>2.038458e+11</td>
+      <td>2.560898e+10</td>
+      <td>1.892194e+10</td>
+      <td>3.963481e+10</td>
+      <td>4.255514e+10</td>
+      <td>3.144312e+10</td>
+      <td>6.586226e+10</td>
+      <td>3.950172e+09</td>
+      <td>8.274219e+09</td>
+      <td>6.113650e+09</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">trim_threshold</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">decay_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">threshold</span><span class="p">)</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">decay_rate</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">t</span><span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_ts_features</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">],</span> <span class="n">drop_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># drop date column</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_data</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;revenue&#39;</span><span class="p">,</span><span class="n">train_size</span><span class="o">=</span><span class="mf">0.8</span><span class="p">):</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">target</span><span class="p">])</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">data_adstock</span><span class="p">[</span><span class="n">target</span><span class="p">]</span>  <span class="c1"># Response variable</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>  <span class="c1"># Adds a constant term to the predictor             </span>
+                
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="n">train_size</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_adstock</span> <span class="o">=</span> <span class="n">trim_threshold</span><span class="p">(</span><span class="n">data_adstock</span><span class="p">,</span> <span class="n">decay_rate</span><span class="o">=</span><span class="n">decay_rate</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">data_adstock</span> <span class="o">=</span> <span class="n">add_ts_features</span><span class="p">(</span><span class="n">data_adstock</span><span class="p">)</span>
+<span class="n">data_adstock</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tv_s</th>
+      <th>ooh_s</th>
+      <th>print_s</th>
+      <th>search_s</th>
+      <th>facebook_s</th>
+      <th>revenue</th>
+      <th>tv_s_x_ooh_s</th>
+      <th>tv_s_x_print_s</th>
+      <th>tv_s_x_search_s</th>
+      <th>tv_s_x_facebook_s</th>
+      <th>...</th>
+      <th>month_3</th>
+      <th>month_4</th>
+      <th>month_5</th>
+      <th>month_6</th>
+      <th>month_7</th>
+      <th>month_8</th>
+      <th>month_9</th>
+      <th>month_10</th>
+      <th>month_11</th>
+      <th>month_12</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4</th>
+      <td>350244.237500</td>
+      <td>582010.50000</td>
+      <td>73117.479167</td>
+      <td>54025.0000</td>
+      <td>113163.349546</td>
+      <td>2.215953e+06</td>
+      <td>2.038458e+11</td>
+      <td>2.560898e+10</td>
+      <td>1.892194e+10</td>
+      <td>3.963481e+10</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>424311.918750</td>
+      <td>291005.25000</td>
+      <td>275976.072917</td>
+      <td>55312.5000</td>
+      <td>216691.829975</td>
+      <td>2.569922e+06</td>
+      <td>1.234770e+11</td>
+      <td>1.170999e+11</td>
+      <td>2.346975e+10</td>
+      <td>9.194493e+10</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>217308.859375</td>
+      <td>570665.62500</td>
+      <td>137988.036458</td>
+      <td>55456.2500</td>
+      <td>217036.281974</td>
+      <td>2.171507e+06</td>
+      <td>1.240107e+11</td>
+      <td>2.998602e+10</td>
+      <td>1.205113e+10</td>
+      <td>4.716391e+10</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>130796.129687</td>
+      <td>285332.81250</td>
+      <td>245853.684896</td>
+      <td>59728.1250</td>
+      <td>232412.625582</td>
+      <td>2.464132e+06</td>
+      <td>3.732043e+10</td>
+      <td>3.215671e+10</td>
+      <td>7.812208e+09</td>
+      <td>3.039867e+10</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>65398.064844</td>
+      <td>142666.40625</td>
+      <td>122926.842448</td>
+      <td>52764.0625</td>
+      <td>224896.679777</td>
+      <td>2.012520e+06</td>
+      <td>9.330107e+09</td>
+      <td>8.039178e+09</td>
+      <td>3.450668e+09</td>
+      <td>1.470781e+10</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 27 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_data</span><span class="p">(</span><span class="n">data_adstock</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">&#39;revenue&#39;</span><span class="p">,</span><span class="n">train_size</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>search for the best model</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_model_with_decay</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">decay_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+    <span class="c1"># allowing each media to have a different decay rate</span>
+    
+    <span class="c1"># Predictor variables with adstock and interaction terms</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;revenue&#39;</span><span class="p">])</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">data_adstock</span><span class="p">[</span><span class="s1">&#39;revenue&#39;</span><span class="p">]</span>  <span class="c1"># Response variable</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>  <span class="c1"># Adds a constant term to the predictor             </span>
+                
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+    
+    <span class="c1"># # Build and fit the model</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span> 
+
+    <span class="c1"># Predict the test data</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+    <span class="c1"># Calculate the R-squared, MAE, and RMSE</span>
+    <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">rmse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> 
+    
+    <span class="k">return</span> <span class="n">model</span><span class="p">,</span> <span class="n">r2</span><span class="p">,</span> <span class="n">mae</span><span class="p">,</span> <span class="n">rmse</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="p">,</span> <span class="n">r2</span><span class="p">,</span> <span class="n">mae</span><span class="p">,</span> <span class="n">rmse</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_model_with_decay</span><span class="p">(</span><span class="n">lr</span><span class="p">,</span> <span class="n">data_ms</span><span class="p">,</span> <span class="n">decay_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r2</span><span class="p">,</span> <span class="n">mae</span><span class="p">,</span> <span class="n">rmse</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.595 316911.197 403379.219
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>const</th>
+      <th>tv_s</th>
+      <th>ooh_s</th>
+      <th>print_s</th>
+      <th>search_s</th>
+      <th>facebook_s</th>
+      <th>tv_s_x_ooh_s</th>
+      <th>tv_s_x_print_s</th>
+      <th>tv_s_x_search_s</th>
+      <th>tv_s_x_facebook_s</th>
+      <th>ooh_s_x_print_s</th>
+      <th>ooh_s_x_search_s</th>
+      <th>ooh_s_x_facebook_s</th>
+      <th>print_s_x_search_s</th>
+      <th>print_s_x_facebook_s</th>
+      <th>search_s_x_facebook_s</th>
+      <th>month</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>120</th>
+      <td>1.0</td>
+      <td>430429.117199</td>
+      <td>203467.423234</td>
+      <td>181119.772736</td>
+      <td>99288.489083</td>
+      <td>1023.370404</td>
+      <td>8.757830e+10</td>
+      <td>7.795922e+10</td>
+      <td>4.273666e+10</td>
+      <td>4.404884e+08</td>
+      <td>3.685197e+10</td>
+      <td>2.020197e+10</td>
+      <td>2.082225e+08</td>
+      <td>1.798311e+10</td>
+      <td>1.853526e+08</td>
+      <td>1.016089e+08</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>59</th>
+      <td>1.0</td>
+      <td>362116.866572</td>
+      <td>520678.859847</td>
+      <td>106126.631413</td>
+      <td>108367.315242</td>
+      <td>298786.314413</td>
+      <td>1.885466e+11</td>
+      <td>3.843024e+10</td>
+      <td>3.924163e+10</td>
+      <td>1.081956e+11</td>
+      <td>5.525789e+10</td>
+      <td>5.642457e+10</td>
+      <td>1.555717e+11</td>
+      <td>1.150066e+10</td>
+      <td>3.170919e+10</td>
+      <td>3.237867e+10</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>1.0</td>
+      <td>153721.725981</td>
+      <td>248531.739425</td>
+      <td>762.360737</td>
+      <td>21762.282601</td>
+      <td>80225.876658</td>
+      <td>3.820473e+10</td>
+      <td>1.171914e+08</td>
+      <td>3.345336e+09</td>
+      <td>1.233246e+10</td>
+      <td>1.894708e+08</td>
+      <td>5.408618e+09</td>
+      <td>1.993868e+10</td>
+      <td>1.659071e+07</td>
+      <td>6.116106e+07</td>
+      <td>1.745898e+09</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>134</th>
+      <td>1.0</td>
+      <td>31686.429609</td>
+      <td>38802.299281</td>
+      <td>25896.215481</td>
+      <td>71807.195342</td>
+      <td>19133.355476</td>
+      <td>1.229506e+09</td>
+      <td>8.205586e+08</td>
+      <td>2.275314e+09</td>
+      <td>6.062677e+08</td>
+      <td>1.004833e+09</td>
+      <td>2.786284e+09</td>
+      <td>7.424182e+08</td>
+      <td>1.859535e+09</td>
+      <td>4.954815e+08</td>
+      <td>1.373913e+09</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>182</th>
+      <td>1.0</td>
+      <td>234317.711700</td>
+      <td>10934.036000</td>
+      <td>48778.099956</td>
+      <td>25167.727132</td>
+      <td>110383.181550</td>
+      <td>2.562038e+09</td>
+      <td>1.142957e+10</td>
+      <td>5.897244e+09</td>
+      <td>2.586473e+10</td>
+      <td>5.333415e+08</td>
+      <td>2.751848e+08</td>
+      <td>1.206934e+09</td>
+      <td>1.227634e+09</td>
+      <td>5.384282e+09</td>
+      <td>2.778094e+09</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get the row of index = 59</span>
+<span class="n">X_train</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">59</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>const                    1.000000e+00
+tv_s                     1.307961e+05
+ooh_s                    2.853328e+05
+print_s                  2.458537e+05
+search_s                 5.972812e+04
+facebook_s               2.324126e+05
+tv_s_x_ooh_s             3.732043e+10
+tv_s_x_print_s           3.215671e+10
+tv_s_x_search_s          7.812208e+09
+tv_s_x_facebook_s        3.039867e+10
+ooh_s_x_print_s          7.015012e+10
+ooh_s_x_search_s         1.704239e+10
+ooh_s_x_facebook_s       6.631495e+10
+print_s_x_search_s       1.468438e+10
+print_s_x_facebook_s     5.713950e+10
+search_s_x_facebook_s    1.388157e+10
+month                    1.000000e+00
+Name: 7, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;LinearRegression&quot;</span><span class="p">,</span> <span class="s2">&quot;AdaBoostRegressor&quot;</span><span class="p">,</span><span class="s2">&quot;XGBRegressor&quot;</span><span class="p">,</span><span class="s2">&quot;RandomForestRegressor&quot;</span><span class="p">,</span><span class="s2">&quot;DecisionTreeRegressor&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;GradientBoostingRegressor&quot;</span><span class="p">,</span><span class="s2">&quot;KNeighborsRegressor&quot;</span><span class="p">]</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="n">lr</span><span class="p">,</span> <span class="n">ada</span><span class="p">,</span> <span class="n">xgb</span><span class="p">,</span> <span class="n">rfr</span><span class="p">,</span> <span class="n">dtr</span><span class="p">,</span> <span class="n">gbr</span><span class="p">,</span> <span class="n">knn</span><span class="p">]</span>
+<span class="n">models</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[LinearRegression(),
+ AdaBoostRegressor(),
+ XGBRegressor(base_score=0.5, booster=&#39;gbtree&#39;, callbacks=None,
+              colsample_bylevel=1, colsample_bynode=1, colsample_bytree=1,
+              early_stopping_rounds=None, enable_categorical=False,
+              eval_metric=None, gamma=0, gpu_id=-1, grow_policy=&#39;depthwise&#39;,
+              importance_type=None, interaction_constraints=&#39;&#39;,
+              learning_rate=0.300000012, max_bin=256, max_cat_to_onehot=4,
+              max_delta_step=0, max_depth=6, max_leaves=0, min_child_weight=1,
+              missing=nan, monotone_constraints=&#39;()&#39;, n_estimators=100, n_jobs=0,
+              num_parallel_tree=1, predictor=&#39;auto&#39;, random_state=0, reg_alpha=0,
+              reg_lambda=1, ...),
+ RandomForestRegressor(),
+ DecisionTreeRegressor(),
+ GradientBoostingRegressor(),
+ KNeighborsRegressor()]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Define a range of potential decay rates to test</span>
+<span class="n">decay_rates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="mi">19</span><span class="p">)</span>  <span class="c1"># Testing 21 values from 0 to 1</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">models</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">decay_rate</span> <span class="ow">in</span> <span class="n">decay_rates</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Testing decay rate: </span><span class="si">{</span><span class="n">decay_rate</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">model</span><span class="p">,</span> <span class="n">r2</span><span class="p">,</span> <span class="n">mae</span><span class="p">,</span> <span class="n">rmse</span> <span class="o">=</span> <span class="n">evaluate_model_with_decay</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">decay_rate</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">name</span><span class="p">,</span> <span class="n">decay_rate</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">r2</span><span class="p">,</span> <span class="n">mae</span><span class="p">,</span> <span class="n">rmse</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> R-squared: </span><span class="si">{</span><span class="n">r2</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># results now contains the performance of each model for each decay rate</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training LinearRegression...
+Testing decay rate: 0.05
+LinearRegression R-squared: 0.466
+Testing decay rate: 0.10
+LinearRegression R-squared: 0.470
+Testing decay rate: 0.15
+LinearRegression R-squared: 0.503
+Testing decay rate: 0.20
+LinearRegression R-squared: 0.528
+Testing decay rate: 0.25
+LinearRegression R-squared: 0.553
+Testing decay rate: 0.30
+LinearRegression R-squared: 0.579
+Testing decay rate: 0.35
+LinearRegression R-squared: 0.531
+Testing decay rate: 0.40
+LinearRegression R-squared: 0.562
+Testing decay rate: 0.45
+LinearRegression R-squared: 0.560
+Testing decay rate: 0.50
+LinearRegression R-squared: 0.587
+Testing decay rate: 0.55
+LinearRegression R-squared: 0.618
+Testing decay rate: 0.60
+LinearRegression R-squared: 0.738
+Testing decay rate: 0.65
+LinearRegression R-squared: 0.698
+Testing decay rate: 0.70
+LinearRegression R-squared: 0.682
+Testing decay rate: 0.75
+LinearRegression R-squared: 0.701
+Testing decay rate: 0.80
+LinearRegression R-squared: 0.706
+Testing decay rate: 0.85
+LinearRegression R-squared: 0.777
+Testing decay rate: 0.90
+LinearRegression R-squared: 0.672
+Testing decay rate: 0.95
+LinearRegression R-squared: 0.750
+Training AdaBoostRegressor...
+Testing decay rate: 0.05
+AdaBoostRegressor R-squared: 0.661
+Testing decay rate: 0.10
+AdaBoostRegressor R-squared: 0.685
+Testing decay rate: 0.15
+AdaBoostRegressor R-squared: 0.671
+Testing decay rate: 0.20
+AdaBoostRegressor R-squared: 0.652
+Testing decay rate: 0.25
+AdaBoostRegressor R-squared: 0.643
+Testing decay rate: 0.30
+AdaBoostRegressor R-squared: 0.692
+Testing decay rate: 0.35
+AdaBoostRegressor R-squared: 0.659
+Testing decay rate: 0.40
+AdaBoostRegressor R-squared: 0.642
+Testing decay rate: 0.45
+AdaBoostRegressor R-squared: 0.667
+Testing decay rate: 0.50
+AdaBoostRegressor R-squared: 0.626
+Testing decay rate: 0.55
+AdaBoostRegressor R-squared: 0.660
+Testing decay rate: 0.60
+AdaBoostRegressor R-squared: 0.675
+Testing decay rate: 0.65
+AdaBoostRegressor R-squared: 0.691
+Testing decay rate: 0.70
+AdaBoostRegressor R-squared: 0.642
+Testing decay rate: 0.75
+AdaBoostRegressor R-squared: 0.674
+Testing decay rate: 0.80
+AdaBoostRegressor R-squared: 0.686
+Testing decay rate: 0.85
+AdaBoostRegressor R-squared: 0.698
+Testing decay rate: 0.90
+AdaBoostRegressor R-squared: 0.686
+Testing decay rate: 0.95
+AdaBoostRegressor R-squared: 0.673
+Training XGBRegressor...
+Testing decay rate: 0.05
+XGBRegressor R-squared: 0.649
+Testing decay rate: 0.10
+XGBRegressor R-squared: 0.706
+Testing decay rate: 0.15
+XGBRegressor R-squared: 0.715
+Testing decay rate: 0.20
+XGBRegressor R-squared: 0.672
+Testing decay rate: 0.25
+XGBRegressor R-squared: 0.702
+Testing decay rate: 0.30
+XGBRegressor R-squared: 0.702
+Testing decay rate: 0.35
+XGBRegressor R-squared: 0.712
+Testing decay rate: 0.40
+XGBRegressor R-squared: 0.711
+Testing decay rate: 0.45
+XGBRegressor R-squared: 0.682
+Testing decay rate: 0.50
+XGBRegressor R-squared: 0.694
+Testing decay rate: 0.55
+XGBRegressor R-squared: 0.696
+Testing decay rate: 0.60
+XGBRegressor R-squared: 0.744
+Testing decay rate: 0.65
+XGBRegressor R-squared: 0.663
+Testing decay rate: 0.70
+XGBRegressor R-squared: 0.607
+Testing decay rate: 0.75
+XGBRegressor R-squared: 0.657
+Testing decay rate: 0.80
+XGBRegressor R-squared: 0.648
+Testing decay rate: 0.85
+XGBRegressor R-squared: 0.777
+Testing decay rate: 0.90
+XGBRegressor R-squared: 0.699
+Testing decay rate: 0.95
+XGBRegressor R-squared: 0.690
+Training RandomForestRegressor...
+Testing decay rate: 0.05
+RandomForestRegressor R-squared: 0.718
+Testing decay rate: 0.10
+RandomForestRegressor R-squared: 0.721
+Testing decay rate: 0.15
+RandomForestRegressor R-squared: 0.712
+Testing decay rate: 0.20
+RandomForestRegressor R-squared: 0.700
+Testing decay rate: 0.25
+RandomForestRegressor R-squared: 0.690
+Testing decay rate: 0.30
+RandomForestRegressor R-squared: 0.733
+Testing decay rate: 0.35
+RandomForestRegressor R-squared: 0.765
+Testing decay rate: 0.40
+RandomForestRegressor R-squared: 0.768
+Testing decay rate: 0.45
+RandomForestRegressor R-squared: 0.766
+Testing decay rate: 0.50
+RandomForestRegressor R-squared: 0.753
+Testing decay rate: 0.55
+RandomForestRegressor R-squared: 0.744
+Testing decay rate: 0.60
+RandomForestRegressor R-squared: 0.748
+Testing decay rate: 0.65
+RandomForestRegressor R-squared: 0.708
+Testing decay rate: 0.70
+RandomForestRegressor R-squared: 0.666
+Testing decay rate: 0.75
+RandomForestRegressor R-squared: 0.724
+Testing decay rate: 0.80
+RandomForestRegressor R-squared: 0.756
+Testing decay rate: 0.85
+RandomForestRegressor R-squared: 0.787
+Testing decay rate: 0.90
+RandomForestRegressor R-squared: 0.737
+Testing decay rate: 0.95
+RandomForestRegressor R-squared: 0.781
+Training DecisionTreeRegressor...
+Testing decay rate: 0.05
+DecisionTreeRegressor R-squared: 0.527
+Testing decay rate: 0.10
+DecisionTreeRegressor R-squared: 0.396
+Testing decay rate: 0.15
+DecisionTreeRegressor R-squared: 0.445
+Testing decay rate: 0.20
+DecisionTreeRegressor R-squared: 0.505
+Testing decay rate: 0.25
+DecisionTreeRegressor R-squared: 0.445
+Testing decay rate: 0.30
+DecisionTreeRegressor R-squared: 0.462
+Testing decay rate: 0.35
+DecisionTreeRegressor R-squared: 0.497
+Testing decay rate: 0.40
+DecisionTreeRegressor R-squared: 0.500
+Testing decay rate: 0.45
+DecisionTreeRegressor R-squared: 0.351
+Testing decay rate: 0.50
+DecisionTreeRegressor R-squared: 0.270
+Testing decay rate: 0.55
+DecisionTreeRegressor R-squared: 0.548
+Testing decay rate: 0.60
+DecisionTreeRegressor R-squared: 0.468
+Testing decay rate: 0.65
+DecisionTreeRegressor R-squared: 0.441
+Testing decay rate: 0.70
+DecisionTreeRegressor R-squared: 0.499
+Testing decay rate: 0.75
+DecisionTreeRegressor R-squared: 0.548
+Testing decay rate: 0.80
+DecisionTreeRegressor R-squared: 0.691
+Testing decay rate: 0.85
+DecisionTreeRegressor R-squared: 0.577
+Testing decay rate: 0.90
+DecisionTreeRegressor R-squared: 0.518
+Testing decay rate: 0.95
+DecisionTreeRegressor R-squared: 0.485
+Training GradientBoostingRegressor...
+Testing decay rate: 0.05
+GradientBoostingRegressor R-squared: 0.697
+Testing decay rate: 0.10
+GradientBoostingRegressor R-squared: 0.713
+Testing decay rate: 0.15
+GradientBoostingRegressor R-squared: 0.745
+Testing decay rate: 0.20
+GradientBoostingRegressor R-squared: 0.745
+Testing decay rate: 0.25
+GradientBoostingRegressor R-squared: 0.738
+Testing decay rate: 0.30
+GradientBoostingRegressor R-squared: 0.699
+Testing decay rate: 0.35
+GradientBoostingRegressor R-squared: 0.752
+Testing decay rate: 0.40
+GradientBoostingRegressor R-squared: 0.747
+Testing decay rate: 0.45
+GradientBoostingRegressor R-squared: 0.725
+Testing decay rate: 0.50
+GradientBoostingRegressor R-squared: 0.766
+Testing decay rate: 0.55
+GradientBoostingRegressor R-squared: 0.790
+Testing decay rate: 0.60
+GradientBoostingRegressor R-squared: 0.685
+Testing decay rate: 0.65
+GradientBoostingRegressor R-squared: 0.674
+Testing decay rate: 0.70
+GradientBoostingRegressor R-squared: 0.621
+Testing decay rate: 0.75
+GradientBoostingRegressor R-squared: 0.654
+Testing decay rate: 0.80
+GradientBoostingRegressor R-squared: 0.663
+Testing decay rate: 0.85
+GradientBoostingRegressor R-squared: 0.770
+Testing decay rate: 0.90
+GradientBoostingRegressor R-squared: 0.707
+Testing decay rate: 0.95
+GradientBoostingRegressor R-squared: 0.727
+Training KNeighborsRegressor...
+Testing decay rate: 0.05
+KNeighborsRegressor R-squared: 0.368
+Testing decay rate: 0.10
+KNeighborsRegressor R-squared: 0.370
+Testing decay rate: 0.15
+KNeighborsRegressor R-squared: 0.348
+Testing decay rate: 0.20
+KNeighborsRegressor R-squared: 0.355
+Testing decay rate: 0.25
+KNeighborsRegressor R-squared: 0.425
+Testing decay rate: 0.30
+KNeighborsRegressor R-squared: 0.434
+Testing decay rate: 0.35
+KNeighborsRegressor R-squared: 0.392
+Testing decay rate: 0.40
+KNeighborsRegressor R-squared: 0.483
+Testing decay rate: 0.45
+KNeighborsRegressor R-squared: 0.536
+Testing decay rate: 0.50
+KNeighborsRegressor R-squared: 0.583
+Testing decay rate: 0.55
+KNeighborsRegressor R-squared: 0.548
+Testing decay rate: 0.60
+KNeighborsRegressor R-squared: 0.657
+Testing decay rate: 0.65
+KNeighborsRegressor R-squared: 0.657
+Testing decay rate: 0.70
+KNeighborsRegressor R-squared: 0.588
+Testing decay rate: 0.75
+KNeighborsRegressor R-squared: 0.574
+Testing decay rate: 0.80
+KNeighborsRegressor R-squared: 0.655
+Testing decay rate: 0.85
+KNeighborsRegressor R-squared: 0.659
+Testing decay rate: 0.90
+KNeighborsRegressor R-squared: 0.698
+Testing decay rate: 0.95
+KNeighborsRegressor R-squared: 0.727
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get all R-squared from results</span>
+<span class="n">r2_results</span> <span class="o">=</span> <span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">]</span>
+<span class="c1"># model with the highest R-squared</span>
+<span class="n">best_model_index</span> <span class="o">=</span> <span class="n">r2_results</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">r2_results</span><span class="p">))</span>
+<span class="n">best_model</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="n">best_model_index</span><span class="p">]</span>
+<span class="n">best_model</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;GradientBoostingRegressor&#39;,
+ 0.5499999999999999,
+ GradientBoostingRegressor(),
+ 0.7898103940412705,
+ 222179.62742040597,
+ 310051.2894419429)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotting decay rates vs MSE scores to visualize the performance</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+    <span class="n">model_results</span> <span class="o">=</span> <span class="p">[</span><span class="n">result</span> <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span> <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">name</span><span class="p">]</span>
+    <span class="n">decay_rates</span> <span class="o">=</span> <span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">model_results</span><span class="p">]</span>
+    <span class="n">r2_scores</span> <span class="o">=</span> <span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">model_results</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">decay_rates</span><span class="p">,</span> <span class="n">r2_scores</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Decay Rate&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;R-squared&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Model Performance vs Decay Rate&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/12f80a867b5018378202e0dd16ac2f68f17c7b6bd060c365aaec88dab27aaf60.png" src="_images/12f80a867b5018378202e0dd16ac2f68f17c7b6bd060c365aaec88dab27aaf60.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Function to create a prediction dataset for a given media channel</span>
+
+<span class="c1"># Function to create a prediction dataset for a given media channel</span>
+<span class="k">def</span> <span class="nf">create_prediction_data_and_predict</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_base</span><span class="p">,</span> <span class="n">media_channel</span><span class="p">,</span> <span class="n">spending_range</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a dataframe for predictions by varying spending in one media channel and predict outcomes.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    - model: The trained model to use for predictions.</span>
+<span class="sd">    - X_base: DataFrame without the target variable, used as a base for other variables&#39; values.</span>
+<span class="sd">    - media_channel: The media channel for which to vary spending.</span>
+<span class="sd">    - spending_range: Range of values to use for the given media channel.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    - predictions: Array of predicted outcomes corresponding to the varied spending.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Copy X_base to ensure original data is not modified</span>
+    <span class="n">X_pred</span> <span class="o">=</span> <span class="n">X_base</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    
+    <span class="c1"># Set all media spending to their mean, except for the channel of interest</span>
+    <span class="k">for</span> <span class="n">media</span> <span class="ow">in</span> <span class="n">media_spend_list</span><span class="p">:</span>
+        <span class="n">X_pred</span><span class="p">[</span><span class="n">media</span><span class="p">]</span> <span class="o">=</span> <span class="n">X_pred</span><span class="p">[</span><span class="n">media</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    
+    <span class="c1"># Ensure X_pred has the correct length to match spending_range</span>
+    <span class="n">X_pred</span> <span class="o">=</span> <span class="n">X_pred</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">spending_range</span><span class="p">)]</span>
+    
+    <span class="c1"># Vary spending for the specified channel</span>
+    <span class="n">X_pred</span><span class="p">[</span><span class="n">media_channel</span><span class="p">]</span> <span class="o">=</span> <span class="n">spending_range</span>
+    
+    <span class="c1"># Make predictions using the model</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_pred</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">predictions</span>
+
+
+<span class="c1"># Base DataFrame for predictions, holding all variables constant at their mean, except the one of interest</span>
+<span class="n">X_base</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  <span class="c1"># Use a copy of X_test to avoid modifying original data</span>
+
+<span class="c1"># Define the spending range for visualization</span>
+<span class="n">spending_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">X_test</span><span class="p">[</span><span class="n">media_spend_list</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_base</span><span class="p">))</span>  <span class="c1"># Adjusted for smooth curves</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+
+<span class="c1"># Initialize a figure with plotly</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+
+<span class="c1"># Assuming &#39;media_spend_list&#39;, &#39;X_base&#39;, &#39;create_prediction_data_for_media&#39;, &#39;gam&#39;, and &#39;spending_range&#39; are already defined</span>
+
+<span class="c1"># Visualize the effect of each media spending variable using Plotly</span>
+<span class="k">for</span> <span class="n">media_channel</span> <span class="ow">in</span> <span class="n">media_spend_list</span><span class="p">:</span>
+    <span class="n">X_pred</span> <span class="o">=</span> <span class="n">create_prediction_data_for_media</span><span class="p">(</span><span class="n">X_base</span><span class="p">,</span> <span class="n">media_channel</span><span class="p">,</span> <span class="n">spending_range</span><span class="p">)</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="n">gam</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_pred</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">spending_range</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">predictions</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Effect of </span><span class="si">{</span><span class="n">media_channel</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">))</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Comparative Effect of Media Spendings on Revenue&#39;</span><span class="p">,</span>
+                  <span class="n">xaxis_title</span><span class="o">=</span><span class="s1">&#39;Media Spending&#39;</span><span class="p">,</span>
+                  <span class="n">yaxis_title</span><span class="o">=</span><span class="s1">&#39;Predicted Revenue&#39;</span><span class="p">,</span>
+                  <span class="n">legend_title</span><span class="o">=</span><span class="s1">&#39;Media Channels&#39;</span><span class="p">,</span>
+                  <span class="n">template</span><span class="o">=</span><span class="s1">&#39;plotly_white&#39;</span><span class="p">)</span>
+
+<span class="c1"># Display the figure</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="n">spend</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">gam</span><span class="p">,</span> <span class="n">base_data</span><span class="o">=</span><span class="n">X</span><span class="p">,</span> <span class="n">decay_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Objective function to be minimized.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    - spend: Array of spend by media channel.</span>
+<span class="sd">    - model: Trained GAM model.</span>
+<span class="sd">    - base_data: DataFrame containing base values for all features except media spends.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    - Negative predicted revenue to be minimized.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Copy base_data to avoid modifying the original</span>
+    <span class="n">X_pred</span> <span class="o">=</span> <span class="n">base_data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    
+    <span class="c1"># Update media spend values in X_pred with the values from &#39;spend&#39;</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">media</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">media_spend_list</span><span class="p">):</span>
+        <span class="n">X_pred</span><span class="p">[</span><span class="n">media</span><span class="p">]</span> <span class="o">=</span> <span class="n">spend</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">X_pred</span><span class="p">[</span><span class="n">media</span><span class="p">]</span> <span class="o">=</span> <span class="n">apply_adstock</span><span class="p">(</span><span class="n">X_pred</span><span class="p">[</span><span class="n">media</span><span class="p">])</span>
+    
+    <span class="c1"># # calculate the t value</span>
+    <span class="c1"># t = round(math.log(threshold) / math.log(decay_rate))</span>
+    <span class="c1"># # exclude the first t rows</span>
+    <span class="c1"># X_pred = X_pred.iloc[t:]</span>
+    
+    <span class="c1"># Predict revenue with the updated media spends</span>
+    <span class="n">predicted_revenue</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_pred</span><span class="p">)</span>
+    
+    <span class="c1"># Return negative revenue because we are minimizing</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">predicted_revenue</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>date</th>
+      <th>revenue</th>
+      <th>tv_s</th>
+      <th>ooh_s</th>
+      <th>print_s</th>
+      <th>facebook_i</th>
+      <th>search_clicks_p</th>
+      <th>search_s</th>
+      <th>competitor_sales_b</th>
+      <th>facebook_s</th>
+      <th>month</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2015-11-23</td>
+      <td>2.754372e+06</td>
+      <td>167687.6</td>
+      <td>0</td>
+      <td>95463.666667</td>
+      <td>7.290385e+07</td>
+      <td>0.000000</td>
+      <td>0</td>
+      <td>8125009</td>
+      <td>228213.987444</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2015-11-30</td>
+      <td>2.584277e+06</td>
+      <td>214600.9</td>
+      <td>0</td>
+      <td>0.000000</td>
+      <td>1.658110e+07</td>
+      <td>29511.715457</td>
+      <td>31000</td>
+      <td>7901549</td>
+      <td>34258.573511</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2015-12-07</td>
+      <td>2.547387e+06</td>
+      <td>0.0</td>
+      <td>248022</td>
+      <td>3404.000000</td>
+      <td>4.995477e+07</td>
+      <td>36132.358958</td>
+      <td>28400</td>
+      <td>8300197</td>
+      <td>127691.261335</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2015-12-14</td>
+      <td>2.875220e+06</td>
+      <td>625877.3</td>
+      <td>0</td>
+      <td>132600.000000</td>
+      <td>3.164930e+07</td>
+      <td>36804.210958</td>
+      <td>31900</td>
+      <td>8122883</td>
+      <td>84014.720306</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2015-12-21</td>
+      <td>2.215953e+06</td>
+      <td>0.0</td>
+      <td>520005</td>
+      <td>0.000000</td>
+      <td>8.802269e+06</td>
+      <td>28401.744069</td>
+      <td>27100</td>
+      <td>7105985</td>
+      <td>20687.478156</td>
+      <td>12</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gam</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ExpectileGAM(callbacks=[Deviance(), Diffs()], expectile=0.75, 
+   fit_intercept=True, max_iter=100, scale=None, 
+   terms=s(0) + s(1) + s(2) + s(3) + s(4) + f(5) + intercept, 
+   tol=0.0001, verbose=False)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spend</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">media_spend_list</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">spend</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tv_s          2.315616e+07
+ooh_s         1.685500e+07
+print_s       5.816666e+06
+search_s      9.228200e+06
+facebook_s    1.338890e+07
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+
+<span class="c1"># Total budget constraint</span>
+<span class="n">total_budget</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">media_spend_list</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="c1"># Example total budget</span>
+
+<span class="c1"># Constraints function ensuring the sum of spends equals the total budget</span>
+<span class="n">constraints</span> <span class="o">=</span> <span class="p">({</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;eq&#39;</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">spend</span><span class="p">:</span> <span class="n">total_budget</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">(</span><span class="n">spend</span><span class="p">)})</span>
+
+<span class="c1"># Bounds for each channel (e.g., min and max spend for each)</span>
+<span class="n">bounds</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="n">total_budget</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">media_spend_list</span><span class="p">]</span>  <span class="c1"># Example bounds</span>
+
+<span class="n">decay_rate</span><span class="o">=</span><span class="mf">0.5</span>
+<span class="n">threshold</span><span class="o">=</span><span class="mf">0.05</span>
+<span class="n">t</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">threshold</span><span class="p">)</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">decay_rate</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+
+<span class="c1"># Initial guess (e.g., evenly distribute the total budget across channels)</span>
+<span class="n">initial_guess</span> <span class="o">=</span> <span class="p">[</span><span class="n">total_budget</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">media_spend_list</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">media_spend_list</span><span class="p">]</span>
+
+<span class="c1"># Run the optimization</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">fun</span><span class="o">=</span><span class="n">objective</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">initial_guess</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="n">constraints</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;SLSQP&#39;</span><span class="p">)</span>
+
+<span class="c1"># Check the optimal spends found</span>
+<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
+    <span class="n">optimal_spends</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">x</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Optimal spends by media channel:&quot;</span><span class="p">,</span> <span class="n">optimal_spends</span><span class="p">)</span>
+    <span class="c1"># Calculate the predicted revenue with the optimal spends</span>
+    <span class="n">optimal_revenue</span> <span class="o">=</span> <span class="o">-</span><span class="n">result</span><span class="o">.</span><span class="n">fun</span>
+    <span class="c1"># Print the predicted revenue with the optimal spends</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Predicted revenue with optimal media spend:, </span><span class="si">{</span><span class="n">optimal_revenue</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># print the original media spend</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original media spend: spend.sum().values[0]&quot;</span><span class="p">)</span>
+    <span class="c1"># print the predicted revenue with the original media spend</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Predicted revenue with original media spend: </span><span class="si">{</span><span class="n">objective</span><span class="p">(</span><span class="n">spend</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># print the actual revenue with the original media spend</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Actual revenue with original media spend: </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;revenue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># print the difference between the original and optimal revenue</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Revenue difference:&quot;</span><span class="p">,</span> <span class="n">optimal_revenue</span> <span class="o">-</span> <span class="n">objective</span><span class="p">(</span><span class="n">spend</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Optimization was not successful. Reason:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_11240</span>\<span class="mf">4159730695.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> 
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># Run the optimization</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="n">result</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">fun</span><span class="o">=</span><span class="n">objective</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">initial_guess</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="n">constraints</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;SLSQP&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> 
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="c1"># Check the optimal spends found</span>
+
+<span class="nn">~\AppData\Roaming\Python\Python37\site-packages\scipy\optimize\_minimize.py</span> in <span class="ni">minimize</span><span class="nt">(fun, x0, args, method, jac, hess, hessp, bounds, constraints, tol, callback, options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">630</span>     <span class="k">elif</span> <span class="n">meth</span> <span class="o">==</span> <span class="s1">&#39;slsqp&#39;</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">631</span>         <span class="k">return</span> <span class="n">_minimize_slsqp</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">jac</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span>
+<span class="ne">--&gt; </span><span class="mi">632</span>                                <span class="n">constraints</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">callback</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">633</span>     <span class="k">elif</span> <span class="n">meth</span> <span class="o">==</span> <span class="s1">&#39;trust-constr&#39;</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">634</span>         <span class="k">return</span> <span class="n">_minimize_trustregion_constr</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">jac</span><span class="p">,</span> <span class="n">hess</span><span class="p">,</span> <span class="n">hessp</span><span class="p">,</span>
+
+<span class="nn">~\AppData\Roaming\Python\Python37\site-packages\scipy\optimize\slsqp.py</span> in <span class="ni">_minimize_slsqp</span><span class="nt">(func, x0, args, jac, bounds, constraints, maxiter, ftol, iprint, disp, eps, callback, finite_diff_rel_step, **unknown_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">375</span>     <span class="n">sf</span> <span class="o">=</span> <span class="n">_prepare_scalar_function</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">jac</span><span class="o">=</span><span class="n">jac</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">376</span>                                   <span class="n">finite_diff_rel_step</span><span class="o">=</span><span class="n">finite_diff_rel_step</span><span class="p">,</span>
+<span class="ne">--&gt; </span><span class="mi">377</span>                                   <span class="n">bounds</span><span class="o">=</span><span class="n">new_bounds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">378</span>     <span class="c1"># gh11403 SLSQP sometimes exceeds bounds by 1 or 2 ULP, make sure this</span>
+<span class="g g-Whitespace">    </span><span class="mi">379</span>     <span class="c1"># doesn&#39;t get sent to the func/grad evaluator.</span>
+
+<span class="nn">~\AppData\Roaming\Python\Python37\site-packages\scipy\optimize\optimize.py</span> in <span class="ni">_prepare_scalar_function</span><span class="nt">(fun, x0, jac, args, bounds, epsilon, finite_diff_rel_step, hess)</span>
+<span class="g g-Whitespace">    </span><span class="mi">260</span>     <span class="c1"># calculation reduces overall function evaluations.</span>
+<span class="g g-Whitespace">    </span><span class="mi">261</span>     <span class="n">sf</span> <span class="o">=</span> <span class="n">ScalarFunction</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">grad</span><span class="p">,</span> <span class="n">hess</span><span class="p">,</span>
+<span class="ne">--&gt; </span><span class="mi">262</span>                         <span class="n">finite_diff_rel_step</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="n">epsilon</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">263</span> 
+<span class="g g-Whitespace">    </span><span class="mi">264</span>     <span class="k">return</span> <span class="n">sf</span>
+
+<span class="nn">~\AppData\Roaming\Python\Python37\site-packages\scipy\optimize\_differentiable_functions.py</span> in <span class="ni">__init__</span><span class="nt">(self, fun, x0, args, grad, hess, finite_diff_rel_step, finite_diff_bounds, epsilon)</span>
+<span class="g g-Whitespace">    </span><span class="mi">138</span> 
+<span class="g g-Whitespace">    </span><span class="mi">139</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_update_fun_impl</span> <span class="o">=</span> <span class="n">update_fun</span>
+<span class="ne">--&gt; </span><span class="mi">140</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_update_fun</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">141</span> 
+<span class="g g-Whitespace">    </span><span class="mi">142</span>         <span class="c1"># Gradient evaluation</span>
+
+<span class="nn">~\AppData\Roaming\Python\Python37\site-packages\scipy\optimize\_differentiable_functions.py</span> in <span class="ni">_update_fun</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">231</span>     <span class="k">def</span> <span class="nf">_update_fun</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">232</span>         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">f_updated</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">233</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_update_fun_impl</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">234</span>             <span class="bp">self</span><span class="o">.</span><span class="n">f_updated</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="g g-Whitespace">    </span><span class="mi">235</span> 
+
+<span class="nn">~\AppData\Roaming\Python\Python37\site-packages\scipy\optimize\_differentiable_functions.py</span> in <span class="ni">update_fun</span><span class="nt">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">135</span> 
+<span class="g g-Whitespace">    </span><span class="mi">136</span>         <span class="k">def</span> <span class="nf">update_fun</span><span class="p">():</span>
+<span class="ne">--&gt; </span><span class="mi">137</span>             <span class="bp">self</span><span class="o">.</span><span class="n">f</span> <span class="o">=</span> <span class="n">fun_wrapped</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">138</span> 
+<span class="g g-Whitespace">    </span><span class="mi">139</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_update_fun_impl</span> <span class="o">=</span> <span class="n">update_fun</span>
+
+<span class="nn">~\AppData\Roaming\Python\Python37\site-packages\scipy\optimize\_differentiable_functions.py</span> in <span class="ni">fun_wrapped</span><span class="nt">(x)</span>
+<span class="g g-Whitespace">    </span><span class="mi">132</span>             <span class="c1"># Overwriting results in undefined behaviour because</span>
+<span class="g g-Whitespace">    </span><span class="mi">133</span>             <span class="c1"># fun(self.x) will change self.x, with the two no longer linked.</span>
+<span class="ne">--&gt; </span><span class="mi">134</span>             <span class="k">return</span> <span class="n">fun</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">135</span> 
+<span class="g g-Whitespace">    </span><span class="mi">136</span>         <span class="k">def</span> <span class="nf">update_fun</span><span class="p">():</span>
+
+<span class="nn">~\AppData\Local\Temp\ipykernel_11240\1727379646.py</span> in <span class="ni">objective</span><span class="nt">(spend, model, base_data, decay_rate, threshold)</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span> 
+<span class="g g-Whitespace">     </span><span class="mi">26</span>     <span class="c1"># Predict revenue with the updated media spends</span>
+<span class="ne">---&gt; </span><span class="mi">27</span>     <span class="n">predicted_revenue</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_pred</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">28</span> 
+<span class="g g-Whitespace">     </span><span class="mi">29</span>     <span class="c1"># Return negative revenue because we are minimizing</span>
+
+<span class="nn">d:\anaconda\envs\jupyterbook\lib\site-packages\pygam\pygam.py</span> in <span class="ni">predict</span><span class="nt">(self, X)</span>
+<span class="g g-Whitespace">    </span><span class="mi">432</span>             <span class="n">containing</span> <span class="n">predicted</span> <span class="n">values</span> <span class="n">under</span> <span class="n">the</span> <span class="n">model</span>
+<span class="g g-Whitespace">    </span><span class="mi">433</span>         <span class="s2">&quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">434</span><span class="s2">         return self.predict_mu(X)</span>
+<span class="g g-Whitespace">    </span><span class="mi">435</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">436</span><span class="s2">     def _modelmat(self, X, term=-1):</span>
+
+<span class="nn">d:\anaconda\envs\jupyterbook\lib\site-packages\pygam\pygam.py</span> in <span class="ni">predict_mu</span><span class="nt">(self, X)</span>
+<span class="g g-Whitespace">    </span><span class="mi">412</span><span class="s2">         X = check_X(X, n_feats=self.statistics_[&#39;m_features&#39;],</span>
+<span class="g g-Whitespace">    </span><span class="mi">413</span><span class="s2">                     edge_knots=self.edge_knots_, dtypes=self.dtype,</span>
+<span class="ne">--&gt; </span><span class="mi">414</span><span class="s2">                     features=self.feature, verbose=self.verbose)</span>
+<span class="g g-Whitespace">    </span><span class="mi">415</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">416</span><span class="s2">         lp = self._linear_predictor(X)</span>
+
+<span class="nn">d:\anaconda\envs\jupyterbook\lib\site-packages\pygam\utils.py</span> in <span class="ni">check_X</span><span class="nt">(X, n_feats, min_samples, edge_knots, dtypes, features, verbose)</span>
+<span class="g g-Whitespace">    </span><span class="mi">271</span><span class="s2">     # basic diagnostics</span>
+<span class="g g-Whitespace">    </span><span class="mi">272</span><span class="s2">     X = check_array(X, force_2d=True, n_feats=n_feats, min_samples=min_samples,</span>
+<span class="ne">--&gt; </span><span class="mi">273</span><span class="s2">                     name=&#39;X data&#39;, verbose=verbose)</span>
+<span class="g g-Whitespace">    </span><span class="mi">274</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">275</span><span class="s2">     # check our categorical data has no new categories</span>
+
+<span class="nn">d:\anaconda\envs\jupyterbook\lib\site-packages\pygam\utils.py</span> in <span class="ni">check_array</span><span class="nt">(array, force_2d, n_feats, ndim, min_samples, name, verbose)</span>
+<span class="g g-Whitespace">    </span><span class="mi">169</span><span class="s2">     # check finite</span>
+<span class="g g-Whitespace">    </span><span class="mi">170</span><span class="s2">     if not(np.isfinite(array).all()):</span>
+<span class="ne">--&gt; </span><span class="mi">171</span><span class="s2">         raise ValueError(&#39;</span><span class="si">{}</span><span class="s2"> must not contain Inf nor NaN&#39;.format(name))</span>
+<span class="g g-Whitespace">    </span><span class="mi">172</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">173</span><span class="s2">     # check ndim</span>
+
+<span class="ne">ValueError</span>: X data must not contain Inf nor NaN
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -446,6 +2854,38 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">9.1 <strong>Introduction</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-importance-of-mmm-in-the-modern-marketing-landscape">9.1.1 The Importance of MMM in the Modern Marketing Landscape</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-objective-of-mmm">9.1.2 The Objective of MMM</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-basics-of-media-mix-modeling">9.2 <strong>The Basics of Media Mix Modeling</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-media-mix-modeling">9.2.1 What is Media Mix Modeling?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-role-of-mmm-in-data-driven-marketing-decisions">9.2.2 The Role of MMM in Data-Driven Marketing Decisions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-components-of-mmm">9.2.3 Key Components of MMM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#brief-history-and-evolution-of-mmm">9.2.4 Brief History and Evolution of MMM</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-framework-of-mmm">9.3 <strong>Understanding the Framework of MMM</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#theoretical-foundation-of-mmm">9.3.1 Theoretical Foundation of MMM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-methods-used-in-mmm">9.3.2 Statistical Methods Used in MMM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accounting-for-diminishing-returns-and-synergy">9.3.3 Accounting for Diminishing Returns and Synergy</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-a-media-mix-model-in-python-a-step-by-step-guide">9.4 Building a Media Mix Model in Python: A Step-by-Step Guide</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
