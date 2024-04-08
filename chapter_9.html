@@ -400,7 +400,15 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accounting-for-diminishing-returns-and-synergy">9.3.3 Accounting for Diminishing Returns and Synergy</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-a-media-mix-model-in-python-a-step-by-step-guide">9.4 Building a Media Mix Model in Python: A Step-by-Step Guide</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-a-media-mix-model-in-python-a-step-by-step-guide">9.4 Building a Media Mix Model in Python: A Step-by-Step Guide</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-description">9.4.1 Data Description</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-processing">9.4.2 Data Processing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-engineering">9.4.3 Feature Engineering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-training">9.4.4 Model Training</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#search-for-the-best-model">9.4.5 search for the best model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#media-expenditure-optimization">9.4.6 Media Expenditure Optimization</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -483,21 +491,43 @@ document.write(`
 </section>
 <section id="building-a-media-mix-model-in-python-a-step-by-step-guide">
 <h2>9.4 Building a Media Mix Model in Python: A Step-by-Step Guide<a class="headerlink" href="#building-a-media-mix-model-in-python-a-step-by-step-guide" title="Permalink to this heading">#</a></h2>
-<p>In this section, we will walk through the process of building a basic Media Mix Model (MMM) using Python, leveraging a public dataset. For this exercise, we’ll use the “Advertising” dataset available from the ISLR package, which is commonly used in statistical learning. This dataset provides a simple yet illustrative example of how advertising expenditures across three different media channels (TV, Radio, and Newspaper) impact sales.</p>
+<p>In this section, we will walk through the process of building a basic Media Mix Model (MMM) using Python, leveraging the dataset provided in Meta’s Robyn R package. This dataset provides a simple yet illustrative example of how media expenditures across five different media channels (TV, OOH, print, facebook, and search) impact revenue.</p>
+<section id="data-description">
+<h3>9.4.1 Data Description<a class="headerlink" href="#data-description" title="Permalink to this heading">#</a></h3>
+<p>The simulated Media Mix expenditure data comprise weekly media expenditures and reveune data over a four-years period from 11-23-2015 to 11-11-2019, 208 weeks data.</p>
+<p><code class="docutils literal notranslate"><span class="pre">date</span></code>: marketing date</p>
+<p><code class="docutils literal notranslate"><span class="pre">revenue</span></code>: business revenue of the week</p>
+<p><code class="docutils literal notranslate"><span class="pre">tv_s</span></code>: tv expenditure of the week</p>
+<p><code class="docutils literal notranslate"><span class="pre">ooh_s</span></code>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">print_s</span></code>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">facebook_i</span></code>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">search_clicks_p</span></code>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">search_s</span></code>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">competitor_sales_b</span></code>:</p>
+<p><code class="docutils literal notranslate"><span class="pre">facebook_s</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;marketing-analytics-with-python&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="c1"># compress the warning messages</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 
 <span class="c1"># Load the dataset</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/Chapter9_mmm.csv&quot;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;data/Chapter9_mmm.csv&quot;</span><span class="p">)</span>
+<span class="c1"># trim the column names </span>
+<span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;(&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;)&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
@@ -525,16 +555,16 @@ document.write(`
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>DATE</th>
+      <th>date</th>
       <th>revenue</th>
-      <th>tv_S</th>
-      <th>ooh_S</th>
-      <th>print_S</th>
-      <th>facebook_I</th>
-      <th>search_clicks_P</th>
-      <th>search_S</th>
-      <th>competitor_sales_B</th>
-      <th>facebook_S</th>
+      <th>tv_s</th>
+      <th>ooh_s</th>
+      <th>print_s</th>
+      <th>facebook_i</th>
+      <th>search_clicks_p</th>
+      <th>search_s</th>
+      <th>competitor_sales_b</th>
+      <th>facebook_s</th>
     </tr>
   </thead>
   <tbody>
@@ -609,8 +639,27 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># trim the column names </span>
-<span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;(&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;)&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;date&#39;, &#39;revenue&#39;, &#39;tv_s&#39;, &#39;ooh_s&#39;, &#39;print_s&#39;, &#39;facebook_i&#39;,
+       &#39;search_clicks_p&#39;, &#39;search_s&#39;, &#39;competitor_sales_b&#39;, &#39;facebook_s&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># min and max of date</span>
+<span class="n">data</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;2019-11-11&#39;
 </pre></div>
 </div>
 </div>
@@ -643,6 +692,9 @@ memory usage: 16.4+ KB
 </div>
 </div>
 </div>
+</section>
+<section id="data-processing">
+<h3>9.4.2 Data Processing<a class="headerlink" href="#data-processing" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -665,6 +717,9 @@ dtype: int64
 </div>
 </div>
 </div>
+</section>
+<section id="feature-engineering">
+<h3>9.4.3 Feature Engineering<a class="headerlink" href="#feature-engineering" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Feature engineering</p></li>
 </ul>
@@ -1127,9 +1182,9 @@ dtype: int64
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>Model Training</p></li>
-</ul>
+</section>
+<section id="model-training">
+<h3>9.4.4 Model Training<a class="headerlink" href="#model-training" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
@@ -1786,9 +1841,9 @@ dtype: int64
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>search for the best model</p></li>
-</ul>
+</section>
+<section id="search-for-the-best-model">
+<h3>9.4.5 search for the best model<a class="headerlink" href="#search-for-the-best-model" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_model_with_decay</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">decay_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
@@ -2460,6 +2515,9 @@ KNeighborsRegressor R-squared: 0.727
 <div class="cell_output docutils container">
 </div>
 </div>
+</section>
+<section id="media-expenditure-optimization">
+<h3>9.4.6 Media Expenditure Optimization<a class="headerlink" href="#media-expenditure-optimization" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="n">spend</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">gam</span><span class="p">,</span> <span class="n">base_data</span><span class="o">=</span><span class="n">X</span><span class="p">,</span> <span class="n">decay_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
@@ -2694,105 +2752,8 @@ dtype: float64
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_11240</span>\<span class="mf">4159730695.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> 
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># Run the optimization</span>
-<span class="ne">----&gt; </span><span class="mi">7</span> <span class="n">result</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">fun</span><span class="o">=</span><span class="n">objective</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">initial_guess</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="n">constraints</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;SLSQP&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> 
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="c1"># Check the optimal spends found</span>
-
-<span class="nn">~\AppData\Roaming\Python\Python37\site-packages\scipy\optimize\_minimize.py</span> in <span class="ni">minimize</span><span class="nt">(fun, x0, args, method, jac, hess, hessp, bounds, constraints, tol, callback, options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">630</span>     <span class="k">elif</span> <span class="n">meth</span> <span class="o">==</span> <span class="s1">&#39;slsqp&#39;</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">631</span>         <span class="k">return</span> <span class="n">_minimize_slsqp</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">jac</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span>
-<span class="ne">--&gt; </span><span class="mi">632</span>                                <span class="n">constraints</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">callback</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">633</span>     <span class="k">elif</span> <span class="n">meth</span> <span class="o">==</span> <span class="s1">&#39;trust-constr&#39;</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">634</span>         <span class="k">return</span> <span class="n">_minimize_trustregion_constr</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">jac</span><span class="p">,</span> <span class="n">hess</span><span class="p">,</span> <span class="n">hessp</span><span class="p">,</span>
-
-<span class="nn">~\AppData\Roaming\Python\Python37\site-packages\scipy\optimize\slsqp.py</span> in <span class="ni">_minimize_slsqp</span><span class="nt">(func, x0, args, jac, bounds, constraints, maxiter, ftol, iprint, disp, eps, callback, finite_diff_rel_step, **unknown_options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">375</span>     <span class="n">sf</span> <span class="o">=</span> <span class="n">_prepare_scalar_function</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">jac</span><span class="o">=</span><span class="n">jac</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">376</span>                                   <span class="n">finite_diff_rel_step</span><span class="o">=</span><span class="n">finite_diff_rel_step</span><span class="p">,</span>
-<span class="ne">--&gt; </span><span class="mi">377</span>                                   <span class="n">bounds</span><span class="o">=</span><span class="n">new_bounds</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">378</span>     <span class="c1"># gh11403 SLSQP sometimes exceeds bounds by 1 or 2 ULP, make sure this</span>
-<span class="g g-Whitespace">    </span><span class="mi">379</span>     <span class="c1"># doesn&#39;t get sent to the func/grad evaluator.</span>
-
-<span class="nn">~\AppData\Roaming\Python\Python37\site-packages\scipy\optimize\optimize.py</span> in <span class="ni">_prepare_scalar_function</span><span class="nt">(fun, x0, jac, args, bounds, epsilon, finite_diff_rel_step, hess)</span>
-<span class="g g-Whitespace">    </span><span class="mi">260</span>     <span class="c1"># calculation reduces overall function evaluations.</span>
-<span class="g g-Whitespace">    </span><span class="mi">261</span>     <span class="n">sf</span> <span class="o">=</span> <span class="n">ScalarFunction</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">grad</span><span class="p">,</span> <span class="n">hess</span><span class="p">,</span>
-<span class="ne">--&gt; </span><span class="mi">262</span>                         <span class="n">finite_diff_rel_step</span><span class="p">,</span> <span class="n">bounds</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="n">epsilon</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">263</span> 
-<span class="g g-Whitespace">    </span><span class="mi">264</span>     <span class="k">return</span> <span class="n">sf</span>
-
-<span class="nn">~\AppData\Roaming\Python\Python37\site-packages\scipy\optimize\_differentiable_functions.py</span> in <span class="ni">__init__</span><span class="nt">(self, fun, x0, args, grad, hess, finite_diff_rel_step, finite_diff_bounds, epsilon)</span>
-<span class="g g-Whitespace">    </span><span class="mi">138</span> 
-<span class="g g-Whitespace">    </span><span class="mi">139</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_update_fun_impl</span> <span class="o">=</span> <span class="n">update_fun</span>
-<span class="ne">--&gt; </span><span class="mi">140</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_update_fun</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">141</span> 
-<span class="g g-Whitespace">    </span><span class="mi">142</span>         <span class="c1"># Gradient evaluation</span>
-
-<span class="nn">~\AppData\Roaming\Python\Python37\site-packages\scipy\optimize\_differentiable_functions.py</span> in <span class="ni">_update_fun</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">231</span>     <span class="k">def</span> <span class="nf">_update_fun</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">232</span>         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">f_updated</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">233</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_update_fun_impl</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">234</span>             <span class="bp">self</span><span class="o">.</span><span class="n">f_updated</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="g g-Whitespace">    </span><span class="mi">235</span> 
-
-<span class="nn">~\AppData\Roaming\Python\Python37\site-packages\scipy\optimize\_differentiable_functions.py</span> in <span class="ni">update_fun</span><span class="nt">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">135</span> 
-<span class="g g-Whitespace">    </span><span class="mi">136</span>         <span class="k">def</span> <span class="nf">update_fun</span><span class="p">():</span>
-<span class="ne">--&gt; </span><span class="mi">137</span>             <span class="bp">self</span><span class="o">.</span><span class="n">f</span> <span class="o">=</span> <span class="n">fun_wrapped</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">138</span> 
-<span class="g g-Whitespace">    </span><span class="mi">139</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_update_fun_impl</span> <span class="o">=</span> <span class="n">update_fun</span>
-
-<span class="nn">~\AppData\Roaming\Python\Python37\site-packages\scipy\optimize\_differentiable_functions.py</span> in <span class="ni">fun_wrapped</span><span class="nt">(x)</span>
-<span class="g g-Whitespace">    </span><span class="mi">132</span>             <span class="c1"># Overwriting results in undefined behaviour because</span>
-<span class="g g-Whitespace">    </span><span class="mi">133</span>             <span class="c1"># fun(self.x) will change self.x, with the two no longer linked.</span>
-<span class="ne">--&gt; </span><span class="mi">134</span>             <span class="k">return</span> <span class="n">fun</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">135</span> 
-<span class="g g-Whitespace">    </span><span class="mi">136</span>         <span class="k">def</span> <span class="nf">update_fun</span><span class="p">():</span>
-
-<span class="nn">~\AppData\Local\Temp\ipykernel_11240\1727379646.py</span> in <span class="ni">objective</span><span class="nt">(spend, model, base_data, decay_rate, threshold)</span>
-<span class="g g-Whitespace">     </span><span class="mi">25</span> 
-<span class="g g-Whitespace">     </span><span class="mi">26</span>     <span class="c1"># Predict revenue with the updated media spends</span>
-<span class="ne">---&gt; </span><span class="mi">27</span>     <span class="n">predicted_revenue</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_pred</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span> 
-<span class="g g-Whitespace">     </span><span class="mi">29</span>     <span class="c1"># Return negative revenue because we are minimizing</span>
-
-<span class="nn">d:\anaconda\envs\jupyterbook\lib\site-packages\pygam\pygam.py</span> in <span class="ni">predict</span><span class="nt">(self, X)</span>
-<span class="g g-Whitespace">    </span><span class="mi">432</span>             <span class="n">containing</span> <span class="n">predicted</span> <span class="n">values</span> <span class="n">under</span> <span class="n">the</span> <span class="n">model</span>
-<span class="g g-Whitespace">    </span><span class="mi">433</span>         <span class="s2">&quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">434</span><span class="s2">         return self.predict_mu(X)</span>
-<span class="g g-Whitespace">    </span><span class="mi">435</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">436</span><span class="s2">     def _modelmat(self, X, term=-1):</span>
-
-<span class="nn">d:\anaconda\envs\jupyterbook\lib\site-packages\pygam\pygam.py</span> in <span class="ni">predict_mu</span><span class="nt">(self, X)</span>
-<span class="g g-Whitespace">    </span><span class="mi">412</span><span class="s2">         X = check_X(X, n_feats=self.statistics_[&#39;m_features&#39;],</span>
-<span class="g g-Whitespace">    </span><span class="mi">413</span><span class="s2">                     edge_knots=self.edge_knots_, dtypes=self.dtype,</span>
-<span class="ne">--&gt; </span><span class="mi">414</span><span class="s2">                     features=self.feature, verbose=self.verbose)</span>
-<span class="g g-Whitespace">    </span><span class="mi">415</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">416</span><span class="s2">         lp = self._linear_predictor(X)</span>
-
-<span class="nn">d:\anaconda\envs\jupyterbook\lib\site-packages\pygam\utils.py</span> in <span class="ni">check_X</span><span class="nt">(X, n_feats, min_samples, edge_knots, dtypes, features, verbose)</span>
-<span class="g g-Whitespace">    </span><span class="mi">271</span><span class="s2">     # basic diagnostics</span>
-<span class="g g-Whitespace">    </span><span class="mi">272</span><span class="s2">     X = check_array(X, force_2d=True, n_feats=n_feats, min_samples=min_samples,</span>
-<span class="ne">--&gt; </span><span class="mi">273</span><span class="s2">                     name=&#39;X data&#39;, verbose=verbose)</span>
-<span class="g g-Whitespace">    </span><span class="mi">274</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">275</span><span class="s2">     # check our categorical data has no new categories</span>
-
-<span class="nn">d:\anaconda\envs\jupyterbook\lib\site-packages\pygam\utils.py</span> in <span class="ni">check_array</span><span class="nt">(array, force_2d, n_feats, ndim, min_samples, name, verbose)</span>
-<span class="g g-Whitespace">    </span><span class="mi">169</span><span class="s2">     # check finite</span>
-<span class="g g-Whitespace">    </span><span class="mi">170</span><span class="s2">     if not(np.isfinite(array).all()):</span>
-<span class="ne">--&gt; </span><span class="mi">171</span><span class="s2">         raise ValueError(&#39;</span><span class="si">{}</span><span class="s2"> must not contain Inf nor NaN&#39;.format(name))</span>
-<span class="g g-Whitespace">    </span><span class="mi">172</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">173</span><span class="s2">     # check ndim</span>
-
-<span class="ne">ValueError</span>: X data must not contain Inf nor NaN
-</pre></div>
 </div>
-</div>
-</div>
+</section>
 </section>
 </section>
 
@@ -2881,7 +2842,15 @@ dtype: float64
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accounting-for-diminishing-returns-and-synergy">9.3.3 Accounting for Diminishing Returns and Synergy</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-a-media-mix-model-in-python-a-step-by-step-guide">9.4 Building a Media Mix Model in Python: A Step-by-Step Guide</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-a-media-mix-model-in-python-a-step-by-step-guide">9.4 Building a Media Mix Model in Python: A Step-by-Step Guide</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-description">9.4.1 Data Description</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-processing">9.4.2 Data Processing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-engineering">9.4.3 Feature Engineering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-training">9.4.4 Model Training</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#search-for-the-best-model">9.4.5 search for the best model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#media-expenditure-optimization">9.4.6 Media Expenditure Optimization</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
