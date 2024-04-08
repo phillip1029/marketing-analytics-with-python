@@ -7,3 +7,5 @@ holidays
 scikit-learn
 statsmodels
 sweetviz
+xgboost
+plotly
